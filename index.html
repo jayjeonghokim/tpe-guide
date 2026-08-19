@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0B5FA5">
+<title>TPE FIELD GUIDE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bl:#0B5FA5; --r:#C8102E; --g:#00785B; --o:#D9821A; --br:#87663B;
+  --ink:#131E27; --ink2:#465862; --ink3:#7C8D98;
+  --paper:#E8ECEE; --panel:#FFFFFF; --line:#CDD5DA; --sunk:#F3F6F7;
+  --pid:#0E1A22; --pid-ink:#DCE6EA;
+  --sans:"IBM Plex Sans KR",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bl:#5AA6E6; --r:#F2607A; --g:#3FBF97; --o:#F0AC50; --br:#C39A6B;
+    --ink:#E4EBEF; --ink2:#A3B4BE; --ink3:#778892;
+    --paper:#0C1216; --panel:#151F26; --line:#28343C; --sunk:#101a20;
+    --pid:#05090C; --pid-ink:#CFE2EA;
+  }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.6;font-size:15px}
+.wrap{max-width:660px;margin:0 auto;padding:0 14px 96px}
+a{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+h1,h2,h3{font-weight:600;letter-spacing:-.01em;margin:0}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ---- masthead ---- */
+.mast{display:flex;align-items:baseline;gap:10px;padding:20px 0 12px}
+.mast .code{font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.16em;color:#fff;background:var(--bl);padding:3px 8px;border-radius:3px}
+.mast h1{font-size:15px;font-weight:500;letter-spacing:.02em}
+.mast .sub{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.08em}
+
+/* ---- PID (signature) ---- */
+.pid{background:var(--pid);border-radius:10px;padding:14px 16px;color:var(--pid-ink);position:relative;overflow:hidden}
+.pid::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px);pointer-events:none}
+.pid-top{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.12em;opacity:.62}
+.pid-clock{font-family:var(--mono);font-size:30px;font-weight:500;letter-spacing:.02em;line-height:1.15;margin:6px 0 2px}
+.pid-clock .sec{font-size:15px;opacity:.5}
+.pid-now{display:flex;gap:10px;align-items:flex-start;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.14)}
+.pid-now .tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:2px 6px;border-radius:3px;background:var(--r);color:#fff;flex:none;margin-top:3px}
+.pid-now .tag.nx{background:rgba(255,255,255,.16)}
+.pid-now .body{min-width:0}
+.pid-now .ttl{font-size:15px;font-weight:500;line-height:1.35}
+.pid-now .met{font-family:var(--mono);font-size:11px;opacity:.6;margin-top:2px}
+
+/* ---- tabs ---- */
+.tabs{position:sticky;top:0;z-index:40;background:var(--paper);display:flex;gap:4px;padding:10px 0 8px;margin-top:14px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;padding:7px 13px;border-radius:20px;font-size:13px;font-weight:500;color:var(--ink2);border:1px solid transparent;white-space:nowrap}
+.tabs button[aria-selected=true]{background:var(--ink);color:var(--paper)}
+.tabs button:focus-visible{outline:2px solid var(--bl);outline-offset:2px}
+.pane{display:none;padding-top:18px}
+.pane.on{display:block}
+
+/* ---- shared ---- */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--ink3);margin:26px 0 10px}
+.eyebrow:first-child{margin-top:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.chip{font-family:var(--mono);font-size:10px;letter-spacing:.06em;padding:2px 7px;border-radius:3px;border:1px solid currentColor}
+.muted{color:var(--ink2);font-size:13.5px}
+.tiny{font-size:12px;color:var(--ink3)}
+
+/* ---- day switch ---- */
+.days{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.days::-webkit-scrollbar{display:none}
+.days button{flex:none;border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:8px 12px;text-align:left;min-width:78px}
+.days button[aria-pressed=true]{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.days .d{font-family:var(--mono);font-size:14px;font-weight:500;display:block}
+.days .w{font-size:11px;opacity:.62;display:block}
+
+/* ---- timeline ---- */
+.tl{margin-top:16px;position:relative;padding-left:26px}
+.tl::before{content:"";position:absolute;left:5px;top:8px;bottom:14px;width:2px;background:var(--line)}
+.stop{position:relative;padding:0 0 20px}
+.stop::before{content:"";position:absolute;left:-26px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--panel);border:3px solid var(--ink3)}
+.stop[data-cat=sight]::before{border-color:var(--br)}
+.stop[data-cat=food]::before{border-color:var(--o)}
+.stop[data-cat=bar]::before{border-color:var(--bl)}
+.stop[data-cat=cafe]::before{border-color:var(--g)}
+.stop.live::before{border-color:var(--r);box-shadow:0 0 0 5px color-mix(in srgb,var(--r) 22%,transparent)}
+.stop .hd{display:flex;gap:9px;align-items:baseline;flex-wrap:wrap}
+.stop .t{font-family:var(--mono);font-size:13px;font-weight:600}
+.stop .n{font-size:15px;font-weight:500}
+.stop .zh{font-size:12px;color:var(--ink3)}
+.stop .dsc{font-size:13.5px;color:var(--ink2);margin-top:3px}
+.stop .mv{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:7px}
+.mv i{width:16px;height:2px;display:inline-block;border-radius:1px}
+.mv.walk i{background:var(--g)} .mv.mrt i{background:var(--bl)} .mv.taxi i{background:var(--o)}
+.stop .lk{display:inline-block;font-family:var(--mono);font-size:11px;margin-top:7px;color:var(--bl);text-decoration:none;border-bottom:1px solid currentColor}
+
+/* ---- place cards ---- */
+.tools{display:flex;gap:8px;margin-bottom:12px}
+.tools input{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:14px;color:var(--ink)}
+.tools input:focus{outline:2px solid var(--bl);outline-offset:-1px}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.filters button{border:1px solid var(--line);border-radius:20px;padding:5px 11px;font-size:12px;font-weight:500;color:var(--ink2);background:var(--panel)}
+.filters button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pl{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:13px 14px;margin-bottom:9px;border-left:3px solid var(--ink3)}
+.pl[data-cat=sight]{border-left-color:var(--br)}
+.pl[data-cat=food]{border-left-color:var(--o)}
+.pl[data-cat=bar]{border-left-color:var(--bl)}
+.pl[data-cat=cafe]{border-left-color:var(--g)}
+.pl[data-cat=base]{border-left-color:var(--r)}
+.pl .r1{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.pl .nm{font-size:15px;font-weight:600}
+.pl .zh{font-size:12.5px;color:var(--ink3);font-family:var(--mono)}
+.pl .st{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.06em;padding:2px 7px;border-radius:3px;flex:none}
+.st.open{background:color-mix(in srgb,var(--g) 16%,transparent);color:var(--g)}
+.st.shut{background:color-mix(in srgb,var(--r) 14%,transparent);color:var(--r)}
+.st.unk{background:var(--sunk);color:var(--ink3)}
+.pl .hr{font-family:var(--mono);font-size:11.5px;color:var(--ink2);margin-top:5px}
+.pl .tp{font-size:13.5px;color:var(--ink2);margin-top:7px}
+.pl .acts{display:flex;gap:7px;margin-top:10px;flex-wrap:wrap}
+.pl .acts a,.pl .acts button{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:6px;padding:5px 9px;text-decoration:none;color:var(--ink2)}
+.pl .acts a:active,.pl .acts button:active{background:var(--sunk)}
+
+/* ---- phrase ---- */
+.ph{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:9px;width:100%;text-align:left;display:block}
+.ph .zh{font-size:21px;font-weight:500;line-height:1.45}
+.ph .ko{font-size:13px;color:var(--ink2);margin-top:5px}
+.big{position:fixed;inset:0;z-index:90;background:var(--panel);display:none;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center}
+.big.on{display:flex}
+.big .zh{font-size:min(11vw,46px);font-weight:600;line-height:1.4}
+.big .ko{font-size:15px;color:var(--ink2);margin-top:18px}
+.big .cl{margin-top:34px;font-family:var(--mono);font-size:12px;border:1px solid var(--line);border-radius:8px;padding:9px 18px}
+
+/* ---- info ---- */
+details{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:9px}
+details[open]{padding-bottom:14px}
+summary{font-size:14.5px;font-weight:600;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";margin-left:auto;font-family:var(--mono);color:var(--ink3)}
+details[open] summary::after{content:"−"}
+details .bd{font-size:13.5px;color:var(--ink2);margin-top:10px}
+details .bd b{color:var(--ink);font-weight:600}
+details .bd ul{margin:7px 0;padding-left:17px}
+details .bd li{margin:4px 0}
+
+/* ---- checklist ---- */
+.ck{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.ck:last-child{border-bottom:0}
+.ck input{width:19px;height:19px;accent-color:var(--g);flex:none}
+.ck input:checked+span{color:var(--ink3);text-decoration:line-through}
+
+/* ---- emergency ---- */
+.sos{display:block;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--r);border-radius:10px;padding:13px 14px;margin-bottom:9px;text-decoration:none}
+.sos .l{font-size:13px;color:var(--ink2)}
+.sos .v{font-family:var(--mono);font-size:19px;font-weight:600;color:var(--r);margin-top:2px}
+.sos .n{font-size:12.5px;color:var(--ink3);margin-top:4px}
+
+.foot{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--ink3);line-height:1.9}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <span class="code">TPE</span>
+  <h1>타이완 필드 가이드</h1>
+  <span class="sub">08.29 — 09.02</span>
+</header>
+
+<section class="pid" aria-live="polite">
+  <div class="pid-top"><span>TAIPEI 台北</span><span id="pidDate">—</span></div>
+  <div class="pid-clock" id="pidClock">--:--<span class="sec">:--</span></div>
+  <div class="pid-now">
+    <span class="tag" id="nowTag">NOW</span>
+    <div class="body">
+      <div class="ttl" id="nowTtl">일정을 불러오는 중</div>
+      <div class="met" id="nowMet"></div>
+    </div>
+  </div>
+  <div class="pid-now" style="border-top:0;padding-top:0;margin-top:6px">
+    <span class="tag nx">NEXT</span>
+    <div class="body">
+      <div class="ttl" id="nxtTtl" style="font-size:14px;opacity:.86">—</div>
+      <div class="met" id="nxtMet"></div>
+    </div>
+  </div>
+</section>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" aria-selected="true" data-p="plan">일정</button>
+  <button role="tab" aria-selected="false" data-p="place">장소</button>
+  <button role="tab" aria-selected="false" data-p="info">실전</button>
+  <button role="tab" aria-selected="false" data-p="talk">필담</button>
+  <button role="tab" aria-selected="false" data-p="sos">긴급</button>
+</nav>
+
+<!-- 일정 -->
+<section class="pane on" id="p-plan" role="tabpanel">
+  <div class="days" id="dayBar"></div>
+  <div id="dayNote" class="tiny" style="margin-top:12px"></div>
+  <div class="tl" id="tl"></div>
+</section>
+
+<!-- 장소 -->
+<section class="pane" id="p-place" role="tabpanel">
+  <div class="tools"><input id="q" type="search" placeholder="이름·한자·지역 검색" autocomplete="off"></div>
+  <div class="filters" id="fl"></div>
+  <div id="plist"></div>
+</section>
+
+<!-- 실전 -->
+<section class="pane" id="p-info" role="tabpanel">
+  <div class="eyebrow">체크리스트</div>
+  <div class="card" id="ckWrap"></div>
+  <div class="eyebrow">현지 운용</div>
+  <div id="infoWrap"></div>
+</section>
+
+<!-- 필담 -->
+<section class="pane" id="p-talk" role="tabpanel">
+  <p class="muted" style="margin:0 0 14px">카드를 누르면 화면 가득 커집니다. 상대에게 그대로 보여주세요.</p>
+  <div id="phWrap"></div>
+</section>
+
+<!-- 긴급 -->
+<section class="pane" id="p-sos" role="tabpanel">
+  <div id="sosWrap"></div>
+  <div class="eyebrow">여권을 잃어버렸다면</div>
+  <div class="card muted">
+    가까운 파출소(派出所)에서 분실 신고 후 <b style="color:var(--ink)">폴리스 리포트</b> 또는 접수증을 받습니다. 단순 분실은 발급까지 1시간 정도 걸립니다. 그 다음 대표부 영사처를 방문해 여행증명서를 신청합니다.
+    <div style="margin-top:10px">주소 <span class="mono">台北市信義區基隆路一段333號 15F 1506室</span></div>
+    <div class="tiny" style="margin-top:6px">영사민원 접수 월~금 09:00–12:00 / 14:00–16:00</div>
+  </div>
+  <div class="eyebrow">구급차</div>
+  <div class="card muted">119로 부르면 비용은 없습니다. 다만 응급이 아닌데 부른 경우 1,800 TWD가 청구됩니다.</div>
+</section>
+
+<div class="foot">
+  URL을 아는 사람만 접근 가능한 비공개 링크입니다.<br>
+  검색엔진 색인 차단됨 · 예약번호·항공편 정보 미포함<br>
+  영업시간은 변동될 수 있습니다. 이동 전 지도 앱에서 재확인하세요.
+</div>
+</div>
+
+<div class="big" id="big" role="dialog" aria-modal="true">
+  <div class="zh" id="bigZh"></div>
+  <div class="ko" id="bigKo"></div>
+  <button class="cl" onclick="closeBig()">닫기</button>
+</div>
+
+<script>
+/* ============ 데이터 ============ */
+// hours: 요일(0=일)별 [시작분, 종료분] 구간. 종료 >1440 이면 익일.
+const H=(o)=>o;
+const ALLDAY={0:[[0,1440]],1:[[0,1440]],2:[[0,1440]],3:[[0,1440]],4:[[0,1440]],5:[[0,1440]],6:[[0,1440]]};
+
+const PLACES=[
+ {id:'amba',nm:'amba 타이베이 시먼딩',zh:'台北西門町意舍酒店',cat:'base',area:'완화·시먼딩',
+  addr:'萬華區武昌街二段77號',hours:ALLDAY,
+  pid:'ChIJX10H1gipQjQRfmZjnra3znU',ll:'25.0451762,121.5056699',
+  tip:'로비는 5층. 1~4층은 쇼핑몰이라 처음 가면 헷갈립니다. 뒤쪽에 측면 출입구가 있습니다. 택시 기사에게는 한자 이름을 보여주는 게 가장 빠릅니다.'},
+
+ {id:'redhouse',nm:'서문홍루',zh:'西門紅樓',cat:'sight',area:'완화·시먼딩',
+  hours:{0:[[660,1260]],1:null,2:[[660,1260]],3:[[660,1260]],4:[[660,1260]],5:[[660,1260]],6:[[660,1320]]},
+  pid:'ChIJi-yspAmpQjQRxcHc_lwnNHw',ll:'25.0420139,121.5068592',
+  tip:'1908년 공설시장 건물. 토요일은 22시까지 열고 주말 창작시장은 14시부터. 월요일 휴관이니 8/31에 다시 갈 생각이면 피하세요.'},
+
+ {id:'bopiliao',nm:'보피랴오 역사거리',zh:'剝皮寮歷史街區',cat:'sight',area:'완화',
+  hours:{0:[[540,1080]],1:null,2:[[540,1080]],3:[[540,1080]],4:[[540,1080]],5:[[540,1080]],6:[[540,1080]]},
+  pid:'ChIJ3bYX0KipQjQR6Q_UrbthM_8',ll:'25.036838,121.5022648',
+  tip:'실내 전시가 18시에 끝납니다. 용산사보다 먼저 보세요. 무료이고 그늘진 회랑이 있어 더위 피하기 좋습니다. 용산사까지 도보 5분.'},
+
+ {id:'longshan',nm:'용산사',zh:'艋舺龍山寺',cat:'sight',area:'완화',
+  hours:{0:[[360,1320]],1:[[360,1320]],2:[[360,1320]],3:[[360,1320]],4:[[360,1320]],5:[[360,1320]],6:[[360,1320]]},
+  pid:'ChIJCd7n16ipQjQRihzEWF4z6Pg',ll:'25.0373106,121.4998654',
+  tip:'6시부터 22시까지. 저녁에 조명이 켜지면 분위기가 완전히 달라집니다. 참배객 앞을 가로지르지 말고 정숙 유지. 입구 쪽 폭포 조형물이 사진 포인트.'},
+
+ {id:'moonq',nm:'Moon Moon 청도점',zh:'雙月食品社 青島店',cat:'food',area:'중정',
+  hours:{0:[[660,840],[1020,1200]],1:[[660,840],[1020,1200]],2:[[660,840],[1020,1200]],3:[[660,840],[1020,1200]],4:[[660,840],[1020,1200]],5:[[660,840],[1020,1200]],6:[[660,840],[1020,1200]]},
+  pid:'ChIJgbsfD3GpQjQR7z5ZO22KdVQ',ll:'25.0437017,121.5220376',
+  tip:'미쉐린 빕 구르망. 3개 지점 중 유일하게 연중무휴. 입장 시 QR 스캔 후 폰으로 주문해 회전이 빠릅니다. 혼자면 탕 1 + 면 1이면 충분 — 탕이 2인분급 용기로 나옵니다. 蛤蜊雞湯(바지락 닭탕) + 麻醬麵(참깨면) 조합 추천.'},
+
+ {id:'moonj',nm:'Moon Moon 제남점',zh:'雙月食品社 濟南店',cat:'food',area:'중정',
+  hours:{0:[[660,840],[1020,1200]],1:null,2:[[660,840],[1020,1200]],3:[[660,840],[1020,1200]],4:[[660,840],[1020,1200]],5:[[660,840],[1020,1200]],6:[[660,840],[1020,1200]]},
+  pid:'ChIJu98loqipQjQRF3IXpB6aGI8',ll:'25.0427329,121.5219127',
+  tip:'청도점 백업. 도보 2분 거리. 월요일 휴무이고 식사 50분 제한이 있습니다. 대기 번호표를 받고 기다리는 동안 미리 주문·선결제합니다.'},
+
+ {id:'barmood',nm:'BAR MOOD',zh:'吧沐',cat:'bar',area:'다안',
+  addr:'敦化南路一段160巷53號',
+  hours:{0:[[1080,1500]],1:[[1080,1500]],2:[[1080,1500]],3:[[1080,1500]],4:[[1080,1560]],5:[[1080,1560]],6:[[1080,1560]]},
+  pid:'ChIJgbsg4tqrQjQRNTNaBAUYOfA',ll:'25.043701,121.5466392',
+  tip:'대만 차·계절 과일·허브 중심. 메뉴가 책 수준으로 방대하니 방향만 던지고 바텐더에게 맡기는 편이 낫습니다. 길 양쪽 두 곳으로 나뉘어 운영되니 도착하면 안내를 받으세요. 예약 inline.app/groups/moodtw'},
+
+ {id:'infinity',nm:'To Infinity & Beyond',zh:'',cat:'bar',area:'다안',
+  addr:'敦化南路一段160巷13號',
+  hours:{0:[[1200,1560]],1:[[1200,1560]],2:[[1200,1560]],3:[[1200,1560]],4:[[1200,1590]],5:[[1200,1590]],6:[[1200,1590]]},
+  pid:'ChIJ28DimWarQjQRZDkB3CI3bHg',ll:'25.0436904,121.547848',
+  tip:'아시아 50 베스트 바 2026 35위, 타이베이 유일 톱50. BAR MOOD와 같은 골목 도보 1분. 20시 오픈이라 BAR MOOD 다음 순서로 붙이기 좋습니다. 메뉴를 크리미·클래리피케이션·카보네이션 등 질감 기준으로 나눈 게 특징 — 증류와 원심분리를 씁니다.'},
+
+ {id:'t101',nm:'타이베이 101',zh:'台北101',cat:'sight',area:'신이',
+  hours:{0:[[660,1290]],1:[[660,1290]],2:[[660,1290]],3:[[660,1290]],4:[[660,1320]],5:[[660,1320]],6:[[660,1320]]},
+  pid:'ChIJraeA2rarQjQRPBBjyR3RxKw',ll:'25.0341222,121.5640212',
+  tip:'표기 시간은 쇼핑몰 기준. 전망대는 21시 종료라 바 일정 뒤에는 못 올라갑니다. 외관과 신이광장 야간 산책만으로 20~30분이면 충분합니다. 8/29 일몰 18:16.'},
+
+ {id:'zhuangji',nm:'撞記 설화빙',zh:'撞記 水果 果汁 雪花冰',cat:'food',area:'중산',
+  addr:'錦州街30巷1號',
+  hours:{0:[[660,1020]],1:[[660,1200]],2:[[660,1200]],3:null,4:null,5:[[660,1200]],6:[[660,1200]]},
+  pid:'ChIJ685-kyGpQjQR2uBgKI2-R0M',ll:'25.0599838,121.5248555',
+  tip:'수·목 휴무. 주말은 30분~1시간 대기가 기본이라 오픈 직후가 안전합니다. 망고빙수 150~180 TWD, 일반 설화빙은 60 TWD(깨·말차·땅콩·선초·행인). 8월 말은 망고 끝물이라 상태가 들쭉날쭉 — 별로면 행인이나 깨가 낫습니다. 현금 준비.'},
+
+ {id:'iyoshi',nm:'Iyoshi Cola',zh:'伊良可樂',cat:'cafe',area:'중산',
+  addr:'中山北路二段44巷21-4號',
+  hours:{0:[[780,1110]],1:[[780,1050]],2:null,3:[[780,1050]],4:[[780,1050]],5:[[780,1050]],6:[[780,1110]]},
+  pid:'ChIJNwu7BACpQjQRx841v6FTH08',ll:'25.055199,121.5212978',
+  tip:'일본 한방 콜라의 첫 해외 매장. 화요일 휴무. 매일 소량 제조라 조기 마감이 잦으니 인스타 확인 필수. 잔당 150 TWD, 1인 2잔 제한, 현장 대기만. 오리지널·마고(馬告)·우유 콜라 3종. 마법 시럽(魔法糖漿)은 병으로 살 수 있어 기념품으로 좋습니다. 현금·LinePay·街口支付.'},
+
+ {id:'sappho',nm:'Sappho Live Jazz',zh:'',cat:'bar',area:'다안',
+  hours:null,
+  pid:'',ll:'25.0417,121.5433',
+  tip:'토요일 밤 라이브 재즈가 가능한 선택지. 영업시간·공연 스케줄은 확정 전이니 방문일에 인스타나 페이스북에서 라인업을 확인하세요.'},
+
+ {id:'indulge',nm:'Indulge Experimental Bistro',zh:'',cat:'bar',area:'다안',
+  hours:null,pid:'',ll:'25.0413,121.5432',
+  tip:'Aki Wang. 미쉐린과 아시아 50 베스트에 동시 등재된 대만 유일 업장. 예약이 사실상 필수라 여유가 생기면 미리 잡아두세요. 영업시간 확인 필요.'},
+
+ {id:'publichouse',nm:'The Public House',zh:'',cat:'bar',area:'다안',
+  hours:null,pid:'',ll:'25.0339,121.5439',
+  tip:'카카오 허스크를 쓴 시그니처가 있습니다. 커피 부산물 활용이라 관심 가실 만한 접근. 영업시간 확인 필요.'}
+];
+
+const CATS={base:'거점',sight:'명소',food:'식당',cafe:'카페·음료',bar:'바'};
+
+const DAYS=[
+ {d:'08.29',w:'토',note:'솔로 자유일. 낮 더위를 피해 15시에 시작해 서→동 한 방향으로 흐릅니다. 되돌아오는 구간 없음.',
+  stops:[
+   {t:'13:00',n:'Iyoshi Cola',zh:'伊良可樂',cat:'cafe',p:'iyoshi',mv:'mrt',mvT:'시먼역 → 중산역 MRT 5분',d:'오픈 직후 도착해 줄을 피합니다. 옵션 일정 — 생략하면 15:00 서문홍루부터 시작.'},
+   {t:'14:00',n:'撞記 설화빙',zh:'撞記',cat:'food',p:'zhuangji',mv:'walk',mvT:'도보 8분',d:'옵션 일정. 대기가 길면 과감히 건너뛰고 8/30 이후로 미루세요.'},
+   {t:'15:00',n:'서문홍루 · 주말 창작시장',zh:'西門紅樓',cat:'sight',p:'redhouse',mv:'mrt',mvT:'중산역 → 시먼역 MRT 5분',d:'붉은 벽돌 팔각당과 내부 문창 상점. 이어서 시먼딩 거리와 레인보우 로드 산책.'},
+   {t:'16:05',n:'보피랴오 역사거리',zh:'剝皮寮',cat:'sight',p:'bopiliao',mv:'mrt',mvT:'시먼역 → 용산사역 MRT 1정거장',d:'청·일제시대 거리. 실내 전시 18시 종료이므로 용산사보다 먼저.'},
+   {t:'16:40',n:'용산사',zh:'龍山寺',cat:'sight',p:'longshan',mv:'walk',mvT:'도보 5분',d:'현지인의 기도와 향불. 해 지기 직전 광선이 가장 좋습니다.'},
+   {t:'17:35',n:'저녁 — Moon Moon 청도점',zh:'雙月食品社',cat:'food',p:'moonq',mv:'taxi',mvT:'택시 15분',d:'저녁 영업 17:00~20:00. 17:20까지 당기면 대기가 거의 없습니다. 탕 1 + 면 1.'},
+   {t:'19:00',n:'BAR MOOD',zh:'吧沐',cat:'bar',p:'barmood',mv:'taxi',mvT:'택시 20분',d:'대만 차·과일 기반 시그니처 1~2잔. 예약 권장.'},
+   {t:'20:05',n:'To Infinity & Beyond',zh:'',cat:'bar',p:'infinity',mv:'walk',mvT:'같은 골목, 도보 1분',d:'20시 오픈에 맞춰 이동. 로컬 재료에서 기술적 접근으로 대비가 선명해집니다. 1잔.'},
+   {t:'21:15',n:'타이베이 101 야경',zh:'台北101',cat:'sight',p:'t101',mv:'taxi',mvT:'택시 25분 (토요일 저녁 정체 감안)',d:'전망대는 종료. 외관과 신이광장 산책 20~30분.'},
+   {t:'22:20',n:'호텔 복귀',zh:'',cat:'base',p:'amba',mv:'taxi',mvT:'택시 25~30분',d:'심야에도 시먼딩은 활발해서 야식 여지가 있습니다.'}
+  ]},
+ {d:'08.30',w:'일',note:'카페 투어 1일차. 세부 일정 미확정 — 방문할 로스터리가 정해지면 여기에 채워 넣으세요.',stops:[]},
+ {d:'08.31',w:'월',note:'카페 투어 2일차. 월요일은 휴무인 곳이 많습니다 — 서문홍루, 보피랴오, Moon Moon 제남·대안점 모두 월요일 휴무입니다.',stops:[]},
+ {d:'09.01',w:'화',note:'카페 투어 3일차. Iyoshi Cola는 화요일 휴무.',stops:[]},
+ {d:'09.02',w:'수',note:'귀국일. 撞記는 수요일 휴무입니다. 남은 TWD는 이날 소진하세요 — 재환전은 손해입니다.',stops:[]}
+];
+
+const PHRASES=[
+ {zh:'不好意思，我不會說中文，可以用英文嗎？',ko:'실례합니다, 중국어를 못 합니다. 영어로 해도 될까요?'},
+ {zh:'麻煩到這個地址，謝謝。',ko:'이 주소로 가주세요. (택시 — 지도 화면과 함께 보여주기)'},
+ {zh:'請問有淺焙的單品咖啡嗎？',ko:'라이트 로스트 싱글 오리진 있나요?'},
+ {zh:'這支豆子是哪個產區的？處理法是什麼？',ko:'이 원두는 어느 산지인가요? 프로세싱은 무엇인가요?'},
+ {zh:'我可以買生豆或熟豆帶回韓國嗎？',ko:'생두나 원두를 한국으로 사 갈 수 있을까요?'},
+ {zh:'我是韓國的咖啡從業者，想跟烘豆師聊聊，方便嗎？',ko:'한국에서 온 커피 업계 종사자입니다. 로스터와 잠깐 이야기할 수 있을까요?'},
+ {zh:'請幫我推薦一杯不會太甜的調酒，用台灣的茶或水果。',ko:'너무 달지 않고 대만 차나 과일을 쓴 칵테일로 추천해주세요.'},
+ {zh:'內用，一位。',ko:'매장에서 먹겠습니다, 한 명이요.'},
+ {zh:'外帶，謝謝。',ko:'포장이요.'},
+ {zh:'微糖，去冰。',ko:'설탕 조금, 얼음 빼고.'},
+ {zh:'請問可以刷卡嗎？',ko:'카드 결제 되나요?'},
+ {zh:'請問廁所在哪裡？',ko:'화장실이 어디인가요?'},
+ {zh:'請問要等多久？',ko:'얼마나 기다려야 하나요?'},
+ {zh:'我想去這裡，請問怎麼走？',ko:'여기 가려는데 어떻게 가나요?'},
+ {zh:'請幫我叫救護車。',ko:'구급차를 불러주세요.'}
+];
+
+const INFO=[
+ {t:'환전과 결제',b:`<ul>
+ <li><b>트래블월렛·트래블로그</b>로 미리 TWD를 채워 가는 게 가장 유리합니다.</li>
+ <li>공항 환전은 환율이 나쁘니 최소한만. 부족분은 편의점 ATM에서 인출.</li>
+ <li>현금 30% / 카드·트래블카드 70% 정도 비율이 무난합니다. 야시장·소규모 로컬 식당·사찰 주변은 현금만 받는 곳이 있습니다.</li>
+ <li>撞記와 Iyoshi Cola는 현금 준비를 권합니다.</li>
+ <li><b>남은 TWD는 마지막 날 소진.</b> 재환전은 손해입니다.</li>
+ <li>팁 문화는 없습니다. 다만 레스토랑은 10% 서비스료가 붙는 곳이 있습니다.</li></ul>`},
+ {t:'교통 — 이지카드',b:`<ul>
+ <li>타오위안 공항 도착 즉시, 또는 MRT 역 창구·무인기에서 구매. 편의점에서 충전.</li>
+ <li>MRT 전 노선, 시내버스, 택시, 유바이크, 편의점 결제까지 커버.</li>
+ <li>MRT·버스 모두 <b>탈 때와 내릴 때 양쪽 태그</b>합니다.</li>
+ <li>기본요금 MRT 20 TWD, 버스 15 TWD.</li>
+ <li><b>MRT 역사와 열차 안에서는 음식물 취식 금지.</b> 물도 안 됩니다. 벌금 대상이니 개찰구 밖에서 마시세요.</li></ul>`},
+ {t:'eSIM과 앱',b:`<ul>
+ <li>한국 번호를 살려둘 거면 eSIM으로 데이터만 추가. Airalo·Holafly 모두 가능하고 Holafly는 실명 인증이 필요 없습니다.</li>
+ <li>한국에서 미리 구매해 QR을 받아두고, 착륙 직전 기내에서 스캔하면 입국심사 줄에서 바로 연결됩니다.</li>
+ <li>대만 번호가 나오는 eSIM이면 유바이크·택시 앱의 SMS 인증이 됩니다.</li>
+ <li>앱: Google Maps, 台北捷運Go, YouBike 2.0, 台北等公車(버스 실시간), Uber 또는 台灣大車隊.</li></ul>`},
+ {t:'8월 말 타이베이 대응',b:`<ul>
+ <li>낮 최고 34~36도에 습도가 높습니다. 정오~15시는 실내 위주로 짜세요.</li>
+ <li>오후 소나기가 잦습니다. 접이식 우산은 상시 휴대.</li>
+ <li>실내 냉방이 강해 얇은 긴팔이 하나 있으면 좋습니다.</li>
+ <li>편의점 물 보충을 습관화하세요. 하루 2L는 마시게 됩니다.</li>
+ <li><b>태풍</b> 가능성이 있는 시기입니다. 항공편 지연·결항 알림을 켜두세요.</li></ul>`},
+ {t:'전원과 장비',b:`<ul>
+ <li><b>대만은 110V, 플러그는 A형(11자 납작핀).</b> 한국 220V 220핀은 그대로 안 들어갑니다. 멀티 어댑터 필수.</li>
+ <li>노트북·카메라 충전기는 대부분 100~240V 프리볼트라 어댑터만 있으면 됩니다. 라벨을 한 번 확인하세요.</li>
+ <li>보조배터리는 기내 반입만 가능, 위탁 수하물 불가.</li></ul>`},
+ {t:'카페 투어 실무',b:`<ul>
+ <li>일요일·월요일 휴무인 로스터리가 많습니다. 전날 밤에 다음 날 리스트의 영업 여부를 한 번씩 확인하세요.</li>
+ <li>원두를 사 올 계획이면 <b>진공 포장 여부</b>와 무게를 챙기세요. 로스팅 데이가 찍힌 라벨을 함께 받아두면 나중에 기록이 됩니다.</li>
+ <li>커핑 세션이 있는 곳은 대개 사전 신청제입니다. 인스타 DM이 가장 빠릅니다.</li>
+ <li>명함을 넉넉히. 필담 탭의 자기소개 문장과 함께 쓰면 대화가 열립니다.</li></ul>`}
+];
+
+const CHECK=['여권 유효기간 6개월 이상 확인','eSIM 구매·QR 저장','110V A형 어댑터','트래블카드 TWD 충전','이지카드 구매(공항 도착 즉시)','접이식 우산','명함','BAR MOOD 예약','撞記·Iyoshi Cola 당일 영업 확인','원두 담을 여유 공간'];
+
+const SOS=[
+ {l:'경찰',v:'110',n:'도난·사건·분실 신고'},
+ {l:'소방·구급',v:'119',n:'화재·응급환자. 구급차 비용 없음'},
+ {l:'관광 핫라인 (24시간 무료)',v:'0800-011-765',n:'다국어 지원. 길 잃음·분쟁·일반 문의'},
+ {l:'관광 안내 (유료)',v:'+886-2-2349-1500',n:'08:00~19:00'},
+ {l:'주타이베이 대한민국 대표부',v:'+886-2-2758-8320',n:'업무 08:30~17:30 (12:00~13:30 점심)'},
+ {l:'대표부 긴급전화',v:'+886-912-069-230',n:'평일 18시~익일 09시, 공휴일 24시간. 긴급 상황 전용'}
+];
+
+/* ============ 유틸 ============ */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const hm=m=>pad(Math.floor(m/60)%24)+':'+pad(m%60);
+
+function taipeiNow(){
+  const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',weekday:'short',hour12:false}).formatToParts(new Date());
+  const g=t=>p.find(x=>x.type===t).value;
+  const wd=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(g('weekday'));
+  return {y:+g('year'),mo:+g('month'),d:+g('day'),h:+g('hour')%24,mi:+g('minute'),s:+g('second'),wd,
+          min:(+g('hour')%24)*60+ +g('minute'), key:g('month')+'.'+g('day')};
+}
+function openState(p,n){
+  if(!p.hours) return {s:'unk',txt:'시간 확인 필요'};
+  const today=p.hours[n.wd], prev=p.hours[(n.wd+6)%7];
+  if(prev) for(const[a,b] of prev) if(b>1440 && n.min<b-1440) return {s:'open',txt:'영업 중 · '+hm(b)+' 마감'};
+  if(!today) return {s:'shut',txt:'오늘 휴무'};
+  for(const[a,b] of today){
+    if(n.min>=a&&n.min<Math.min(b,1440)) return {s:'open',txt:'영업 중 · '+hm(b)+' 마감'};
+  }
+  for(const[a,b] of today) if(n.min<a) return {s:'shut',txt:hm(a)+' 오픈'};
+  return {s:'shut',txt:'오늘 영업 종료'};
+}
+function hoursLine(p,n){
+  if(!p.hours) return '영업시간 미확인';
+  const t=p.hours[n.wd];
+  if(!t) return '오늘 휴무';
+  return '오늘 '+t.map(([a,b])=>hm(a)+'–'+hm(b)).join(', ');
+}
+function mapUrl(p){
+  const base='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p.ll||p.nm);
+  return p.pid? base+'&query_place_id='+p.pid : base;
+}
+
+/* ============ PID ============ */
+function tickPID(){
+  const n=taipeiNow();
+  $('#pidClock').innerHTML=pad(n.h)+':'+pad(n.mi)+'<span class="sec">:'+pad(n.s)+'</span>';
+  $('#pidDate').textContent=n.mo+'월 '+n.d+'일 '+['일','월','화','수','목','금','토'][n.wd];
+
+  const day=DAYS.find(d=>d.d===n.key);
+  let cur=null,nxt=null;
+  if(day&&day.stops.length){
+    const list=day.stops.map(s=>({...s,m:+s.t.slice(0,2)*60 + +s.t.slice(3)}));
+    for(const s of list){ if(s.m<=n.min) cur=s; else if(!nxt) nxt=s; }
+  }
+  const tag=$('#nowTag');
+  if(!day){
+    $('#nowTtl').textContent='여행 기간이 아닙니다';
+    $('#nowMet').textContent='08.29 – 09.02';
+    tag.style.background='rgba(255,255,255,.16)';
+  }else if(!day.stops.length){
+    $('#nowTtl').textContent=day.d+' — 카페 투어';
+    $('#nowMet').textContent='세부 일정 미확정';
+    tag.style.background='rgba(255,255,255,.16)';
+  }else if(cur){
+    $('#nowTtl').textContent=cur.n;
+    $('#nowMet').textContent=cur.t+' 시작 · '+(n.min-cur.m)+'분 경과';
+    tag.style.background='';
+  }else{
+    $('#nowTtl').textContent='아직 시작 전';
+    $('#nowMet').textContent='첫 일정 '+list0(day);
+    tag.style.background='rgba(255,255,255,.16)';
+  }
+  if(nxt){
+    const dm=(+nxt.t.slice(0,2)*60 + +nxt.t.slice(3))-n.min;
+    $('#nxtTtl').textContent=nxt.n;
+    $('#nxtMet').textContent=nxt.t+' · '+(dm>60?Math.floor(dm/60)+'시간 '+(dm%60)+'분':dm+'분')+' 남음'+(nxt.mvT?' · '+nxt.mvT:'');
+  }else{
+    $('#nxtTtl').textContent=day&&day.stops.length?'오늘 일정 종료':'—';
+    $('#nxtMet').textContent='';
+  }
+  $$('.stop').forEach(el=>el.classList.toggle('live',cur&&el.dataset.t===cur.t&&el.dataset.day===n.key));
+  $$('.st').forEach(el=>{
+    const p=PLACES.find(x=>x.id===el.dataset.pid); if(!p)return;
+    const st=openState(p,n); el.className='st '+st.s; el.textContent=st.s==='open'?'영업 중':st.s==='shut'?'닫힘':'확인 필요';
+    const hl=el.closest('.pl')?.querySelector('.hr'); if(hl) hl.textContent=hoursLine(p,n)+(st.s==='open'?' · '+st.txt.split('· ')[1]:'');
+  });
+}
+const list0=d=>d.stops[0].t;
+
+/* ============ 렌더 ============ */
+let curDay=0;
+function renderDays(){
+  $('#dayBar').innerHTML=DAYS.map((d,i)=>`<button aria-pressed="${i===curDay}" onclick="pickDay(${i})"><span class="d">${d.d}</span><span class="w">${d.w}</span></button>`).join('');
+  const day=DAYS[curDay];
+  $('#dayNote').textContent=day.note;
+  $('#tl').innerHTML=day.stops.length? day.stops.map(s=>{
+    const p=PLACES.find(x=>x.id===s.p);
+    return `<div class="stop" data-cat="${s.cat}" data-t="${s.t}" data-day="${day.d}">
+      <div class="hd"><span class="t mono">${s.t}</span><span class="n">${esc(s.n)}</span>${s.zh?`<span class="zh mono">${esc(s.zh)}</span>`:''}</div>
+      <div class="dsc">${esc(s.d)}</div>
+      ${s.mvT?`<div class="mv ${s.mv}"><i></i>${esc(s.mvT)}</div>`:''}
+      ${p?`<br><a class="lk" href="${mapUrl(p)}" target="_blank" rel="noopener">지도 열기 →</a>`:''}
+    </div>`;
+  }).join('') : `<div class="card muted">아직 채워지지 않았습니다. 방문할 로스터리가 정해지면 <span class="mono">DAYS</span> 배열에 추가하세요.</div>`;
+  tickPID();
+}
+function pickDay(i){curDay=i;renderDays();}
+
+let filt='all',qs='';
+function renderPlaces(){
+  const n=taipeiNow();
+  $('#fl').innerHTML=['all',...Object.keys(CATS)].map(k=>
+    `<button aria-pressed="${filt===k}" onclick="setFilt('${k}')">${k==='all'?'전체':CATS[k]}</button>`).join('');
+  const rows=PLACES.filter(p=>(filt==='all'||p.cat===filt)&&
+    (!qs||(p.nm+p.zh+p.area+(p.addr||'')).toLowerCase().includes(qs)));
+  $('#plist').innerHTML=rows.length? rows.map(p=>`
+    <div class="pl" data-cat="${p.cat}">
+      <div class="r1"><span class="nm">${esc(p.nm)}</span>${p.zh?`<span class="zh">${esc(p.zh)}</span>`:''}<span class="st unk" data-pid="${p.id}">—</span></div>
+      <div class="hr mono"></div>
+      ${p.addr?`<div class="tiny mono" style="margin-top:3px">${esc(p.addr)} · ${esc(p.area)}</div>`:`<div class="tiny mono" style="margin-top:3px">${esc(p.area)}</div>`}
+      <div class="tp">${esc(p.tip)}</div>
+      <div class="acts">
+        <a href="${mapUrl(p)}" target="_blank" rel="noopener">지도</a>
+        ${p.zh?`<button onclick="copyTxt('${esc(p.zh)}',this)">한자 복사</button>`:''}
+        ${p.addr?`<button onclick="copyTxt('${esc(p.addr)}',this)">주소 복사</button>`:''}
+      </div>
+    </div>`).join('') : `<div class="card muted">일치하는 장소가 없습니다. 검색어를 줄여보세요.</div>`;
+  tickPID();
+}
+function setFilt(k){filt=k;renderPlaces();}
+function copyTxt(t,btn){
+  navigator.clipboard?.writeText(t).then(()=>{const o=btn.textContent;btn.textContent='복사됨';setTimeout(()=>btn.textContent=o,1400);})
+  .catch(()=>{btn.textContent='복사 실패';});
+}
+
+function renderTalk(){
+  $('#phWrap').innerHTML=PHRASES.map((p,i)=>
+    `<button class="ph" onclick="openBig(${i})"><div class="zh">${esc(p.zh)}</div><div class="ko">${esc(p.ko)}</div></button>`).join('');
+}
+function openBig(i){$('#bigZh').textContent=PHRASES[i].zh;$('#bigKo').textContent=PHRASES[i].ko;$('#big').classList.add('on');}
+function closeBig(){$('#big').classList.remove('on');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBig();});
+
+function renderInfo(){
+  $('#infoWrap').innerHTML=INFO.map(x=>`<details><summary>${esc(x.t)}</summary><div class="bd">${x.b}</div></details>`).join('');
+  let saved={};
+  try{saved=JSON.parse(localStorage.getItem('tpe.check')||'{}');}catch(e){saved={};}
+  $('#ckWrap').innerHTML=CHECK.map((c,i)=>
+    `<label class="ck"><input type="checkbox" data-i="${i}" ${saved[i]?'checked':''}><span>${esc(c)}</span></label>`).join('');
+  $$('#ckWrap input').forEach(el=>el.addEventListener('change',()=>{
+    saved[el.dataset.i]=el.checked;
+    try{localStorage.setItem('tpe.check',JSON.stringify(saved));}catch(e){}
+  }));
+}
+function renderSos(){
+  $('#sosWrap').innerHTML=SOS.map(s=>
+    `<a class="sos" href="tel:${s.v.replace(/[^+\d]/g,'')}"><div class="l">${esc(s.l)}</div><div class="v">${esc(s.v)}</div><div class="n">${esc(s.n)}</div></a>`).join('');
+}
+
+/* ============ 탭 ============ */
+$$('.tabs button').forEach(b=>b.addEventListener('click',()=>{
+  $$('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
+  $$('.pane').forEach(p=>p.classList.toggle('on',p.id==='p-'+b.dataset.p));
+  window.scrollTo({top:0,behavior:'instant'});
+}));
+$('#q').addEventListener('input',e=>{qs=e.target.value.trim().toLowerCase();renderPlaces();});
+
+renderDays();renderPlaces();renderTalk();renderInfo();renderSos();
+tickPID();setInterval(tickPID,1000);
+</script>
+</body>
+</html>
