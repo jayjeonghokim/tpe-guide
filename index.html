@@ -162,6 +162,71 @@ details .bd li{margin:4px 0}
 
 .foot{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--ink3);line-height:1.9}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---- 사진 갤러리 ---- */
+.gal{display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x mandatory;margin:10px -14px 0;padding:0 14px 2px;scrollbar-width:none}
+.gal::-webkit-scrollbar{display:none}
+.gal button{flex:none;scroll-snap-align:start;padding:0;border-radius:7px;overflow:hidden;background:var(--sunk);height:112px;position:relative;line-height:0}
+.gal img{height:112px;width:auto;display:block;object-fit:cover;background:var(--sunk)}
+.gal .more{height:112px;width:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:1px dashed var(--line);border-radius:7px;font-family:var(--mono);font-size:10px;color:var(--ink3);text-align:center;line-height:1.4;text-decoration:none;padding:0 7px}
+.gal .more b{font-size:16px;font-weight:400;opacity:.5}
+.galn{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-top:6px;letter-spacing:.04em}
+
+/* ---- 라이트박스 ---- */
+.lb{position:fixed;inset:0;z-index:95;background:#05090C;display:none;flex-direction:column}
+.lb.on{display:flex}
+.lb .fig{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:52px 10px 4px}
+.lb .fig img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px}
+.lb .cap{flex:none;padding:12px 16px calc(16px + env(safe-area-inset-bottom));color:#DCE6EA;background:#05090C}
+.lb .cap .c{font-size:14px;line-height:1.5}
+.lb .cap .m{font-family:var(--mono);font-size:10.5px;opacity:.55;margin-top:6px;line-height:1.7}
+.lb .cap .m a{color:inherit}
+.lb .x{position:absolute;top:calc(10px + env(safe-area-inset-top));right:12px;z-index:2;font-family:var(--mono);font-size:12px;color:#DCE6EA;background:rgba(255,255,255,.12);border-radius:7px;padding:8px 13px}
+.lb .ct{position:absolute;top:calc(10px + env(safe-area-inset-top));left:12px;z-index:2;font-family:var(--mono);font-size:11px;color:#DCE6EA;opacity:.6;padding:8px 2px}
+.lb .nav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;font-size:26px;color:#DCE6EA;background:rgba(255,255,255,.1);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center}
+.lb .nav.pv{left:8px} .lb .nav.nx{right:8px}
+.lb .nav[disabled]{opacity:.2}
+
+/* ---- 동선 ---- */
+.rt{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;margin-top:12px}
+.rt svg{width:100%;height:auto;display:block;border-radius:6px;background:var(--sunk)}
+.rtlg{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-family:var(--mono);font-size:10.5px;color:var(--ink3)}
+.rtlg span{display:inline-flex;align-items:center;gap:5px}
+.rtlg i{width:15px;height:3px;border-radius:2px;display:inline-block}
+.sum{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:12px}
+.sum>div{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:9px 6px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.sum .v{font-family:var(--mono);font-size:15px;font-weight:600;line-height:1.2;word-break:keep-all}
+.sum .k{font-size:10px;color:var(--ink3);margin-top:4px;line-height:1.35;word-break:keep-all}
+.legs{margin-top:16px}
+.lg{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid var(--line)}
+.lg:last-child{border-bottom:0}
+.lg .ic{flex:none;width:34px;text-align:center;font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;padding:3px 0;border-radius:4px;height:fit-content;color:#fff}
+.ic.walk{background:var(--g)} .ic.mrt{background:var(--bl)} .ic.taxi{background:var(--o)}
+.ic.arex{background:var(--br)} .ic.air{background:var(--r)} .ic.bus{background:var(--ink3)}
+.lg .bd{min-width:0;flex:1}
+.lg .r{font-size:14px;font-weight:500}
+.lg .d{font-family:var(--mono);font-size:11.5px;color:var(--ink2);margin-top:3px;line-height:1.65}
+.lg .alt{font-size:12px;color:var(--ink3);margin-top:5px;padding-left:9px;border-left:2px solid var(--line);line-height:1.6}
+.mrtl{font-family:var(--mono);font-size:9.5px;font-weight:600;color:#fff;padding:1px 5px;border-radius:3px;margin-right:4px}
+.mrtl.BL{background:#0070BD}.mrtl.R{background:#E3002C}.mrtl.G{background:#008659}
+.mrtl.O{background:#F5A100}.mrtl.BR{background:#A45A2A}.mrtl.A{background:#8246AF}
+
+/* ---- 필담 그룹 ---- */
+.ph .py{font-family:var(--mono);font-size:12.5px;color:var(--bl);margin-top:4px;letter-spacing:.01em}
+.big .py{font-family:var(--mono);font-size:15px;color:var(--bl);margin-top:12px}
+.gsec{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--ink3);margin:22px 0 9px;display:flex;align-items:center;gap:8px}
+.gsec::after{content:"";flex:1;height:1px;background:var(--line)}
+.gsec:first-child{margin-top:0}
+
+/* ---- 기타 ---- */
+.warn{background:color-mix(in srgb,var(--r) 9%,var(--panel));border:1px solid color-mix(in srgb,var(--r) 32%,var(--line));border-radius:8px;padding:10px 12px;font-size:13px;color:var(--ink);margin-top:9px;line-height:1.6}
+.warn b{color:var(--r)}
+.est{opacity:.6}
+.stop .warn{margin-top:8px}
+.pl .warn{margin-top:9px}
+.tgl{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:5px 11px;background:var(--panel)}
+.tgl[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.filters{align-items:center}
 </style>
 </head>
 <body>
@@ -194,9 +259,10 @@ details .bd li{margin:4px 0}
 
 <nav class="tabs" role="tablist">
   <button role="tab" aria-selected="true" data-p="plan">일정</button>
+  <button role="tab" aria-selected="false" data-p="route">동선</button>
   <button role="tab" aria-selected="false" data-p="place">장소</button>
-  <button role="tab" aria-selected="false" data-p="info">실전</button>
   <button role="tab" aria-selected="false" data-p="talk">필담</button>
+  <button role="tab" aria-selected="false" data-p="info">실전</button>
   <button role="tab" aria-selected="false" data-p="sos">긴급</button>
 </nav>
 
@@ -204,7 +270,19 @@ details .bd li{margin:4px 0}
 <section class="pane on" id="p-plan" role="tabpanel">
   <div class="days" id="dayBar"></div>
   <div id="dayNote" class="tiny" style="margin-top:12px"></div>
+  <div id="dayStay"></div>
   <div class="tl" id="tl"></div>
+</section>
+
+<!-- 동선 -->
+<section class="pane" id="p-route" role="tabpanel">
+  <div class="days" id="rDayBar"></div>
+  <div id="rNote" class="tiny" style="margin-top:12px"></div>
+  <div id="rMap"></div>
+  <div id="rSum"></div>
+  <div class="eyebrow">구간별 이동</div>
+  <div class="legs" id="rLegs"></div>
+  <div id="rLink"></div>
 </section>
 
 <!-- 장소 -->
@@ -214,18 +292,20 @@ details .bd li{margin:4px 0}
   <div id="plist"></div>
 </section>
 
+<!-- 필담 -->
+<section class="pane" id="p-talk" role="tabpanel">
+  <p class="muted" style="margin:0 0 12px">카드를 누르면 화면 가득 커집니다. 상대에게 그대로 보여주세요. 파란 줄은 한국어 발음입니다.</p>
+  <div class="tools"><input id="tq" type="search" placeholder="한국어·한자 검색" autocomplete="off"></div>
+  <div class="filters" id="tfl"></div>
+  <div id="phWrap"></div>
+</section>
+
 <!-- 실전 -->
 <section class="pane" id="p-info" role="tabpanel">
   <div class="eyebrow">체크리스트</div>
   <div class="card" id="ckWrap"></div>
   <div class="eyebrow">현지 운용</div>
   <div id="infoWrap"></div>
-</section>
-
-<!-- 필담 -->
-<section class="pane" id="p-talk" role="tabpanel">
-  <p class="muted" style="margin:0 0 14px">카드를 누르면 화면 가득 커집니다. 상대에게 그대로 보여주세요.</p>
-  <div id="phWrap"></div>
 </section>
 
 <!-- 긴급 -->
@@ -242,56 +322,241 @@ details .bd li{margin:4px 0}
 </section>
 
 <div class="foot">
-  URL을 아는 사람만 접근 가능한 비공개 링크입니다.<br>
-  검색엔진 색인 차단됨 · 예약번호·항공편 정보 미포함<br>
-  영업시간은 변동될 수 있습니다. 이동 전 지도 앱에서 재확인하세요.
+  URL을 아는 사람만 접근 가능한 비공개 링크입니다. 검색엔진 색인 차단됨.<br>
+  8/30 이후는 패키지 공식 일정이며 <b>표시된 시각은 추정치</b>입니다. 확정 시각이 나오면 갱신하세요.<br>
+  영업시간은 변동될 수 있습니다. 이동 전 지도 앱에서 재확인하세요.<br>
+  사진 출처 Wikimedia Commons · 각 사진의 촬영자와 라이선스는 확대 화면에 표기됩니다.
 </div>
 </div>
 
 <div class="big" id="big" role="dialog" aria-modal="true">
   <div class="zh" id="bigZh"></div>
+  <div class="py mono" id="bigPy"></div>
   <div class="ko" id="bigKo"></div>
   <button class="cl" onclick="closeBig()">닫기</button>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="사진 보기">
+  <div class="ct mono" id="lbCt"></div>
+  <button class="x mono" onclick="lbClose()">닫기 ✕</button>
+  <button class="nav pv" id="lbPv" onclick="lbGo(-1)" aria-label="이전">‹</button>
+  <button class="nav nx" id="lbNx" onclick="lbGo(1)" aria-label="다음">›</button>
+  <div class="fig"><img id="lbImg" alt=""></div>
+  <div class="cap"><div class="c" id="lbC"></div><div class="m" id="lbM"></div></div>
 </div>
 
 <script>
 /* ============ 데이터 ============ */
 // hours: 요일(0=일)별 [시작분, 종료분] 구간. 종료 >1440 이면 익일.
-const H=(o)=>o;
 const ALLDAY={0:[[0,1440]],1:[[0,1440]],2:[[0,1440]],3:[[0,1440]],4:[[0,1440]],5:[[0,1440]],6:[[0,1440]]};
+const EVERYDAY=(a,b)=>({0:[[a,b]],1:[[a,b]],2:[[a,b]],3:[[a,b]],4:[[a,b]],5:[[a,b]],6:[[a,b]]});
+const EXCEPT=(a,b,off)=>{const o=EVERYDAY(a,b);off.forEach(d=>o[d]=null);return o;};
+
+const CATS={base:'숙소',sight:'볼거리',food:'먹거리',cafe:'커피·차',bar:'바·재즈',move:'교통',trip:'별도 검토'};
 
 const PLACES=[
- {id:'amba',nm:'amba 타이베이 시먼딩',zh:'台北西門町意舍酒店',cat:'base',area:'완화·시먼딩',
-  addr:'萬華區武昌街二段77號',hours:ALLDAY,
-  pid:'ChIJX10H1gipQjQRfmZjnra3znU',ll:'25.0451762,121.5056699',
-  tip:'로비는 5층. 1~4층은 쇼핑몰이라 처음 가면 헷갈립니다. 뒤쪽에 측면 출입구가 있습니다. 택시 기사에게는 한자 이름을 보여주는 게 가장 빠릅니다.'},
+ /* ---- 숙소 ---- */
+ {id:'amba',nm:'amba 타이베이 시먼딩',zh:'台北西門町意舍酒店',cat:'base',area:'완화·시먼딩',sch:1,
+  addr:'萬華區武昌街二段77號',hours:ALLDAY,pid:'ChIJX10H1gipQjQRfmZjnra3znU',ll:'25.0451762,121.5056699',
+  tip:'8/29–8/30 숙박. 로비는 5층이고 1~4층은 쇼핑몰이라 처음 가면 헷갈립니다. 뒤쪽에 측면 출입구가 있습니다. 체크인 15:00 / 체크아웃 11:00 — 8/29는 도착이 이르니 짐만 맡기고 일정을 시작하세요. 택시 기사에게는 한자 이름을 보여주는 게 가장 빠릅니다.'},
 
- {id:'redhouse',nm:'서문홍루',zh:'西門紅樓',cat:'sight',area:'완화·시먼딩',
+ {id:'inhouse',nm:'inhouse Hotel',zh:'',cat:'base',area:'완화·시먼딩',sch:1,
+  hours:ALLDAY,pid:'',ll:'',
+  tip:'8/30–9/2 숙박. 패키지 지정 숙소로 amba와 같은 시먼딩 권역이라 도보 이동이 가능합니다. 정확한 지점명과 주소는 패키지 확정서에서 확인하세요 — 타이베이에 inhouse 계열이 여러 곳 있어 지도 검색 시 혼동될 수 있습니다.'},
+
+ /* ---- 교통 거점 ---- */
+ {id:'tpeapt1',nm:'타오위안공항 제1터미널',zh:'桃園國際機場 第一航廈',cat:'move',area:'타오위안',sch:1,
+  hours:ALLDAY,pid:'',ll:'25.0797,121.2342',nomap:1,
+  tip:'8/29 도착 · 9/2 출발. 입국 후 공항 MRT(A12역)는 지하 1층. 이지카드는 도착층 편의점이나 MRT 역 창구에서 삽니다. 귀국일은 출발 3시간 전 도착 권장.'},
+
+ {id:'tpemain',nm:'타이베이 메인역',zh:'台北車站',cat:'move',area:'중정',sch:1,
+  hours:ALLDAY,pid:'',ll:'25.046243,121.517475',
+  tip:'공항 MRT A1역. TRA·고속철·MRT 반난선·단수이신이선이 모두 모여 구조가 복잡합니다. 시먼 방면은 반난선(藍) 1정거장. 일부 항공사는 A1역에서 인타운 체크인이 되니 귀국일에 확인해볼 만합니다.'},
+
+ /* ---- 볼거리 · 일정 포함 ---- */
+ {id:'ximending',nm:'시먼딩·레인보우 크로싱',zh:'西門町',cat:'sight',area:'완화·시먼딩',sch:1,
+  hours:ALLDAY,pid:'',ll:'25.0421,121.5074',
+  tip:'숙소 바로 앞 보행자 상권. 레인보우 크로싱은 서문홍루 북쪽 횡단보도입니다. 상점은 대체로 11시 이후 열고 밤이 가장 활발합니다. 아종면선(阿宗麵線)이 이 구역에 있습니다.'},
+
+ {id:'redhouse',nm:'서문홍루',zh:'西門紅樓',cat:'sight',area:'완화·시먼딩',sch:1,
   hours:{0:[[660,1260]],1:null,2:[[660,1260]],3:[[660,1260]],4:[[660,1260]],5:[[660,1260]],6:[[660,1320]]},
   pid:'ChIJi-yspAmpQjQRxcHc_lwnNHw',ll:'25.0420139,121.5068592',
-  tip:'1908년 공설시장 건물. 토요일은 22시까지 열고 주말 창작시장은 14시부터. 월요일 휴관이니 8/31에 다시 갈 생각이면 피하세요.'},
+  tip:'1908년 공설시장 건물. 토요일은 22시까지 열고 주말 창작시장은 14시부터. 월요일 휴관이라 8/31에는 갈 수 없습니다.'},
 
- {id:'bopiliao',nm:'보피랴오 역사거리',zh:'剝皮寮歷史街區',cat:'sight',area:'완화',
+ {id:'bopiliao',nm:'보피랴오 역사거리',zh:'剝皮寮歷史街區',cat:'sight',area:'완화',sch:1,
   hours:{0:[[540,1080]],1:null,2:[[540,1080]],3:[[540,1080]],4:[[540,1080]],5:[[540,1080]],6:[[540,1080]]},
   pid:'ChIJ3bYX0KipQjQR6Q_UrbthM_8',ll:'25.036838,121.5022648',
-  tip:'실내 전시가 18시에 끝납니다. 용산사보다 먼저 보세요. 무료이고 그늘진 회랑이 있어 더위 피하기 좋습니다. 용산사까지 도보 5분.'},
+  tip:'실내 전시가 18시에 끝납니다. 용산사보다 먼저 보세요. 무료이고 그늘진 회랑이 있어 더위 피하기 좋습니다. 용산사까지 도보 5분. 월요일 휴관.'},
 
- {id:'longshan',nm:'용산사',zh:'艋舺龍山寺',cat:'sight',area:'완화',
-  hours:{0:[[360,1320]],1:[[360,1320]],2:[[360,1320]],3:[[360,1320]],4:[[360,1320]],5:[[360,1320]],6:[[360,1320]]},
-  pid:'ChIJCd7n16ipQjQRihzEWF4z6Pg',ll:'25.0373106,121.4998654',
-  tip:'6시부터 22시까지. 저녁에 조명이 켜지면 분위기가 완전히 달라집니다. 참배객 앞을 가로지르지 말고 정숙 유지. 입구 쪽 폭포 조형물이 사진 포인트.'},
+ {id:'longshan',nm:'용산사',zh:'艋舺龍山寺',cat:'sight',area:'완화',sch:1,
+  hours:EVERYDAY(360,1320),pid:'ChIJCd7n16ipQjQRihzEWF4z6Pg',ll:'25.0373106,121.4998654',
+  tip:'6시부터 22시까지. 저녁에 조명이 켜지면 분위기가 완전히 달라집니다. 참배객 앞을 가로지르지 말고 정숙 유지. 대만 유일의 청동 반룡주(蟠龍柱)가 전전에 있습니다.'},
 
- {id:'moonq',nm:'Moon Moon 청도점',zh:'雙月食品社 青島店',cat:'food',area:'중정',
+ {id:'t101',nm:'타이베이 101',zh:'台北101',cat:'sight',area:'신이',sch:1,
+  hours:{0:[[660,1290]],1:[[660,1290]],2:[[660,1290]],3:[[660,1290]],4:[[660,1320]],5:[[660,1320]],6:[[660,1320]]},
+  pid:'ChIJraeA2rarQjQRPBBjyR3RxKw',ll:'25.0341222,121.5640212',
+  tip:'표기 시간은 쇼핑몰 기준. 전망대는 21시 종료(마지막 입장 21:15)라 늦게 가면 못 올라갑니다. 외관과 신이광장 야간 산책만으로 20~30분이면 충분합니다. 8/29 일몰 18:16.'},
+
+ {id:'dadaocheng',nm:'다다오청·디화제',zh:'大稻埕 迪化街',cat:'sight',area:'다퉁',sch:1,
+  hours:EVERYDAY(600,1140),pid:'',ll:'25.056173,121.510216',
+  tip:'청말·일제시대 바로크 파사드가 남은 건재·한약재·차 도매 거리. 상점마다 영업시간이 달라 대체로 10~19시로 보면 됩니다. 북문역(北門) 3번 출구에서 남쪽 입구까지 도보 8분. 차 도매상이 많아 시음이 되는 곳이 꽤 있습니다.'},
+
+ {id:'yongkang',nm:'융캉제',zh:'永康街',cat:'sight',area:'다안',sch:1,
+  hours:EVERYDAY(660,1320),pid:'',ll:'25.032464,121.52973',
+  tip:'동문역(東門) 5번 출구 바로 앞. 식당·찻집·디저트가 밀집한 보행 상권. 낮에는 한산하고 저녁에 붐빕니다. 융캉우육면과 스무시(思慕昔) 빙수가 대표 가게로 늘 줄이 있습니다.'},
+
+ {id:'huashan',nm:'화산1914 문창원구',zh:'華山1914文化創意產業園區',cat:'sight',area:'중정',sch:1,
+  hours:EVERYDAY(540,1320),pid:'',ll:'25.044609,121.529183',
+  tip:'1914년 일본식 주조창을 개조한 문화단지. 야외 구역은 상시 개방이고 전시관은 개별 유료·개별 시간입니다. 상점과 카페는 대체로 11~21시. 충샤오신성역(忠孝新生) 1번 출구 도보 3분.'},
+
+ {id:'cks',nm:'중정기념당',zh:'中正紀念堂',cat:'sight',area:'중정',sch:1,
+  hours:EVERYDAY(540,1080),pid:'',ll:'25.034576,121.521781',
+  tip:'본관 전시는 09:00–18:00, 자유광장과 회랑은 야간에도 개방되고 조명이 들어옵니다. 위병 교대식은 매시 정각(본관 내부). 국가희극원·음악청 두 건물이 광장을 마주 보고 서 있어 야간 사진이 좋습니다.'},
+
+ {id:'npm',nm:'국립고궁박물원',zh:'國立故宮博物院',cat:'sight',area:'스린',sch:1,
+  hours:{0:[[540,1020]],1:null,2:[[540,1020]],3:[[540,1020]],4:[[540,1020]],5:[[540,1020]],6:[[540,1020]]},
+  pid:'',ll:'25.101574,121.548862',
+  tip:'09:00–17:00, 월요일 휴관. 마지막 입장 16:30입니다. 시내에서 멀어(스린역에서 버스 15분) 왕복 이동만 1시간 30분 잡아야 합니다. 제대로 보려면 최소 2시간 — 오후 늦게 배치하면 사실상 관람이 불가능합니다.'},
+
+ /* ---- 볼거리 · 후보 ---- */
+ {id:'daanpark',nm:'다안삼림공원',zh:'大安森林公園',cat:'sight',area:'다안',
+  hours:ALLDAY,pid:'',ll:'25.029693,121.535824',
+  tip:'26만㎡ 도심 녹지. 상시 개방·무료. 이른 아침과 해질 무렵이 좋고 한낮은 그늘이 있어도 덥습니다. 융캉제에서 도보 15분이라 8/31 오전에 붙이기 좋습니다.'},
+
+ {id:'xiangshan',nm:'샹산 (코끼리산)',zh:'象山',cat:'sight',area:'신이',
+  hours:ALLDAY,pid:'',ll:'25.03292,121.569769',
+  tip:'101 야경 조망 1순위. 상시 개방·무료이고 조명이 있습니다. 등산로 입구에서 첫 전망대까지 계단 약 20분 — 짧지만 가파릅니다. 8월 말 저녁에도 땀에 젖으니 물과 수건 필수. 일몰 30분 전 도착이 가장 좋습니다.'},
+
+ {id:'linjiang',nm:'린장제(통화) 야시장',zh:'臨江街觀光夜市',cat:'sight',area:'다안',
+  hours:EVERYDAY(1080,1500),pid:'',ll:'25.02931,121.55721',
+  tip:'18시 무렵부터 새벽 1시까지. 스린야시장보다 작고 현지인 비중이 높아 줄이 짧습니다. 101에서 택시 10분. 현금 준비.'},
+
+ {id:'tfam',nm:'타이베이 시립미술관',zh:'臺北市立美術館',cat:'sight',area:'중산',
+  hours:{0:[[570,1050]],1:null,2:[[570,1050]],3:[[570,1050]],4:[[570,1050]],5:[[570,1050]],6:[[570,1230]]},
+  pid:'',ll:'25.07203,121.524661',
+  tip:'09:30–17:30, 토요일은 20:30까지. 월요일 휴관. 위안산역(圓山) 1번 출구 도보 10분. 옆에 화보리공원과 타이베이 고사관이 붙어 있습니다.'},
+
+ {id:'moca',nm:'타이베이 현대미술관',zh:'台北當代藝術館',cat:'sight',area:'다퉁',
+  hours:{0:[[600,1080]],1:null,2:[[600,1080]],3:[[600,1080]],4:[[600,1080]],5:[[600,1080]],6:[[600,1080]]},
+  pid:'',ll:'25.050781,121.518965',
+  tip:'10:00–18:00, 월요일 휴관. 1921년 일제시대 초등학교 건물. 중산역에서 도보 5분이라 9/2 중산 카페 거리와 묶기 좋습니다. 규모가 작아 1시간이면 충분합니다.'},
+
+ {id:'zhongshan',nm:'중산 카페 거리 (츠펑제)',zh:'中山 赤峰街',cat:'sight',area:'중산',sch:1,
+  hours:EVERYDAY(660,1260),pid:'',ll:'25.05736,121.519615',
+  tip:'중산역과 솽롄역 사이 골목. 옛 철공소 자리에 카페·편집숍·독립서점이 들어선 구역입니다. 대부분 12시 이후 열고 월요일 휴무가 잦습니다. 9/2 귀국일 오전 일정이라 시간이 짧으니 두세 곳만 정해두세요.'},
+
+ /* ---- 먹거리 ---- */
+ {id:'moonq',nm:'雙月食品社 청도점',zh:'雙月食品社 青島店',cat:'food',area:'중정',sch:1,
   hours:{0:[[660,840],[1020,1200]],1:[[660,840],[1020,1200]],2:[[660,840],[1020,1200]],3:[[660,840],[1020,1200]],4:[[660,840],[1020,1200]],5:[[660,840],[1020,1200]],6:[[660,840],[1020,1200]]},
   pid:'ChIJgbsfD3GpQjQR7z5ZO22KdVQ',ll:'25.0437017,121.5220376',
-  tip:'미쉐린 빕 구르망. 3개 지점 중 유일하게 연중무휴. 입장 시 QR 스캔 후 폰으로 주문해 회전이 빠릅니다. 혼자면 탕 1 + 면 1이면 충분 — 탕이 2인분급 용기로 나옵니다. 蛤蜊雞湯(바지락 닭탕) + 麻醬麵(참깨면) 조합 추천.'},
+  tip:'미쉐린 빕 구르망. 3개 지점 중 유일하게 연중무휴. 11:00–14:00 / 17:00–20:00. 입장 시 QR 스캔 후 폰으로 주문해 회전이 빠릅니다. 혼자면 탕 1 + 면 1이면 충분 — 탕이 2인분급 용기로 나옵니다. 蛤蜊雞湯(바지락 닭탕) + 麻醬麵(참깨면) 조합 추천.'},
 
- {id:'moonj',nm:'Moon Moon 제남점',zh:'雙月食品社 濟南店',cat:'food',area:'중정',
+ {id:'moonj',nm:'雙月食品社 제남점',zh:'雙月食品社 濟南店',cat:'food',area:'중정',
   hours:{0:[[660,840],[1020,1200]],1:null,2:[[660,840],[1020,1200]],3:[[660,840],[1020,1200]],4:[[660,840],[1020,1200]],5:[[660,840],[1020,1200]],6:[[660,840],[1020,1200]]},
   pid:'ChIJu98loqipQjQRF3IXpB6aGI8',ll:'25.0427329,121.5219127',
   tip:'청도점 백업. 도보 2분 거리. 월요일 휴무이고 식사 50분 제한이 있습니다. 대기 번호표를 받고 기다리는 동안 미리 주문·선결제합니다.'},
 
- {id:'barmood',nm:'BAR MOOD',zh:'吧沐',cat:'bar',area:'다안',
+ {id:'fuhang',nm:'푸항더우장',zh:'阜杭豆漿',cat:'food',area:'중정',
+  hours:{0:[[330,750]],1:null,2:[[330,750]],3:[[330,750]],4:[[330,750]],5:[[330,750]],6:[[330,750]]},
+  pid:'',ll:'25.0444,121.5245',
+  tip:'화산시장 2층. 05:30–12:30, 월요일 휴무. 타이베이에서 줄이 가장 긴 아침식사 — 8시 이후엔 1시간을 각오해야 하니 7시 전 도착이 답입니다. 厚燒餅(두꺼운 사오빙) + 鹹豆漿(짠 두유)가 정석. 선도사역(善導寺) 5번 출구 바로 위. 현금.'},
+
+ {id:'liushandong',nm:'류산둥 우육면',zh:'劉山東牛肉麵',cat:'food',area:'중정',
+  hours:{0:null,1:[[480,1170]],2:[[480,1170]],3:[[480,1170]],4:[[480,1170]],5:[[480,1170]],6:[[480,1170]]},
+  pid:'',ll:'25.045733,121.513778',
+  tip:'개봉가(開封街) 골목. 일요일 휴무. 청탕(清燉) 우육면으로 이름난 노포로 맑은 국물 계열입니다. 타이베이 메인역에서 도보 5분이라 도착일이나 귀국일 끼니로 쓰기 좋습니다. 현금.'},
+
+ {id:'jinfeng',nm:'진펑 루로우판',zh:'金峰滷肉飯',cat:'food',area:'중정',
+  hours:EVERYDAY(480,1380),pid:'',ll:'25.032032,121.518508',
+  tip:'중정기념당역 2번 출구 앞. 루로우판 한 그릇 40 TWD 안팎으로 늘 붐빕니다. 회전이 빨라 줄은 금방 줄어듭니다. 루로우판 + 부추 + 죽순탕이 기본 조합. 9/1 중정기념당 일정과 자연스럽게 붙습니다. 현금.'},
+
+ {id:'ayzong',nm:'아종면선',zh:'阿宗麵線',cat:'food',area:'완화·시먼딩',
+  hours:EVERYDAY(660,1410),pid:'',ll:'25.043318,121.507686',
+  tip:'시먼딩 한복판. 앉을 자리가 없어 다들 서서 먹습니다. 곱창면선(大腸麵線) 소/대 두 가지뿐이라 주문이 간단합니다. 숙소에서 도보 3분이라 야식이나 늦은 간식으로 쓰기 좋습니다.'},
+
+ /* ---- 커피·차 · 일정 포함 ---- */
+ {id:'alldayroast',nm:'ALL DAY Roasting Company',zh:'',cat:'cafe',area:'쑹산',sch:1,
+  hours:null,pid:'',ll:'25.056714,121.56022',
+  tip:'8/30 패키지 일정. 좌표는 옌서우제(延壽街) 지점 기준이며 타이베이에 지점이 여러 곳이라 패키지가 어느 지점을 가는지 확인이 필요합니다. 다다오청과는 거리가 있어 이동 시간을 넉넉히 보세요.'},
+
+ {id:'wangtealab',nm:'Wangtea Lab',zh:'王有記茶行',cat:'cafe',area:'다퉁',sch:1,
+  hours:null,pid:'',ll:'',
+  tip:'8/30 패키지 일정. 다다오청 권역의 차 실험실 컨셉 매장으로 대만차를 현대적으로 재해석해 냅니다. 주소와 영업시간은 미확인이니 방문 전 확인하세요. 차를 사 올 생각이면 여기가 좋은 후보입니다.'},
+
+ {id:'oasis',nm:'OASIS COFFEE ROASTERS',zh:'',cat:'cafe',area:'미확인',sch:1,
+  hours:null,pid:'',ll:'',
+  tip:'8/31 패키지 일정. 주소·영업시간 미확인. 로스터리 카페이니 원두 구매와 로스터 대화를 염두에 두고 명함을 챙기세요.'},
+
+ {id:'simplekaffa',nm:'Simple Kaffa 싱보커피',zh:'興波咖啡',cat:'cafe',area:'중정',sch:1,
+  hours:null,pid:'',ll:'',
+  tip:'8/31 패키지 일정. 우바오춘(吳則霖) — 2016 월드 바리스타 챔피언의 매장으로 이번 커피 투어의 핵심입니다. 화산1914 인근 본점(興波咖啡 Founder)과 다른 지점이 있으니 어느 곳인지 확인하세요. 원두 라인업이 넓어 구매 목적이면 시간을 넉넉히.'},
+
+ {id:'vwi',nm:'VWI BY CHADWANG',zh:'',cat:'cafe',area:'다안',sch:1,
+  hours:null,pid:'',ll:'25.042291,121.540773',
+  tip:'8/31 패키지 일정. 왕처둥(王策) — 2017 월드 브루어스컵 챔피언의 매장. 핸드드립 중심이라 추출 방식과 레시피를 물어보기 좋은 곳입니다. 충샤오둥루3단 골목 안쪽.'},
+
+ {id:'fika',nm:'FIKA FIKA CAFE',zh:'',cat:'cafe',area:'중산',sch:1,
+  hours:null,pid:'',ll:'25.05044,121.535257',
+  tip:'9/1 패키지 일정. 이퉁제(伊通街) 본점. 북유럽식 라이트 로스팅으로 대만 스페셜티 씬의 초기를 연 곳입니다. 노르딕 로스트 계열을 좋아하면 여기서 원두를 사 오세요.'},
+
+ {id:'oddoneout',nm:'ODD ONE OUT',zh:'',cat:'cafe',area:'미확인',sch:1,
+  hours:null,pid:'',ll:'',
+  tip:'9/1 패키지 일정. 주소·영업시간 미확인. 지도 검색 시 동명 매장이 있을 수 있으니 패키지 확정서의 주소를 우선하세요.'},
+
+ {id:'astea',nm:'芏 Astēa',zh:'芏',cat:'bar',area:'미확인',sch:1,
+  hours:null,pid:'',ll:'',
+  tip:'9/1 패키지 일정. 대만차 기반 칵테일 바로 알려져 있습니다. 바 업장은 대개 저녁 영업이라 낮 시간에 배치되어 있다면 영업 여부를 반드시 확인하세요.'},
+
+ {id:'yiyi',nm:'YiYi Coffee Cocktail Bar',zh:'',cat:'bar',area:'다퉁',sch:1,
+  hours:null,pid:'',ll:'',
+  tip:'8/30 패키지 일정. 커피와 칵테일을 접붙인 업장으로 커피 업계 종사자에게는 특히 볼 만한 조합입니다. 주소·영업시간 미확인.'},
+
+ /* ---- 커피·차 · 후보 ---- */
+ {id:'iyoshi',nm:'Iyoshi Cola',zh:'伊良可樂',cat:'cafe',area:'중산',
+  addr:'中山北路二段44巷21-4號',
+  hours:{0:[[780,1110]],1:[[780,1050]],2:null,3:[[780,1050]],4:[[780,1050]],5:[[780,1050]],6:[[780,1110]]},
+  pid:'ChIJNwu7BACpQjQRx841v6FTH08',ll:'25.055199,121.5212978',
+  tip:'일본 한방 콜라의 첫 해외 매장. 화요일 휴무. 매일 소량 제조라 조기 마감이 잦으니 인스타 확인 필수. 잔당 150 TWD, 1인 2잔 제한, 현장 대기만. 마법 시럽(魔法糖漿)은 병으로 살 수 있어 기념품으로 좋습니다. 9/2 중산 카페 거리 일정과 같은 구역입니다.'},
+
+ {id:'zhuangji',nm:'撞記 설화빙',zh:'撞記 水果 果汁 雪花冰',cat:'cafe',area:'중산',
+  addr:'錦州街30巷1號',
+  hours:{0:[[660,1020]],1:[[660,1200]],2:[[660,1200]],3:null,4:null,5:[[660,1200]],6:[[660,1200]]},
+  pid:'ChIJ685-kyGpQjQR2uBgKI2-R0M',ll:'25.0599838,121.5248555',
+  tip:'수·목 휴무 — 9/2 귀국일에는 못 갑니다. 주말은 30분~1시간 대기가 기본이라 오픈 직후가 안전합니다. 망고빙수 150~180 TWD, 일반 설화빙 60 TWD. 8월 말은 망고 끝물이라 상태가 들쭉날쭉 — 별로면 행인이나 깨가 낫습니다. 현금.'},
+
+ {id:'rufous',nm:'RUFOUS COFFEE ROASTERS',zh:'',cat:'cafe',area:'다안',
+  hours:null,pid:'',ll:'25.023498,121.543589',
+  tip:'푸싱난루2단. 양야오(楊耀) 로스터의 매장으로 다크·미디엄 계열 정통 로스팅 노선입니다. 라이트 로스팅 위주 매장들과 대비해서 마셔보면 대만 씬의 폭이 보입니다. 류장리역(六張犁) 도보 5분.'},
+
+ {id:'coffeesweet',nm:'Coffee Sweet',zh:'',cat:'cafe',area:'중산',
+  hours:null,pid:'',ll:'25.048415,121.52224',
+  tip:'중산북로1단 골목. 오래된 자가배전 매장으로 조용합니다. 중산역 도보 5분이라 9/2 중산 카페 거리 일정에 넣기 좋습니다.'},
+
+ {id:'coffeesind',nm:'Coffee Sind',zh:'',cat:'cafe',area:'중정',
+  hours:null,pid:'',ll:'25.041089,121.5321',
+  tip:'신성난루1단 56항. 화산1914에서 도보 8분이라 8/31 일정에 끼워 넣을 수 있습니다.'},
+
+ {id:'coffeelaw',nm:'COFFEE LAW',zh:'',cat:'cafe',area:'다안',
+  hours:null,pid:'',ll:'25.044042,121.549757',
+  tip:'충샤오둥루4단 181항. 동취(東區) 골목 안쪽. VWI와 도보 10분 거리라 8/31에 이어 붙일 수 있습니다.'},
+
+ {id:'cama',nm:'CAMA COFFEE ROASTERS',zh:'',cat:'cafe',area:'미확인',
+  hours:null,pid:'',ll:'',
+  tip:'대만 전국 체인이자 로스터리. 양밍산의 豆留森林(도류삼림)은 옛 일본식 가옥을 개조한 플래그십으로 시내 지점과는 성격이 완전히 다릅니다 — 어느 쪽을 볼지 먼저 정하세요. 시내 지점은 접근성만 보면 편합니다.'},
+
+ {id:'thenormal',nm:'The Normal',zh:'',cat:'cafe',area:'미확인',hours:null,pid:'',ll:'',
+  tip:'주소·영업시간 미확인. 방문 전 지도 검색으로 확정하세요.'},
+ {id:'moonshine',nm:'Moonshine Coffee Roasters',zh:'',cat:'cafe',area:'미확인',hours:null,pid:'',ll:'',
+  tip:'주소·영업시간 미확인. 로스터리이므로 원두 구매 후보.'},
+ {id:'paperst',nm:'Paper St. Coffee',zh:'',cat:'cafe',area:'미확인',hours:null,pid:'',ll:'',
+  tip:'주소·영업시간 미확인.'},
+ {id:'mountainkids',nm:'Mountain Kids Coffee Roaster',zh:'山小孩咖啡',cat:'cafe',area:'미확인',hours:null,pid:'',ll:'',
+  tip:'주소·영업시간 미확인. 자가배전 매장.'},
+ {id:'congrats',nm:'Congrats Café',zh:'',cat:'cafe',area:'미확인',hours:null,pid:'',ll:'',
+  tip:'주소·영업시간 미확인.'},
+
+ /* ---- 바·재즈 ---- */
+ {id:'barmood',nm:'BAR MOOD',zh:'吧沐',cat:'bar',area:'다안',sch:1,
   addr:'敦化南路一段160巷53號',
   hours:{0:[[1080,1500]],1:[[1080,1500]],2:[[1080,1500]],3:[[1080,1500]],4:[[1080,1560]],5:[[1080,1560]],6:[[1080,1560]]},
   pid:'ChIJgbsg4tqrQjQRNTNaBAUYOfA',ll:'25.043701,121.5466392',
@@ -301,116 +566,380 @@ const PLACES=[
   addr:'敦化南路一段160巷13號',
   hours:{0:[[1200,1560]],1:[[1200,1560]],2:[[1200,1560]],3:[[1200,1560]],4:[[1200,1590]],5:[[1200,1590]],6:[[1200,1590]]},
   pid:'ChIJ28DimWarQjQRZDkB3CI3bHg',ll:'25.0436904,121.547848',
-  tip:'아시아 50 베스트 바 2026 35위, 타이베이 유일 톱50. BAR MOOD와 같은 골목 도보 1분. 20시 오픈이라 BAR MOOD 다음 순서로 붙이기 좋습니다. 메뉴를 크리미·클래리피케이션·카보네이션 등 질감 기준으로 나눈 게 특징 — 증류와 원심분리를 씁니다.'},
+  tip:'아시아 50 베스트 바 2026 35위, 타이베이 유일 톱50. BAR MOOD와 같은 골목 도보 1분이라 8/29에 한 잔 더 붙이기 딱 좋습니다. 20시 오픈. 메뉴를 크리미·클래리피케이션·카보네이션 등 질감 기준으로 나눈 게 특징 — 증류와 원심분리를 씁니다.'},
 
- {id:'t101',nm:'타이베이 101',zh:'台北101',cat:'sight',area:'신이',
-  hours:{0:[[660,1290]],1:[[660,1290]],2:[[660,1290]],3:[[660,1290]],4:[[660,1320]],5:[[660,1320]],6:[[660,1320]]},
-  pid:'ChIJraeA2rarQjQRPBBjyR3RxKw',ll:'25.0341222,121.5640212',
-  tip:'표기 시간은 쇼핑몰 기준. 전망대는 21시 종료라 바 일정 뒤에는 못 올라갑니다. 외관과 신이광장 야간 산책만으로 20~30분이면 충분합니다. 8/29 일몰 18:16.'},
+ {id:'ounce',nm:'Ounce Taipei',zh:'',cat:'bar',area:'다안',hours:null,pid:'',ll:'',
+  tip:'타이베이 스피크이지의 원조 격. 카페 안쪽 숨은 문으로 들어가는 구조로 알려져 있습니다. 주소·영업시간 확인 필요.'},
+ {id:'labtaipei',nm:'LAB Taipei',zh:'',cat:'bar',area:'다안',hours:null,pid:'',ll:'25.037995,121.555987',
+  tip:'런아이루4단 인근. 실험적 칵테일 노선. 영업시간 확인 필요.'},
+ {id:'kor',nm:'KOR Taipei',zh:'',cat:'bar',area:'미확인',hours:null,pid:'',ll:'',
+  tip:'주소·영업시간 확인 필요.'},
+ {id:'bluenote',nm:'Blue Note Taipei',zh:'藍調',cat:'bar',area:'중정',hours:null,pid:'',ll:'',
+  tip:'뤄쓰푸루3단 지하. 1974년 문을 연 타이베이 최고참 재즈 클럽입니다. 라이브 스케줄과 커버차지는 방문일에 확인하세요.'},
+ {id:'sappho',nm:'Sappho Live Jazz',zh:'',cat:'bar',area:'다안',hours:null,pid:'',ll:'25.0417,121.5433',
+  tip:'라이브 재즈가 가능한 선택지. 영업시간·공연 스케줄은 방문일에 인스타나 페이스북에서 라인업을 확인하세요.'},
+ {id:'indulge',nm:'Indulge Experimental Bistro',zh:'',cat:'bar',area:'다안',hours:null,pid:'',ll:'25.0413,121.5432',
+  tip:'Aki Wang. 미쉐린과 아시아 50 베스트에 동시 등재된 대만 유일 업장. 예약이 사실상 필수라 여유가 생기면 미리 잡아두세요.'},
+ {id:'publichouse',nm:'The Public House',zh:'',cat:'bar',area:'다안',hours:null,pid:'',ll:'25.0339,121.5439',
+  tip:'카카오 허스크를 쓴 시그니처가 있습니다. 커피 부산물 활용이라 관심 가실 만한 접근.'},
 
- {id:'zhuangji',nm:'撞記 설화빙',zh:'撞記 水果 果汁 雪花冰',cat:'food',area:'중산',
-  addr:'錦州街30巷1號',
-  hours:{0:[[660,1020]],1:[[660,1200]],2:[[660,1200]],3:null,4:null,5:[[660,1200]],6:[[660,1200]]},
-  pid:'ChIJ685-kyGpQjQR2uBgKI2-R0M',ll:'25.0599838,121.5248555',
-  tip:'수·목 휴무. 주말은 30분~1시간 대기가 기본이라 오픈 직후가 안전합니다. 망고빙수 150~180 TWD, 일반 설화빙은 60 TWD(깨·말차·땅콩·선초·행인). 8월 말은 망고 끝물이라 상태가 들쭉날쭉 — 별로면 행인이나 깨가 낫습니다. 현금 준비.'},
-
- {id:'iyoshi',nm:'Iyoshi Cola',zh:'伊良可樂',cat:'cafe',area:'중산',
-  addr:'中山北路二段44巷21-4號',
-  hours:{0:[[780,1110]],1:[[780,1050]],2:null,3:[[780,1050]],4:[[780,1050]],5:[[780,1050]],6:[[780,1110]]},
-  pid:'ChIJNwu7BACpQjQRx841v6FTH08',ll:'25.055199,121.5212978',
-  tip:'일본 한방 콜라의 첫 해외 매장. 화요일 휴무. 매일 소량 제조라 조기 마감이 잦으니 인스타 확인 필수. 잔당 150 TWD, 1인 2잔 제한, 현장 대기만. 오리지널·마고(馬告)·우유 콜라 3종. 마법 시럽(魔法糖漿)은 병으로 살 수 있어 기념품으로 좋습니다. 현금·LinePay·街口支付.'},
-
- {id:'sappho',nm:'Sappho Live Jazz',zh:'',cat:'bar',area:'다안',
-  hours:null,
-  pid:'',ll:'25.0417,121.5433',
-  tip:'토요일 밤 라이브 재즈가 가능한 선택지. 영업시간·공연 스케줄은 확정 전이니 방문일에 인스타나 페이스북에서 라인업을 확인하세요.'},
-
- {id:'indulge',nm:'Indulge Experimental Bistro',zh:'',cat:'bar',area:'다안',
-  hours:null,pid:'',ll:'25.0413,121.5432',
-  tip:'Aki Wang. 미쉐린과 아시아 50 베스트에 동시 등재된 대만 유일 업장. 예약이 사실상 필수라 여유가 생기면 미리 잡아두세요. 영업시간 확인 필요.'},
-
- {id:'publichouse',nm:'The Public House',zh:'',cat:'bar',area:'다안',
-  hours:null,pid:'',ll:'25.0339,121.5439',
-  tip:'카카오 허스크를 쓴 시그니처가 있습니다. 커피 부산물 활용이라 관심 가실 만한 접근. 영업시간 확인 필요.'}
+ /* ---- 별도 검토 ---- */
+ {id:'kavalan',nm:'카발란 증류소',zh:'金車噶瑪蘭威士忌酒廠',cat:'trip',area:'이란현',
+  hours:EVERYDAY(540,1020),pid:'',ll:'24.7452,121.7075',
+  tip:'이란현 위안산향. 타이베이에서 편도 1시간 30분(궈광버스 1915 또는 기차+택시)이라 왕복·투어·시음까지 최소 6~7시간이 필요합니다. 8/30 패키지 집결 시각이 확인되기 전에는 보류. 무료 견학과 유료 테이스팅이 있고 09:00–17:00 운영입니다. 술을 사 오려면 면세 한도(1인 1L)를 확인하세요.'}
 ];
 
-const CATS={base:'거점',sight:'명소',food:'식당',cafe:'카페·음료',bar:'바'};
-
+/* DAYS — stop.leg 은 "직전 지점에서 이 지점까지"의 이동.
+   m: walk|mrt|taxi|arex|air|bus  ·  min 소요분  ·  fare TWD  ·  alt 대안 경로 */
 const DAYS=[
- {d:'08.29',w:'토',note:'솔로 자유일. 낮 더위를 피해 15시에 시작해 서→동 한 방향으로 흐릅니다. 되돌아오는 구간 없음.',
+ {d:'08.29',w:'토',stay:'amba 타이베이 시먼딩',
+  note:'도착일. 입국·이동에 오후가 걸리므로 서→동 한 방향으로 흐르게 짰습니다. 되돌아오는 구간 없음. 체크인은 15시부터라 짐만 맡기고 시작하세요.',
   stops:[
-   {t:'13:00',n:'Iyoshi Cola',zh:'伊良可樂',cat:'cafe',p:'iyoshi',mv:'mrt',mvT:'시먼역 → 중산역 MRT 5분',d:'오픈 직후 도착해 줄을 피합니다. 옵션 일정 — 생략하면 15:00 서문홍루부터 시작.'},
-   {t:'14:00',n:'撞記 설화빙',zh:'撞記',cat:'food',p:'zhuangji',mv:'walk',mvT:'도보 8분',d:'옵션 일정. 대기가 길면 과감히 건너뛰고 8/30 이후로 미루세요.'},
-   {t:'15:00',n:'서문홍루 · 주말 창작시장',zh:'西門紅樓',cat:'sight',p:'redhouse',mv:'mrt',mvT:'중산역 → 시먼역 MRT 5분',d:'붉은 벽돌 팔각당과 내부 문창 상점. 이어서 시먼딩 거리와 레인보우 로드 산책.'},
-   {t:'16:05',n:'보피랴오 역사거리',zh:'剝皮寮',cat:'sight',p:'bopiliao',mv:'mrt',mvT:'시먼역 → 용산사역 MRT 1정거장',d:'청·일제시대 거리. 실내 전시 18시 종료이므로 용산사보다 먼저.'},
-   {t:'16:40',n:'용산사',zh:'龍山寺',cat:'sight',p:'longshan',mv:'walk',mvT:'도보 5분',d:'현지인의 기도와 향불. 해 지기 직전 광선이 가장 좋습니다.'},
-   {t:'17:35',n:'저녁 — Moon Moon 청도점',zh:'雙月食品社',cat:'food',p:'moonq',mv:'taxi',mvT:'택시 15분',d:'저녁 영업 17:00~20:00. 17:20까지 당기면 대기가 거의 없습니다. 탕 1 + 면 1.'},
-   {t:'19:00',n:'BAR MOOD',zh:'吧沐',cat:'bar',p:'barmood',mv:'taxi',mvT:'택시 20분',d:'대만 차·과일 기반 시그니처 1~2잔. 예약 권장.'},
-   {t:'20:05',n:'To Infinity & Beyond',zh:'',cat:'bar',p:'infinity',mv:'walk',mvT:'같은 골목, 도보 1분',d:'20시 오픈에 맞춰 이동. 로컬 재료에서 기술적 접근으로 대비가 선명해집니다. 1잔.'},
-   {t:'21:15',n:'타이베이 101 야경',zh:'台北101',cat:'sight',p:'t101',mv:'taxi',mvT:'택시 25분 (토요일 저녁 정체 감안)',d:'전망대는 종료. 외관과 신이광장 산책 20~30분.'},
-   {t:'22:20',n:'호텔 복귀',zh:'',cat:'base',p:'amba',mv:'taxi',mvT:'택시 25~30분',d:'심야에도 시먼딩은 활발해서 야식 여지가 있습니다.'}
+   {t:'10:30',n:'인천공항 출발',zh:'KE2021',cat:'move',d:'대한항공 KE2021. 비행 약 2시간 40분.'},
+   {t:'12:10',n:'타오위안공항 T1 도착',zh:'桃園機場 第一航廈',cat:'move',p:'tpeapt1',
+    leg:{m:'air',min:160,note:'KE2021 · 인천 → 타오위안'},
+    d:'입국심사·수하물에 30~40분. 도착층에서 이지카드를 먼저 사고 지하 1층 공항 MRT로 내려갑니다.'},
+   {t:'13:15',n:'공항 MRT → 타이베이 메인역',zh:'台北車站',cat:'move',p:'tpemain',
+    leg:{m:'arex',line:'A',from:'A12 機場第一航廈',to:'A1 台北車站',min:36,fare:150,
+         note:'직달차(紫·36분)와 보통차(藍·50분)가 번갈아 옵니다. 이지카드 사용 가능.'},
+    d:'짐이 있으면 직달차가 편합니다. A1 도착 후 반난선 환승까지 지하 통로로 도보 8분.'},
+   {t:'14:10',n:'amba 체크인 · 짐 보관',zh:'台北西門町意舍酒店',cat:'base',p:'amba',
+    leg:{m:'mrt',line:'BL',from:'台北車站',to:'西門',stops:1,min:2,walk:10,fare:20},
+    d:'체크인 개시는 15:00. 이 시각엔 프런트에 짐만 맡기고 바로 나가는 편이 낫습니다.'},
+   {t:'14:40',n:'서문홍루',zh:'西門紅樓',cat:'sight',p:'redhouse',
+    leg:{m:'walk',min:4,dist:300},
+    d:'1908년 붉은 벽돌 팔각당. 토요일은 22시까지 열고 주말 창작시장은 14시부터라 시간이 맞습니다.'},
+   {t:'15:30',n:'시먼딩 · 레인보우 크로싱',zh:'西門町',cat:'sight',p:'ximending',
+    leg:{m:'walk',min:3,dist:200},
+    d:'보행자 거리와 무지개 횡단보도. 더울 때는 지하상가로 피하세요.'},
+   {t:'16:15',n:'보피랴오 역사거리',zh:'剝皮寮',cat:'sight',p:'bopiliao',
+    leg:{m:'mrt',line:'BL',from:'西門',to:'龍山寺',stops:1,min:2,walk:8,fare:20},
+    d:'청·일제시대 거리. 실내 전시가 18시에 끝나므로 용산사보다 먼저 봅니다.'},
+   {t:'16:55',n:'용산사',zh:'艋舺龍山寺',cat:'sight',p:'longshan',
+    leg:{m:'walk',min:5,dist:400},
+    d:'현지인의 기도와 향불. 해 지기 직전 광선이 가장 좋고, 조명이 들어오면 분위기가 완전히 달라집니다.'},
+   {t:'17:40',n:'저녁 — 雙月食品社 청도점',zh:'雙月食品社 青島店',cat:'food',p:'moonq',
+    leg:{m:'taxi',min:15,fare:190,dist:5.4,
+         alt:'MRT 龍山寺 → 善導寺 반난선 3정거장 7분 + 도보 6분 · 20 TWD'},
+    d:'저녁 영업 17:00–20:00. 17:20까지 당기면 대기가 거의 없습니다. 탕 1 + 면 1이면 충분합니다.'},
+   {t:'19:10',n:'BAR MOOD',zh:'吧沐',cat:'bar',p:'barmood',
+    leg:{m:'taxi',min:18,fare:180,dist:4.8,
+         alt:'MRT 善導寺 → 忠孝敦化 반난선 3정거장 6분 + 도보 5분 · 20 TWD — 토요일 저녁엔 MRT가 더 빠릅니다'},
+    d:'대만 차·과일 기반 시그니처 1~2잔. 예약 권장(inline.app/groups/moodtw).',
+    opt:'같은 골목 도보 1분에 To Infinity & Beyond가 20시에 엽니다. 여유가 있으면 한 잔 더 붙이세요 — 아시아 50 베스트 35위.'},
+   {t:'20:30',n:'타이베이 101 야경',zh:'台北101',cat:'sight',p:'t101',
+    leg:{m:'taxi',min:15,fare:160,dist:3.4,
+         alt:'MRT 忠孝敦化 →(반난선 1)→ 忠孝復興 →(원후선 1)→ 大安 →(단수이신이선 2)→ 台北101/世貿 · 환승 2회 약 18분 · 25 TWD'},
+    d:'전망대 마지막 입장 21:15. 올라갈 생각이면 이 시각에 도착해야 합니다. 외관과 신이광장 산책만이면 20~30분.'},
+   {t:'21:40',n:'호텔 복귀',zh:'',cat:'base',p:'amba',
+    leg:{m:'taxi',min:22,fare:280,dist:8.1,
+         alt:'MRT 台北101/世貿 →(단수이신이선 5)→ 中正紀念堂 →(쑹산신뎬선 2)→ 西門 · 환승 1회 약 20분 · 25 TWD'},
+    d:'심야에도 시먼딩은 활발해서 야식 여지가 있습니다. 아종면선이 도보 3분, 새벽 0시 반까지.'}
   ]},
- {d:'08.30',w:'일',note:'카페 투어 1일차. 세부 일정 미확정 — 방문할 로스터리가 정해지면 여기에 채워 넣으세요.',stops:[]},
- {d:'08.31',w:'월',note:'카페 투어 2일차. 월요일은 휴무인 곳이 많습니다 — 서문홍루, 보피랴오, Moon Moon 제남·대안점 모두 월요일 휴무입니다.',stops:[]},
- {d:'09.01',w:'화',note:'카페 투어 3일차. Iyoshi Cola는 화요일 휴무.',stops:[]},
- {d:'09.02',w:'수',note:'귀국일. 撞記는 수요일 휴무입니다. 남은 TWD는 이날 소진하세요 — 재환전은 손해입니다.',stops:[]}
+
+ {d:'08.30',w:'일',stay:'inhouse Hotel',est:1,
+  note:'오전은 개인 자유, 오후부터 패키지 공식 일정입니다. 숙소가 amba → inhouse로 바뀌는 날 — 두 곳 모두 시먼딩이라 도보 이동이 됩니다. 아래 시각은 모두 추정치입니다.',
+  stops:[
+   {t:'09:00',n:'오전 개인 일정',zh:'',cat:'move',est:1,
+    d:'미정. 시먼딩 권역이라면 아종면선 아침, 다다오청 조기 산책, 중산 카페 거리가 이동 부담이 적습니다.'},
+   {t:'11:00',n:'amba 체크아웃',zh:'',cat:'base',p:'amba',est:1,
+    d:'체크아웃 11:00. 짐은 inhouse에 바로 맡기면 됩니다.'},
+   {t:'11:30',n:'inhouse Hotel 이동 · 짐 보관',zh:'',cat:'base',p:'inhouse',est:1,
+    leg:{m:'walk',min:10,note:'두 숙소 모두 시먼딩 권역. 정확한 위치는 패키지 확정서 확인'},
+    d:'체크인 시각 전이면 짐만 맡기고 나옵니다.'},
+   {t:'13:00',n:'다다오청 · 디화제',zh:'大稻埕 迪化街',cat:'sight',p:'dadaocheng',est:1,
+    leg:{m:'mrt',line:'G',from:'西門',to:'北門',stops:1,min:2,walk:10,fare:20,
+         note:'北門역 3번 출구에서 디화제 남쪽 입구까지 도보 8분'},
+    d:'바로크 파사드가 남은 건재·한약재·차 도매 거리. 차 도매상 중 시음이 되는 곳이 꽤 있습니다.'},
+   {t:'15:00',n:'ALL DAY Roasting Company',zh:'',cat:'cafe',p:'alldayroast',est:1,
+    leg:{m:'mrt',min:25,fare:25,note:'지점 미확정 — 옌서우제 지점이면 다다오청에서 25분 이상 걸립니다'},
+    d:'패키지 일정. 어느 지점인지 확인이 필요합니다.'},
+   {t:'16:30',n:'Wangtea Lab',zh:'王有記茶行',cat:'cafe',p:'wangtealab',est:1,
+    leg:{m:'mrt',min:20,fare:20,note:'경로 미확정'},
+    d:'대만차를 현대적으로 재해석하는 매장. 차를 사 올 계획이면 여기가 유력 후보입니다.'},
+   {t:'19:00',n:'YiYi Coffee Cocktail Bar',zh:'',cat:'bar',p:'yiyi',est:1,
+    leg:{m:'taxi',min:15,fare:150,note:'경로 미확정'},
+    d:'커피와 칵테일을 접붙인 업장. 커피 쪽 일을 한다면 특히 볼 만한 조합입니다.'},
+   {t:'22:00',n:'inhouse Hotel 복귀',zh:'',cat:'base',p:'inhouse',est:1,
+    leg:{m:'taxi',min:20,fare:200},d:''}
+  ]},
+
+ {d:'08.31',w:'월',stay:'inhouse Hotel',est:1,
+  note:'패키지 공식 일정. 월요일은 휴관·휴무가 많은 날입니다 — 서문홍루, 보피랴오, 고궁박물원, 두 미술관, 雙月 제남점이 모두 월요일 휴무입니다. 시각은 추정치.',
+  stops:[
+   {t:'10:00',n:'융캉제',zh:'永康街',cat:'sight',p:'yongkang',est:1,
+    leg:{m:'mrt',line:'G',from:'西門',to:'東門',min:12,walk:6,fare:20,
+         note:'西門 →(쑹산신뎬선 2)→ 中正紀念堂 환승 →(단수이신이선 1)→ 東門. 5번 출구 앞'},
+    d:'식당·찻집·디저트 밀집 보행 상권. 오전엔 아직 여는 중이라 한산합니다.'},
+   {t:'11:30',n:'OASIS COFFEE ROASTERS',zh:'',cat:'cafe',p:'oasis',est:1,
+    leg:{m:'mrt',min:15,fare:20,note:'위치 미확정'},
+    d:'로스터리 카페. 원두 구매와 로스터 대화를 염두에 두고 명함을 챙기세요.'},
+   {t:'13:30',n:'Simple Kaffa 싱보커피',zh:'興波咖啡',cat:'cafe',p:'simplekaffa',est:1,
+    leg:{m:'mrt',min:15,fare:20,note:'위치 미확정'},
+    d:'우바오춘 — 2016 월드 바리스타 챔피언의 매장. 이번 커피 투어의 핵심입니다. 원두 라인업이 넓으니 시간을 넉넉히 쓰세요.'},
+   {t:'15:00',n:'VWI BY CHADWANG',zh:'',cat:'cafe',p:'vwi',est:1,
+    leg:{m:'mrt',line:'BL',to:'忠孝復興',min:15,walk:8,fare:20},
+    d:'왕처둥 — 2017 월드 브루어스컵 챔피언. 핸드드립 중심이라 추출 레시피를 물어보기 좋습니다.'},
+   {t:'16:30',n:'화산1914 문창원구',zh:'華山1914',cat:'sight',p:'huashan',est:1,
+    leg:{m:'mrt',line:'BL',from:'忠孝復興',to:'忠孝新生',stops:1,min:2,walk:5,fare:20},
+    d:'일본식 주조창을 개조한 문화단지. 야외는 상시 개방, 전시관은 개별 유료입니다.'},
+   {t:'19:00',n:'시먼딩',zh:'西門町',cat:'sight',p:'ximending',est:1,
+    leg:{m:'mrt',line:'BL',from:'忠孝新生',to:'西門',stops:3,min:6,fare:20},
+    d:'저녁 상권. 아종면선이 이 구역입니다.'},
+   {t:'22:00',n:'inhouse Hotel 복귀',zh:'',cat:'base',p:'inhouse',est:1,
+    leg:{m:'walk',min:8},d:''}
+  ]},
+
+ {d:'09.01',w:'화',stay:'inhouse Hotel',est:1,
+  note:'패키지 공식 일정. 고궁박물원 마지막 입장이 16:30, 폐관 17:00이라 아래 순서대로면 관람 시간이 나오지 않습니다 — 순서 조정을 권합니다. 시각은 추정치.',
+  stops:[
+   {t:'10:00',n:'FIKA FIKA CAFE',zh:'',cat:'cafe',p:'fika',est:1,
+    leg:{m:'mrt',line:'BL',from:'西門',to:'忠孝復興',min:14,walk:10,fare:20,
+         note:'이퉁제 본점 기준'},
+    d:'북유럽식 라이트 로스팅으로 대만 스페셜티 씬의 초기를 연 곳. 노르딕 계열 원두 구매 후보.'},
+   {t:'12:00',n:'ODD ONE OUT',zh:'',cat:'cafe',p:'oddoneout',est:1,
+    leg:{m:'mrt',min:15,fare:20,note:'위치 미확정'},d:'패키지 일정. 주소 확인 필요.'},
+   {t:'14:00',n:'芏 Astēa',zh:'芏',cat:'bar',p:'astea',est:1,
+    leg:{m:'mrt',min:15,fare:20,note:'위치 미확정'},
+    d:'대만차 기반 칵테일 바.',
+    warn:'바 업장은 대개 저녁 영업입니다. 14시 방문이 맞는지 패키지 측에 확인하세요.'},
+   {t:'15:30',n:'중정기념당',zh:'中正紀念堂',cat:'sight',p:'cks',est:1,
+    leg:{m:'mrt',line:'R',to:'中正紀念堂',min:18,fare:20},
+    d:'본관 전시 09:00–18:00. 자유광장과 회랑은 야간에도 개방되고 조명이 들어옵니다.'},
+   {t:'17:00',n:'국립고궁박물원',zh:'國立故宮博物院',cat:'sight',p:'npm',est:1,
+    leg:{m:'mrt',line:'R',to:'士林',min:30,walk:0,fare:25,
+         note:'중정기념당 → 士林역 단수이신이선 약 20분 + 스린역에서 紅30 버스 15분'},
+    d:'중국 역대 황실 컬렉션.',
+    warn:'폐관 17:00 · 마지막 입장 16:30. 이 시각 도착이면 입장 자체가 불가능합니다. 고궁을 오후 일찍(13~14시)으로 당기고 중정기념당을 저녁으로 미루면 두 곳 다 볼 수 있습니다.'},
+   {t:'19:00',n:'inhouse Hotel 복귀',zh:'',cat:'base',p:'inhouse',est:1,
+    leg:{m:'mrt',min:35,fare:30},d:''}
+  ]},
+
+ {d:'09.02',w:'수',stay:'—',est:1,
+  note:'귀국일. 항공편과 세부 시각이 미정이라 공항 이동은 역산해서 잡아야 합니다. 남은 TWD는 이날 소진하세요 — 재환전은 손해입니다. 撞記는 수요일 휴무입니다.',
+  stops:[
+   {t:'10:00',n:'inhouse Hotel 체크아웃',zh:'',cat:'base',p:'inhouse',est:1,
+    d:'짐은 프런트에 맡기거나 타이베이 메인역 코인로커를 쓰세요.'},
+   {t:'10:30',n:'중산 카페 거리 (츠펑제)',zh:'中山 赤峰街',cat:'sight',p:'zhongshan',est:1,
+    leg:{m:'mrt',line:'G',from:'西門',to:'中山',stops:2,min:4,walk:5,fare:20},
+    d:'옛 철공소 자리에 카페·편집숍·독립서점이 들어선 골목. 대부분 12시 이후 열리니 두세 곳만 정해두세요. Coffee Sweet과 Iyoshi Cola가 이 구역입니다.'},
+   {t:'14:00',n:'타오위안공항 이동',zh:'桃園機場',cat:'move',p:'tpeapt1',est:1,
+    leg:{m:'arex',line:'A',from:'A1 台北車站',to:'A12/A13',min:36,fare:150,
+         note:'중산역 → 타이베이 메인역은 쑹산신뎬선 2정거장. 일부 항공사는 A1역 인타운 체크인 가능'},
+    d:'출발 3시간 전 도착 권장. 짐과 남은 현금을 여기서 정리합니다.'},
+   {t:'17:00',n:'인천행 출발',zh:'',cat:'move',est:1,
+    d:'항공편·시각 미정. 확정되면 이 줄과 위 이동 시각을 함께 갱신하세요.'}
+  ]}
 ];
 
-const PHRASES=[
- {zh:'不好意思，我不會說中文，可以用英文嗎？',ko:'실례합니다, 중국어를 못 합니다. 영어로 해도 될까요?'},
- {zh:'麻煩到這個地址，謝謝。',ko:'이 주소로 가주세요. (택시 — 지도 화면과 함께 보여주기)'},
- {zh:'請問有淺焙的單品咖啡嗎？',ko:'라이트 로스트 싱글 오리진 있나요?'},
- {zh:'這支豆子是哪個產區的？處理法是什麼？',ko:'이 원두는 어느 산지인가요? 프로세싱은 무엇인가요?'},
- {zh:'我可以買生豆或熟豆帶回韓國嗎？',ko:'생두나 원두를 한국으로 사 갈 수 있을까요?'},
- {zh:'我是韓國的咖啡從業者，想跟烘豆師聊聊，方便嗎？',ko:'한국에서 온 커피 업계 종사자입니다. 로스터와 잠깐 이야기할 수 있을까요?'},
- {zh:'請幫我推薦一杯不會太甜的調酒，用台灣的茶或水果。',ko:'너무 달지 않고 대만 차나 과일을 쓴 칵테일로 추천해주세요.'},
- {zh:'內用，一位。',ko:'매장에서 먹겠습니다, 한 명이요.'},
- {zh:'外帶，謝謝。',ko:'포장이요.'},
- {zh:'微糖，去冰。',ko:'설탕 조금, 얼음 빼고.'},
- {zh:'請問可以刷卡嗎？',ko:'카드 결제 되나요?'},
- {zh:'請問廁所在哪裡？',ko:'화장실이 어디인가요?'},
- {zh:'請問要等多久？',ko:'얼마나 기다려야 하나요?'},
- {zh:'我想去這裡，請問怎麼走？',ko:'여기 가려는데 어떻게 가나요?'},
- {zh:'請幫我叫救護車。',ko:'구급차를 불러주세요.'}
+/* TALK — [한자, 한국어 발음, 뜻] */
+const TALK=[
+ {k:'basic',g:'기본·인사',items:[
+  ['你好','니 하오','안녕하세요'],
+  ['謝謝','씨에씨에','감사합니다'],
+  ['不好意思','부 하오 이쓰','실례합니다 (부를 때·가볍게 사과할 때)'],
+  ['對不起','뚜이부치','죄송합니다'],
+  ['我不會說中文，可以用英文嗎？','워 부후이 슈어 중원, 커이 융 잉원 마','중국어를 못 합니다. 영어로 해도 될까요?'],
+  ['我是韓國人。','워 스 한궈런','저는 한국인입니다'],
+  ['我聽不懂。','워 팅부둥','못 알아들었습니다'],
+  ['可以慢一點說嗎？','커이 만 이디엔 슈어 마','조금 천천히 말씀해주시겠어요?'],
+  ['可以請你寫下來嗎？','커이 칭 니 시에시아라이 마','좀 적어주실 수 있나요?'],
+  ['請稍等一下。','칭 사오 덩 이시아','잠깐만 기다려주세요'],
+  ['好，沒問題。','하오, 메이 원티','네, 괜찮습니다'],
+  ['麻煩你了。','마판 니 러','번거롭게 해드렸습니다']
+ ]},
+ {k:'way',g:'이동 중·길 찾기',items:[
+  ['我想去這裡，請問怎麼走？','워 시앙 취 저리, 칭원 전머 조우','여기 가려는데 어떻게 가나요? (지도 화면과 함께)'],
+  ['請問這裡是哪裡？','칭원 저리 스 나리','여기가 어디인가요?'],
+  ['走路要多久？','조우루 야오 뚸지우','걸어서 얼마나 걸리나요?'],
+  ['請問廁所在哪裡？','칭원 처수어 짜이 나리','화장실이 어디인가요?'],
+  ['請問附近有便利商店嗎？','칭원 푸진 요우 삐엔리상디엔 마','근처에 편의점이 있나요?'],
+  ['可以幫我指一下地圖嗎？','커이 방 워 즈 이시아 띠투 마','지도에서 좀 짚어주시겠어요?'],
+  ['我迷路了。','워 미루 러','길을 잃었습니다'],
+  ['請問寄物櫃在哪裡？','칭원 지우꾸이 짜이 나리','물품보관함이 어디인가요?'],
+  ['這附近有電梯嗎？','저 푸진 요우 띠엔티 마','이 근처에 엘리베이터가 있나요?']
+ ]},
+ {k:'transit',g:'대중교통 (MRT·버스)',items:[
+  ['我要買一張悠遊卡。','워 야오 마이 이 장 요우여우카','이지카드 한 장 사려고요'],
+  ['請幫我加值五百元。','칭 방 워 지아즈 우바이 위엔','500위안 충전해주세요'],
+  ['請問這班車有到這裡嗎？','칭원 저 반 처 요우 따오 저리 마','이 차가 여기까지 가나요?'],
+  ['我要去這一站。','워 야오 취 저 이 잔','이 역으로 가려고 합니다'],
+  ['請問在哪裡換車？','칭원 짜이 나리 환처','어디서 갈아타나요?'],
+  ['請問還有幾站？','칭원 하이 요우 지 잔','몇 정거장 남았나요?'],
+  ['請問末班車是幾點？','칭원 모반처 스 지디엔','막차가 몇 시인가요?'],
+  ['請問機場快線在哪裡搭？','칭원 지창 콰이시엔 짜이 나리 다','공항 MRT는 어디서 타나요?'],
+  ['請問這裡可以刷悠遊卡嗎？','칭원 저리 커이 슈아 요우여우카 마','여기 이지카드 되나요?'],
+  ['我坐過站了。','워 쭈어궈잔 러','정거장을 지나쳤습니다']
+ ]},
+ {k:'taxi',g:'택시',items:[
+  ['麻煩到這個地址，謝謝。','마판 따오 저거 띠즈, 씨에씨에','이 주소로 가주세요 (지도 화면과 함께)'],
+  ['請打表，謝謝。','칭 다뱌오, 씨에씨에','미터기 켜주세요'],
+  ['請開後車廂，謝謝。','칭 카이 호우처시앙, 씨에씨에','트렁크 좀 열어주세요'],
+  ['可以在這裡停嗎？','커이 짜이 저리 팅 마','여기서 세워주시겠어요?'],
+  ['我趕時間，麻煩快一點。','워 간 스지엔, 마판 콰이 이디엔','시간이 급합니다, 조금 서둘러주세요'],
+  ['請給我收據。','칭 게이 워 소우쥐','영수증 주세요'],
+  ['請問可以刷卡嗎？','칭원 커이 슈아카 마','카드 결제 되나요?']
+ ]},
+ {k:'rest',g:'식당',items:[
+  ['內用，一位。','네이융, 이 웨이','매장에서 먹겠습니다, 한 명이요'],
+  ['外帶，謝謝。','와이따이, 씨에씨에','포장이요'],
+  ['請問要等多久？','칭원 야오 덩 뚸지우','얼마나 기다려야 하나요?'],
+  ['這個怎麼點？','저거 전머 디엔','이건 어떻게 주문하나요?'],
+  ['請推薦一道招牌菜。','칭 투이지엔 이 따오 자오파이차이','대표 메뉴 하나 추천해주세요'],
+  ['一個湯，一個麵，謝謝。','이 거 탕, 이 거 미엔, 씨에씨에','탕 하나, 면 하나 주세요'],
+  ['不要太辣，謝謝。','부야오 타이 라, 씨에씨에','너무 맵지 않게 해주세요'],
+  ['我不吃香菜。','워 부츠 시앙차이','고수는 빼주세요'],
+  ['請問這個有豬肉嗎？','칭원 저거 요우 주로우 마','이거 돼지고기 들어있나요?'],
+  ['請問可以打包嗎？','칭원 커이 다바오 마','남은 것 포장 되나요?'],
+  ['買單，謝謝。','마이단, 씨에씨에','계산해주세요'],
+  ['請問有服務費嗎？','칭원 요우 푸우페이 마','서비스료가 붙나요?'],
+  ['很好吃，謝謝。','헌 하오츠, 씨에씨에','정말 맛있었습니다']
+ ]},
+ {k:'cafe',g:'카페·로스터리',items:[
+  ['請問有淺焙的單品咖啡嗎？','칭원 요우 치엔뻬이 더 단핀 카페이 마','라이트 로스트 싱글 오리진 있나요?'],
+  ['這支豆子是哪個產區的？','저 즈 도우쯔 스 나거 찬취 더','이 원두는 어느 산지인가요?'],
+  ['處理法是什麼？','추리파 스 선머','프로세싱은 무엇인가요?'],
+  ['是水洗還是日曬？','스 수이시 하이스 르사이','워시드인가요, 내추럴인가요?'],
+  ['烘焙日期是什麼時候？','훙뻬이 르치 스 선머 스호우','로스팅 날짜가 언제인가요?'],
+  ['請問手沖用什麼濾杯？','칭원 소우충 융 선머 뤼뻬이','핸드드립은 어떤 드리퍼를 쓰나요?'],
+  ['我可以買熟豆帶回韓國嗎？','워 커이 마이 소우도우 따이후이 한궈 마','원두를 한국으로 사 갈 수 있을까요?'],
+  ['請問有真空包裝嗎？','칭원 요우 전쿵 바오좡 마','진공 포장 되나요?'],
+  ['我是韓國的咖啡從業者，想跟烘豆師聊聊，方便嗎？','워 스 한궈 더 카페이 충예저, 시앙 껀 훙도우스 랴오랴오, 팡비엔 마','한국에서 온 커피 업계 종사자입니다. 로스터와 잠깐 이야기할 수 있을까요?'],
+  ['你們有杯測嗎？需要預約嗎？','니먼 요우 뻬이처 마, 쉬야오 위위에 마','커핑 세션이 있나요? 예약이 필요한가요?'],
+  ['這是我的名片。','저 스 워 더 밍피엔','제 명함입니다'],
+  ['熱的，謝謝。','러 더, 씨에씨에','따뜻한 걸로 주세요'],
+  ['冰的，謝謝。','삥 더, 씨에씨에','아이스로 주세요'],
+  ['微糖，去冰。','웨이탕, 취삥','설탕 조금, 얼음 빼고'],
+  ['無糖，謝謝。','우탕, 씨에씨에','무가당으로 주세요'],
+  ['請問內用有時間限制嗎？','칭원 네이융 요우 스지엔 시엔즈 마','매장 이용 시간 제한이 있나요?'],
+  ['請問有插座和 Wi-Fi 嗎？','칭원 요우 차쭈어 허 와이파이 마','콘센트와 와이파이 있나요?']
+ ]},
+ {k:'bar',g:'바·재즈',items:[
+  ['請幫我推薦一杯不會太甜的調酒，用台灣的茶或水果。','칭 방 워 투이지엔 이 뻬이 부후이 타이 티엔 더 탸오지우, 융 타이완 더 차 후어 수이궈','너무 달지 않고 대만 차나 과일을 쓴 칵테일로 추천해주세요'],
+  ['我有訂位，姓金。','워 요우 띵웨이, 씽 진','예약했습니다, 김입니다'],
+  ['請問還有位子嗎？','칭원 하이 요우 웨이쯔 마','자리 있나요?'],
+  ['請問低消是多少？','칭원 띠샤오 스 뚸사오','최소 주문 금액이 얼마인가요?'],
+  ['有入場費嗎？','요우 루창페이 마','커버차지가 있나요?'],
+  ['請問今天有現場演出嗎？幾點開始？','칭원 진티엔 요우 시엔창 옌추 마, 지디엔 카이스','오늘 라이브 공연이 있나요? 몇 시에 시작하나요?'],
+  ['這杯用了什麼酒？','저 뻬이 융러 선머 지우','이 칵테일에 뭐가 들어갔나요?'],
+  ['請給我一杯水。','칭 게이 워 이 뻬이 수이','물 한 잔 주세요'],
+  ['再一杯，謝謝。','짜이 이 뻬이, 씨에씨에','한 잔 더 주세요'],
+  ['可以拍照嗎？','커이 파이자오 마','사진 찍어도 되나요?']
+ ]},
+ {k:'street',g:'길거리 음식·야시장',items:[
+  ['這個怎麼賣？','저거 전머 마이','이거 얼마예요?'],
+  ['一份多少錢？','이 펀 뚸사오 치엔','1인분에 얼마인가요?'],
+  ['我要一份，謝謝。','워 야오 이 펀, 씨에씨에','하나 주세요'],
+  ['小份的就好。','샤오 펀 더 지우 하오','작은 걸로 주세요'],
+  ['請問這是什麼？','칭원 저 스 선머','이게 뭔가요?'],
+  ['可以試吃嗎？','커이 스츠 마','맛봐도 되나요?'],
+  ['不要辣，不要香菜。','부야오 라, 부야오 시앙차이','안 맵게, 고수 빼고요'],
+  ['只收現金嗎？','즈 소우 시엔진 마','현금만 받나요?'],
+  ['請幫我裝袋，謝謝。','칭 방 워 좡따이, 씨에씨에','봉투에 담아주세요']
+ ]},
+ {k:'shop',g:'쇼핑·결제',items:[
+  ['多少錢？','뚸사오 치엔','얼마인가요?'],
+  ['我要這個。','워 야오 저거','이걸로 주세요'],
+  ['太貴了，可以便宜一點嗎？','타이 꾸이 러, 커이 피엔이 이디엔 마','너무 비싸요, 조금 깎아주실 수 있나요?'],
+  ['有大一點的尺寸嗎？','요우 따 이디엔 더 츠춘 마','더 큰 사이즈 있나요?'],
+  ['可以刷卡嗎？','커이 슈아카 마','카드 되나요?'],
+  ['我用 LINE Pay。','워 융 라인페이','라인페이로 결제할게요'],
+  ['請問可以退稅嗎？','칭원 커이 투이수이 마','택스 리펀드 되나요?'],
+  ['請給我發票。','칭 게이 워 파피아오','영수증 주세요'],
+  ['我只是看看，謝謝。','워 즈스 칸칸, 씨에씨에','그냥 구경만 할게요']
+ ]},
+ {k:'hotel',g:'숙소',items:[
+  ['我要辦入住，我姓金。','워 야오 빤 루주, 워 씽 진','체크인하려고 합니다, 김입니다'],
+  ['可以先寄放行李嗎？','커이 시엔 지팡 싱리 마','짐을 먼저 맡길 수 있나요?'],
+  ['幾點可以入住？','지디엔 커이 루주','몇 시부터 체크인 되나요?'],
+  ['退房是幾點？','투이팡 스 지디엔','체크아웃은 몇 시인가요?'],
+  ['房間的冷氣壞了。','팡지엔 더 렁치 화이 러','방 에어컨이 고장났습니다'],
+  ['我要多一條毛巾。','워 야오 뚸 이 탸오 마오진','수건 하나 더 주세요'],
+  ['請問有轉接頭嗎？','칭원 요우 좐지에토우 마','변환 어댑터 있나요?'],
+  ['可以幫我叫計程車嗎？','커이 방 워 쟈오 지청처 마','택시 좀 불러주시겠어요?']
+ ]},
+ {k:'sos',g:'몸이 안 좋을 때·긴급',items:[
+  ['請幫我叫救護車。','칭 방 워 쟈오 지우후처','구급차를 불러주세요'],
+  ['我不舒服。','워 부수푸','몸이 안 좋습니다'],
+  ['我肚子痛。','워 뚜쯔 퉁','배가 아픕니다'],
+  ['我發燒了。','워 파사오 러','열이 납니다'],
+  ['附近有藥局嗎？','푸진 요우 야오쥐 마','근처에 약국이 있나요?'],
+  ['我對這個過敏。','워 뚜이 저거 궈민','이것에 알레르기가 있습니다'],
+  ['我的東西不見了。','워 더 둥시 부지엔 러','물건을 잃어버렸습니다'],
+  ['我的護照掉了，請幫我報警。','워 더 후자오 댜오 러, 칭 방 워 바오징','여권을 잃어버렸습니다, 신고 좀 도와주세요'],
+  ['請幫我打這個電話。','칭 방 워 다 저거 띠엔화','이 번호로 전화 좀 걸어주세요'],
+  ['我需要中文翻譯。','워 쉬야오 중원 판이','통역이 필요합니다']
+ ]}
 ];
 
 const INFO=[
  {t:'환전과 결제',b:`<ul>
  <li><b>트래블월렛·트래블로그</b>로 미리 TWD를 채워 가는 게 가장 유리합니다.</li>
  <li>공항 환전은 환율이 나쁘니 최소한만. 부족분은 편의점 ATM에서 인출.</li>
- <li>현금 30% / 카드·트래블카드 70% 정도 비율이 무난합니다. 야시장·소규모 로컬 식당·사찰 주변은 현금만 받는 곳이 있습니다.</li>
- <li>撞記와 Iyoshi Cola는 현금 준비를 권합니다.</li>
- <li><b>남은 TWD는 마지막 날 소진.</b> 재환전은 손해입니다.</li>
- <li>팁 문화는 없습니다. 다만 레스토랑은 10% 서비스료가 붙는 곳이 있습니다.</li></ul>`},
- {t:'교통 — 이지카드',b:`<ul>
+ <li>현금 30% / 카드·트래블카드 70% 정도가 무난합니다. 야시장·소규모 로컬 식당·사찰 주변은 현금만 받는 곳이 있습니다.</li>
+ <li>현금 필수 후보: 阜杭豆漿, 劉山東, 金峰滷肉飯, 撞記, Iyoshi Cola, 린장제 야시장.</li>
+ <li><b>남은 TWD는 9/2에 소진.</b> 재환전은 손해입니다.</li>
+ <li>팁 문화는 없습니다. 다만 레스토랑·바는 10% 서비스료가 붙는 곳이 있습니다.</li></ul>`},
+
+ {t:'교통 — 이지카드와 MRT',b:`<ul>
  <li>타오위안 공항 도착 즉시, 또는 MRT 역 창구·무인기에서 구매. 편의점에서 충전.</li>
- <li>MRT 전 노선, 시내버스, 택시, 유바이크, 편의점 결제까지 커버.</li>
+ <li>MRT 전 노선, 시내버스, 공항 MRT, 택시, 유바이크, 편의점 결제까지 커버합니다.</li>
  <li>MRT·버스 모두 <b>탈 때와 내릴 때 양쪽 태그</b>합니다.</li>
- <li>기본요금 MRT 20 TWD, 버스 15 TWD.</li>
- <li><b>MRT 역사와 열차 안에서는 음식물 취식 금지.</b> 물도 안 됩니다. 벌금 대상이니 개찰구 밖에서 마시세요.</li></ul>`},
+ <li>기본요금 MRT 20 TWD, 버스 15 TWD. 이지카드는 단품 승차권 대비 20% 할인.</li>
+ <li>노선 색: <span class="mrtl BL">BL</span>반난선 <span class="mrtl R">R</span>단수이신이선 <span class="mrtl G">G</span>쑹산신뎬선 <span class="mrtl O">O</span>중허신루선 <span class="mrtl BR">BR</span>원후선 <span class="mrtl A">A</span>공항선</li>
+ <li>이번 일정 기준 시먼역(西門)은 <b>반난선·쑹산신뎬선</b> 환승역이라 대부분 여기서 시작합니다.</li>
+ <li><b>MRT 역사와 열차 안에서는 음식물 취식 금지.</b> 물도 안 됩니다. 벌금 대상이니 개찰구 밖에서 마시세요.</li>
+ <li>택시 기본요금 85 TWD(1.25km), 이후 200m당 5 TWD. 23시~06시는 20 TWD 할증.</li></ul>`},
+
+ {t:'공항 ↔ 시내',b:`<ul>
+ <li>공항 MRT(A선) A12 제1터미널 → A1 타이베이 메인역. <b>직달차(紫) 36분 / 보통차(藍) 50분</b>, 150 TWD.</li>
+ <li>두 종류가 번갈아 오니 승강장 전광판에서 색을 확인하세요. 짐이 있으면 직달차.</li>
+ <li>첫차 06:00대, 막차 23:00대. 9/2 야간 출발이면 시간을 미리 확인하세요.</li>
+ <li>일부 항공사는 A1역에서 <b>인타운 체크인</b>(수하물 선탁송)이 됩니다. 귀국일 짐 부담이 크게 줄어듭니다.</li>
+ <li>대안은 궈광버스 1819(타이베이역행, 약 60~70분, 140 TWD) — 심야에도 운행합니다.</li></ul>`},
+
  {t:'eSIM과 앱',b:`<ul>
  <li>한국 번호를 살려둘 거면 eSIM으로 데이터만 추가. Airalo·Holafly 모두 가능하고 Holafly는 실명 인증이 필요 없습니다.</li>
  <li>한국에서 미리 구매해 QR을 받아두고, 착륙 직전 기내에서 스캔하면 입국심사 줄에서 바로 연결됩니다.</li>
  <li>대만 번호가 나오는 eSIM이면 유바이크·택시 앱의 SMS 인증이 됩니다.</li>
  <li>앱: Google Maps, 台北捷運Go, YouBike 2.0, 台北等公車(버스 실시간), Uber 또는 台灣大車隊.</li></ul>`},
+
  {t:'8월 말 타이베이 대응',b:`<ul>
  <li>낮 최고 34~36도에 습도가 높습니다. 정오~15시는 실내 위주로 짜세요.</li>
  <li>오후 소나기가 잦습니다. 접이식 우산은 상시 휴대.</li>
  <li>실내 냉방이 강해 얇은 긴팔이 하나 있으면 좋습니다.</li>
  <li>편의점 물 보충을 습관화하세요. 하루 2L는 마시게 됩니다.</li>
+ <li>샹산이나 야외 일정이 있으면 여벌 티셔츠와 수건을 챙기세요.</li>
  <li><b>태풍</b> 가능성이 있는 시기입니다. 항공편 지연·결항 알림을 켜두세요.</li></ul>`},
+
+ {t:'요일별 휴무 — 미리 확인',b:`<ul>
+ <li><b>월요일(8/31)</b> 휴무: 서문홍루, 보피랴오, 국립고궁박물원, 시립미술관, 현대미술관, 雙月 제남점.</li>
+ <li><b>화요일(9/1)</b> 휴무: Iyoshi Cola.</li>
+ <li><b>수요일(9/2)</b> 휴무: 撞記 설화빙.</li>
+ <li><b>일요일</b> 휴무: 劉山東 우육면.</li>
+ <li>중산 카페 거리와 로스터리는 월요일 휴무가 잦습니다. 전날 밤에 다음 날 리스트를 한 번씩 확인하세요.</li></ul>`},
+
+ {t:'카페 투어 실무',b:`<ul>
+ <li>원두를 사 올 계획이면 <b>진공 포장 여부</b>와 무게를 챙기세요. 로스팅 데이가 찍힌 라벨을 함께 받아두면 나중에 기록이 됩니다.</li>
+ <li>커핑 세션이 있는 곳은 대개 사전 신청제입니다. 인스타 DM이 가장 빠릅니다.</li>
+ <li>명함을 넉넉히. 필담 탭의 <b>카페·로스터리</b> 그룹과 함께 쓰면 대화가 열립니다.</li>
+ <li>이번 일정의 축: Simple Kaffa(2016 WBC 챔피언 우바오춘) · VWI(2017 WBrC 챔피언 왕처둥) · FIKA FIKA(대만 라이트 로스팅의 시작). 세 곳을 비교하면 대만 씬의 지형이 잡힙니다.</li>
+ <li>대비를 위해 RUFOUS 같은 정통 다크·미디엄 로스팅 매장을 한 곳 끼워 넣으면 좋습니다.</li></ul>`},
+
+ {t:'패키지 일정 다루기',b:`<ul>
+ <li>8/30 이후는 패키지 공식 일정이라 <b>이 가이드의 시각은 모두 추정치</b>입니다. 확정 시각표를 받으면 대조하세요.</li>
+ <li>집결 시각·장소가 확정되기 전에는 카발란 증류소 같은 반나절 이상 일정은 확정하지 마세요.</li>
+ <li>패키지 사이 빈 시간에 넣을 후보는 <b>장소</b> 탭에서 일정 미포함 항목을 보세요 — 가까운 순으로 붙이면 됩니다.</li>
+ <li>주소가 미확인인 매장(OASIS, ODD ONE OUT, Astēa, Wangtea Lab, YiYi 등)은 패키지 확정서의 주소를 우선하세요. 동명 매장이 있을 수 있습니다.</li></ul>`},
+
  {t:'전원과 장비',b:`<ul>
  <li><b>대만은 110V, 플러그는 A형(11자 납작핀).</b> 한국 220V 220핀은 그대로 안 들어갑니다. 멀티 어댑터 필수.</li>
  <li>노트북·카메라 충전기는 대부분 100~240V 프리볼트라 어댑터만 있으면 됩니다. 라벨을 한 번 확인하세요.</li>
- <li>보조배터리는 기내 반입만 가능, 위탁 수하물 불가.</li></ul>`},
- {t:'카페 투어 실무',b:`<ul>
- <li>일요일·월요일 휴무인 로스터리가 많습니다. 전날 밤에 다음 날 리스트의 영업 여부를 한 번씩 확인하세요.</li>
- <li>원두를 사 올 계획이면 <b>진공 포장 여부</b>와 무게를 챙기세요. 로스팅 데이가 찍힌 라벨을 함께 받아두면 나중에 기록이 됩니다.</li>
- <li>커핑 세션이 있는 곳은 대개 사전 신청제입니다. 인스타 DM이 가장 빠릅니다.</li>
- <li>명함을 넉넉히. 필담 탭의 자기소개 문장과 함께 쓰면 대화가 열립니다.</li></ul>`}
+ <li>보조배터리는 기내 반입만 가능, 위탁 수하물 불가.</li>
+ <li>술을 사 올 경우 면세 한도는 1인 1L·1병입니다(카발란 검토 시 확인).</li></ul>`}
 ];
 
-const CHECK=['여권 유효기간 6개월 이상 확인','eSIM 구매·QR 저장','110V A형 어댑터','트래블카드 TWD 충전','이지카드 구매(공항 도착 즉시)','접이식 우산','명함','BAR MOOD 예약','撞記·Iyoshi Cola 당일 영업 확인','원두 담을 여유 공간'];
+const CHECK=['여권 유효기간 6개월 이상 확인','eSIM 구매·QR 저장','110V A형 어댑터','트래블카드 TWD 충전','이지카드 구매(공항 도착 즉시)','접이식 우산','명함','BAR MOOD 예약','패키지 확정 일정표·집결 시각 수령','inhouse Hotel 정확한 주소 확인','귀국 항공편 확정','원두 담을 여유 공간'];
 
 const SOS=[
  {l:'경찰',v:'110',n:'도난·사건·분실 신고'},
@@ -420,30 +949,142 @@ const SOS=[
  {l:'주타이베이 대한민국 대표부',v:'+886-2-2758-8320',n:'업무 08:30~17:30 (12:00~13:30 점심)'},
  {l:'대표부 긴급전화',v:'+886-912-069-230',n:'평일 18시~익일 09시, 공휴일 24시간. 긴급 상황 전용'}
 ];
+const PHOTOS={
+ ximending:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Ximending_rainbow_crossing_20260326_%28IMG_8643%29.jpg/500px-Ximending_rainbow_crossing_20260326_%28IMG_8643%29.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Ximending_rainbow_crossing_20260326_%28IMG_8643%29.jpg/1280px-Ximending_rainbow_crossing_20260326_%28IMG_8643%29.jpg",r:0.750,c:"Rainbow Six , a rainbow crossing in Ximending, Taipei, Taiwan.",by:"Bigmorr",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:Ximending_rainbow_crossing_20260326_(IMG_8643).jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Ximending-commercial-buildings.jpg/500px-Ximending-commercial-buildings.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Ximending-commercial-buildings.jpg/1280px-Ximending-commercial-buildings.jpg",r:1.333,c:"Commercial buildings in Ximending",by:"Alfred Twu",l:"CC0",p:"https://commons.wikimedia.org/wiki/File:Ximending-commercial-buildings.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Ximending-alley.jpg/500px-Ximending-alley.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Ximending-alley.jpg/1280px-Ximending-alley.jpg",r:1.333,c:"Ximending alley",by:"Alfred Twu",l:"CC0",p:"https://commons.wikimedia.org/wiki/File:Ximending-alley.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/202509_%E6%99%9A%E9%96%93%E5%9C%A8%E8%A5%BF%E9%96%80%E5%BE%92%E6%AD%A5%E5%8D%80%E9%99%84%E8%BF%91%E7%9A%84%E8%88%8A%E7%A3%9A%E9%80%A0%E5%A4%96%E7%89%86.jpg/500px-202509_%E6%99%9A%E9%96%93%E5%9C%A8%E8%A5%BF%E9%96%80%E5%BE%92%E6%AD%A5%E5%8D%80%E9%99%84%E8%BF%91%E7%9A%84%E8%88%8A%E7%A3%9A%E9%80%A0%E5%A4%96%E7%89%86.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/202509_%E6%99%9A%E9%96%93%E5%9C%A8%E8%A5%BF%E9%96%80%E5%BE%92%E6%AD%A5%E5%8D%80%E9%99%84%E8%BF%91%E7%9A%84%E8%88%8A%E7%A3%9A%E9%80%A0%E5%A4%96%E7%89%86.jpg/1280px-202509_%E6%99%9A%E9%96%93%E5%9C%A8%E8%A5%BF%E9%96%80%E5%BE%92%E6%AD%A5%E5%8D%80%E9%99%84%E8%BF%91%E7%9A%84%E8%88%8A%E7%A3%9A%E9%80%A0%E5%A4%96%E7%89%86.jpg",r:0.667,c:"The brick wall of old building in Ximending Pedestrian zone at early night",by:"Junyu-K",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:202509_%E6%99%9A%E9%96%93%E5%9C%A8%E8%A5%BF%E9%96%80%E5%BE%92%E6%AD%A5%E5%8D%80%E9%99%84%E8%BF%91%E7%9A%84%E8%88%8A%E7%A3%9A%E9%80%A0%E5%A4%96%E7%89%86.jpg"},
+ ],
+ redhouse:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Octagon_Building%2C_Red_House_Theater.jpg/500px-Octagon_Building%2C_Red_House_Theater.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Octagon_Building%2C_Red_House_Theater.jpg/1280px-Octagon_Building%2C_Red_House_Theater.jpg",r:1.333,c:"Octagon Building of the Red House Theater in Ximending, Taipei City.",by:"毛貓大少爺 from Taipei, Taiwan",l:"CC BY-SA 2.0",p:"https://commons.wikimedia.org/wiki/File:Octagon_Building,_Red_House_Theater.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Red_House_Theater_20231109.jpg/500px-Red_House_Theater_20231109.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Red_House_Theater_20231109.jpg/1280px-Red_House_Theater_20231109.jpg",r:1.779,c:"​夜間的西門紅樓",by:"Yu tptw",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:Red_House_Theater_20231109.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Taipei_Taiwan_Red-House-Theater-01.jpg/500px-Taipei_Taiwan_Red-House-Theater-01.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Taipei_Taiwan_Red-House-Theater-01.jpg/1280px-Taipei_Taiwan_Red-House-Theater-01.jpg",r:1.499,c:"Taipei, Taiwan: Red House Theater",by:"CEphoto, Uwe Aranas",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_Taiwan_Red-House-Theater-01.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Taipei_Taiwan_Red-House-Theater-03.jpg/500px-Taipei_Taiwan_Red-House-Theater-03.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Taipei_Taiwan_Red-House-Theater-03.jpg/1280px-Taipei_Taiwan_Red-House-Theater-03.jpg",r:1.499,c:"Taipei, Taiwan: Red House Theater",by:"CEphoto, Uwe Aranas",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_Taiwan_Red-House-Theater-03.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/%E8%A5%BF%E9%96%80%E7%B4%85%E6%A8%9301.jpg/500px-%E8%A5%BF%E9%96%80%E7%B4%85%E6%A8%9301.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/%E8%A5%BF%E9%96%80%E7%B4%85%E6%A8%9301.jpg/1280px-%E8%A5%BF%E9%96%80%E7%B4%85%E6%A8%9301.jpg",r:0.844,c:"The Red House (Honglou)",by:"Daniel P. C. Shen",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:%E8%A5%BF%E9%96%80%E7%B4%85%E6%A8%9301.jpg"},
+ ],
+ bopiliao:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Bopiliao_Historic_Block_%E5%89%9D%E7%9A%AE%E5%AF%AE_-_panoramio.jpg/500px-Bopiliao_Historic_Block_%E5%89%9D%E7%9A%AE%E5%AF%AE_-_panoramio.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Bopiliao_Historic_Block_%E5%89%9D%E7%9A%AE%E5%AF%AE_-_panoramio.jpg/1280px-Bopiliao_Historic_Block_%E5%89%9D%E7%9A%AE%E5%AF%AE_-_panoramio.jpg",r:1.333,c:"Bopiliao Historic Block 剝皮寮",by:"lienyuan lee",l:"CC BY 3.0",p:"https://commons.wikimedia.org/wiki/File:Bopiliao_Historic_Block_%E5%89%9D%E7%9A%AE%E5%AF%AE_-_panoramio.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/%E5%89%9D%E7%9A%AE%E5%AF%AE%E6%AD%B7%E5%8F%B2%E8%A1%97%E5%8D%8020220617.jpg/500px-%E5%89%9D%E7%9A%AE%E5%AF%AE%E6%AD%B7%E5%8F%B2%E8%A1%97%E5%8D%8020220617.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/%E5%89%9D%E7%9A%AE%E5%AF%AE%E6%AD%B7%E5%8F%B2%E8%A1%97%E5%8D%8020220617.jpg/1280px-%E5%89%9D%E7%9A%AE%E5%AF%AE%E6%AD%B7%E5%8F%B2%E8%A1%97%E5%8D%8020220617.jpg",r:1.626,c:"​剝皮寮歷史建築群位於康定路旁的街屋,台北市萬華區",by:"Yu tptw",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:%E5%89%9D%E7%9A%AE%E5%AF%AE%E6%AD%B7%E5%8F%B2%E8%A1%97%E5%8D%8020220617.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/%E5%89%9D%E7%9A%AE%E5%AF%AE%E8%A1%97%E9%81%93.jpg/500px-%E5%89%9D%E7%9A%AE%E5%AF%AE%E8%A1%97%E9%81%93.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/%E5%89%9D%E7%9A%AE%E5%AF%AE%E8%A1%97%E9%81%93.jpg/1280px-%E5%89%9D%E7%9A%AE%E5%AF%AE%E8%A1%97%E9%81%93.jpg",r:0.750,c:"​剝皮寮街道",by:"XimenZangief",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:%E5%89%9D%E7%9A%AE%E5%AF%AE%E8%A1%97%E9%81%93.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/%E5%89%9D%E7%9A%AE%E5%AF%AE_Bopiliao_Historical_Block_-_panoramio.jpg/500px-%E5%89%9D%E7%9A%AE%E5%AF%AE_Bopiliao_Historical_Block_-_panoramio.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/%E5%89%9D%E7%9A%AE%E5%AF%AE_Bopiliao_Historical_Block_-_panoramio.jpg/1280px-%E5%89%9D%E7%9A%AE%E5%AF%AE_Bopiliao_Historical_Block_-_panoramio.jpg",r:1.333,c:"剝皮寮 Bopiliao Historical Block",by:"lienyuan lee",l:"CC BY 3.0",p:"https://commons.wikimedia.org/wiki/File:%E5%89%9D%E7%9A%AE%E5%AF%AE_Bopiliao_Historical_Block_-_panoramio.jpg"},
+ ],
+ longshan:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Longshan_Temple%2C_Taipei_01.jpg/500px-Longshan_Temple%2C_Taipei_01.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Longshan_Temple%2C_Taipei_01.jpg/1280px-Longshan_Temple%2C_Taipei_01.jpg",r:1.464,c:"Main Hall of the Mengjia Longshan Temple in Taipei, Taiwan",by:"Bernard Gagnon",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Longshan_Temple,_Taipei_01.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Taipei_Taiwan_Mengjia-Longshan-Temple-00.jpg/500px-Taipei_Taiwan_Mengjia-Longshan-Temple-00.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Taipei_Taiwan_Mengjia-Longshan-Temple-00.jpg/1280px-Taipei_Taiwan_Mengjia-Longshan-Temple-00.jpg",r:1.372,c:"Taipei, Taiwan: Inside Mengjia Longshan Temple",by:"CEphoto, Uwe Aranas",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_Taiwan_Mengjia-Longshan-Temple-00.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Taipei_Taiwan_Mengjia-Longshan-Temple-04.jpg/500px-Taipei_Taiwan_Mengjia-Longshan-Temple-04.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Taipei_Taiwan_Mengjia-Longshan-Temple-04.jpg/1280px-Taipei_Taiwan_Mengjia-Longshan-Temple-04.jpg",r:1.000,c:"Taipei, Taiwan: Roof detail of Mengjia Longshan Temple",by:"CEphoto, Uwe Aranas",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_Taiwan_Mengjia-Longshan-Temple-04.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Taipei_Taiwan_Mengjia-Longshan-Temple-05.jpg/500px-Taipei_Taiwan_Mengjia-Longshan-Temple-05.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Taipei_Taiwan_Mengjia-Longshan-Temple-05.jpg/1280px-Taipei_Taiwan_Mengjia-Longshan-Temple-05.jpg",r:1.435,c:"Taipei, Taiwan: Inside Mengjia Longshan Temple",by:"CEphoto, Uwe Aranas",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_Taiwan_Mengjia-Longshan-Temple-05.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Taipei_Taiwan_Mengjia-Longshan-Temple-09.jpg/500px-Taipei_Taiwan_Mengjia-Longshan-Temple-09.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Taipei_Taiwan_Mengjia-Longshan-Temple-09.jpg/1280px-Taipei_Taiwan_Mengjia-Longshan-Temple-09.jpg",r:0.773,c:"Taipei, Taiwan: Members of the Mengjia Longshan Temple Association gather for a divine service",by:"CEphoto, Uwe Aranas",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_Taiwan_Mengjia-Longshan-Temple-09.jpg"},
+ ],
+ t101:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Taipei_101_2009_amk.jpg/500px-Taipei_101_2009_amk.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Taipei_101_2009_amk.jpg/1280px-Taipei_101_2009_amk.jpg",r:0.627,c:"Taipei 101 as seen from Sun Yat-sen Memorial Hall in Taipei, Taiwan.",by:"AngMoKio",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_101_2009_amk.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Taipei_101_view_from_below_amk.jpg/500px-Taipei_101_view_from_below_amk.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Taipei_101_view_from_below_amk.jpg/1280px-Taipei_101_view_from_below_amk.jpg",r:0.667,c:"Taipei 101",by:"AngMoKio",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_101_view_from_below_amk.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Taipei_Taiwan_Taipei-101-Tower-01.jpg/500px-Taipei_Taiwan_Taipei-101-Tower-01.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Taipei_Taiwan_Taipei-101-Tower-01.jpg/1280px-Taipei_Taiwan_Taipei-101-Tower-01.jpg",r:1.499,c:"Taipei, Taiwan: Taipei 101 tower at sunset",by:"CEphoto, Uwe Aranas",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_Taiwan_Taipei-101-Tower-01.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Taipei_101_Tuned_Mass_Damper_2010.jpg/500px-Taipei_101_Tuned_Mass_Damper_2010.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Taipei_101_Tuned_Mass_Damper_2010.jpg/1280px-Taipei_101_Tuned_Mass_Damper_2010.jpg",r:1.506,c:"Tuned mass damper on display in Taipei 101.",by:"Armand du Plessis",l:"CC BY 3.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_101_Tuned_Mass_Damper_2010.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/1_taipei_sunrise_panorama_dxr_edit_pangen_141215_1.jpg/500px-1_taipei_sunrise_panorama_dxr_edit_pangen_141215_1.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/1_taipei_sunrise_panorama_dxr_edit_pangen_141215_1.jpg/1280px-1_taipei_sunrise_panorama_dxr_edit_pangen_141215_1.jpg",r:1.773,c:"Taipei sunrise panorama. This image was stiched in Hugin using panini general projection.",by:"Chensiyuan, edit by DXR",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:1_taipei_sunrise_panorama_dxr_edit_pangen_141215_1.jpg"},
+ ],
+ huashan:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_%2849491483783%29.jpg/500px-%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_%2849491483783%29.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_%2849491483783%29.jpg/1280px-%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_%2849491483783%29.jpg",r:1.501,c:"華山1914文化創意產業園區",by:"迷惘的人生",l:"CC BY-SA 2.0",p:"https://commons.wikimedia.org/wiki/File:%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_(49491483783).jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_%2851384978280%29.jpg/500px-%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_%2851384978280%29.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_%2851384978280%29.jpg/1280px-%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_%2851384978280%29.jpg",r:1.501,c:"華山1914文化創意產業園區",by:"迷惘的人生",l:"CC BY-SA 2.0",p:"https://commons.wikimedia.org/wiki/File:%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_(51384978280).jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/%E5%8F%B0%E5%8C%97%E5%B8%82_%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_Huashan_Creative_Park%28Taipei_City%29_-_panoramio.jpg/500px-%E5%8F%B0%E5%8C%97%E5%B8%82_%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_Huashan_Creative_Park%28Taipei_City%29_-_panoramio.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/%E5%8F%B0%E5%8C%97%E5%B8%82_%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_Huashan_Creative_Park%28Taipei_City%29_-_panoramio.jpg/1280px-%E5%8F%B0%E5%8C%97%E5%B8%82_%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_Huashan_Creative_Park%28Taipei_City%29_-_panoramio.jpg",r:0.750,c:"​華山1914文化創意產業園區標誌牌。",by:"Chi-Hung Lin",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:%E5%8F%B0%E5%8C%97%E5%B8%82_%E8%8F%AF%E5%B1%B11914%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_Huashan_Creative_Park(Taipei_City)_-_panoramio.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/%E8%8F%AF%E5%B1%B1%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_Huashan_Cultural_and_Creative_Industry_Park_-_panoramio.jpg/500px-%E8%8F%AF%E5%B1%B1%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_Huashan_Cultural_and_Creative_Industry_Park_-_panoramio.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/%E8%8F%AF%E5%B1%B1%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_Huashan_Cultural_and_Creative_Industry_Park_-_panoramio.jpg/1280px-%E8%8F%AF%E5%B1%B1%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_Huashan_Cultural_and_Creative_Industry_Park_-_panoramio.jpg",r:1.501,c:"​華山1914文化創意產業園區草原裝置藝術。",by:"lienyuan lee",l:"CC BY 3.0",p:"https://commons.wikimedia.org/wiki/File:%E8%8F%AF%E5%B1%B1%E6%96%87%E5%8C%96%E5%89%B5%E6%84%8F%E7%94%A2%E6%A5%AD%E5%9C%92%E5%8D%80_Huashan_Cultural_and_Creative_Industry_Park_-_panoramio.jpg"},
+ ],
+ cks:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Chiang_Kai-shek_memorial_amk.jpg/500px-Chiang_Kai-shek_memorial_amk.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Chiang_Kai-shek_memorial_amk.jpg/1280px-Chiang_Kai-shek_memorial_amk.jpg",r:1.501,c:"Chiang Kai-shek Memorial Hall in Taipei , Taiwan",by:"AngMoKio",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Chiang_Kai-shek_memorial_amk.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Chiang_Kai-shek_Memorial_Gate_e_amk.jpg/500px-Chiang_Kai-shek_Memorial_Gate_e_amk.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Chiang_Kai-shek_Memorial_Gate_e_amk.jpg/1280px-Chiang_Kai-shek_Memorial_Gate_e_amk.jpg",r:1.501,c:"Gate to Chiang Kai-shek Memorial Hall, Taipei , Taiwan",by:"AngMoKio",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Chiang_Kai-shek_Memorial_Gate_e_amk.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Taipei_Taiwan_Chiang-Kai-Shek-Memorial-Hall-01.jpg/500px-Taipei_Taiwan_Chiang-Kai-Shek-Memorial-Hall-01.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Taipei_Taiwan_Chiang-Kai-Shek-Memorial-Hall-01.jpg/1280px-Taipei_Taiwan_Chiang-Kai-Shek-Memorial-Hall-01.jpg",r:1.501,c:"Taipei, Taiwan: Chiang Kai-Shek Memorial Hall (中正紀念堂)",by:"CEphoto, Uwe Aranas",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_Taiwan_Chiang-Kai-Shek-Memorial-Hall-01.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Taipei_Taiwan_Chiang-Kai-Shek-Memorial-Hall-07.jpg/500px-Taipei_Taiwan_Chiang-Kai-Shek-Memorial-Hall-07.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Taipei_Taiwan_Chiang-Kai-Shek-Memorial-Hall-07.jpg/1280px-Taipei_Taiwan_Chiang-Kai-Shek-Memorial-Hall-07.jpg",r:1.919,c:"Taipei, Taiwan: View from Chiang Kai-Shek Memorial Hall (中正紀念堂) to National Theater and Concert Hall and Gate of Grea…",by:"CEphoto, Uwe Aranas",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_Taiwan_Chiang-Kai-Shek-Memorial-Hall-07.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Taipei_Taiwan_Chiang-Kai-Shek-Memorial-Hall-09.jpg/500px-Taipei_Taiwan_Chiang-Kai-Shek-Memorial-Hall-09.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Taipei_Taiwan_Chiang-Kai-Shek-Memorial-Hall-09.jpg/1280px-Taipei_Taiwan_Chiang-Kai-Shek-Memorial-Hall-09.jpg",r:1.501,c:"Taipei, Taiwan: Chiang Kai-Shek Memorial Hall (中正紀念堂)",by:"CEphoto, Uwe Aranas",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_Taiwan_Chiang-Kai-Shek-Memorial-Hall-09.jpg"},
+ ],
+ npm:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/NationalPalace_MuseumFrontView.jpg/500px-NationalPalace_MuseumFrontView.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/NationalPalace_MuseumFrontView.jpg/1280px-NationalPalace_MuseumFrontView.jpg",r:1.504,c:"National Palace Museum , Taiwan.",by:"Peellden",l:"CC BY 3.0",p:"https://commons.wikimedia.org/wiki/File:NationalPalace_MuseumFrontView.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/National_Palace_Museum_02.jpg/500px-National_Palace_Museum_02.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/National_Palace_Museum_02.jpg/1280px-National_Palace_Museum_02.jpg",r:1.501,c:"National Palace Museum,Taipei,ROC",by:"Emcc83",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:National_Palace_Museum_02.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/National_Palace_Museum_03.jpg/500px-National_Palace_Museum_03.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/National_Palace_Museum_03.jpg/1280px-National_Palace_Museum_03.jpg",r:1.501,c:"National Palace Museum,Taipei,ROC",by:"Emcc83",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:National_Palace_Museum_03.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/%E5%9C%8B%E7%AB%8B%E6%95%85%E5%AE%AE%E5%8D%9A%E7%89%A9%E9%99%A2%EF%BC%8D%E5%B1%8B%E6%AA%90%E4%B8%80%E8%85%B3%EF%BC%8FA_corner_of_National_Forbidden_Palace_Museum_-_panoramio.jpg/500px-%E5%9C%8B%E7%AB%8B%E6%95%85%E5%AE%AE%E5%8D%9A%E7%89%A9%E9%99%A2%EF%BC%8D%E5%B1%8B%E6%AA%90%E4%B8%80%E8%85%B3%EF%BC%8FA_corner_of_National_Forbidden_Palace_Museum_-_panoramio.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/%E5%9C%8B%E7%AB%8B%E6%95%85%E5%AE%AE%E5%8D%9A%E7%89%A9%E9%99%A2%EF%BC%8D%E5%B1%8B%E6%AA%90%E4%B8%80%E8%85%B3%EF%BC%8FA_corner_of_National_Forbidden_Palace_Museum_-_panoramio.jpg/1280px-%E5%9C%8B%E7%AB%8B%E6%95%85%E5%AE%AE%E5%8D%9A%E7%89%A9%E9%99%A2%EF%BC%8D%E5%B1%8B%E6%AA%90%E4%B8%80%E8%85%B3%EF%BC%8FA_corner_of_National_Forbidden_Palace_Museum_-_panoramio.jpg",r:1.283,c:"國立故宮博物院－屋檐一腳／A corner of National Forbidden Palace Museum",by:"Weixi Zeng",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:%E5%9C%8B%E7%AB%8B%E6%95%85%E5%AE%AE%E5%8D%9A%E7%89%A9%E9%99%A2%EF%BC%8D%E5%B1%8B%E6%AA%90%E4%B8%80%E8%85%B3%EF%BC%8FA_corner_of_National_Forbidden_Palace_Museum_-_panoramio.jpg"},
+ ],
+ dadaocheng:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/TW_%E5%8F%B0%E5%8C%97%E5%B8%82_Taipei_%E5%A4%A7%E5%90%8C%E5%8D%80_Datong_District_%E8%BF%AA%E5%8C%96%E8%A1%97%E4%BA%8C%E6%AE%B5_Dihua_Street_March_2024_R12S_122.jpg/500px-TW_%E5%8F%B0%E5%8C%97%E5%B8%82_Taipei_%E5%A4%A7%E5%90%8C%E5%8D%80_Datong_District_%E8%BF%AA%E5%8C%96%E8%A1%97%E4%BA%8C%E6%AE%B5_Dihua_Street_March_2024_R12S_122.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/TW_%E5%8F%B0%E5%8C%97%E5%B8%82_Taipei_%E5%A4%A7%E5%90%8C%E5%8D%80_Datong_District_%E8%BF%AA%E5%8C%96%E8%A1%97%E4%BA%8C%E6%AE%B5_Dihua_Street_March_2024_R12S_122.jpg/1280px-TW_%E5%8F%B0%E5%8C%97%E5%B8%82_Taipei_%E5%A4%A7%E5%90%8C%E5%8D%80_Datong_District_%E8%BF%AA%E5%8C%96%E8%A1%97%E4%BA%8C%E6%AE%B5_Dihua_Street_March_2024_R12S_122.jpg",r:1.333,c:"TW 台北市 Taipei 大同區 Datong District 迪化街二段 Dihua Street in March 2024",by:"DONGIE 829 EFUOA",l:"CC0",p:"https://commons.wikimedia.org/wiki/File:TW_%E5%8F%B0%E5%8C%97%E5%B8%82_Taipei_%E5%A4%A7%E5%90%8C%E5%8D%80_Datong_District_%E8%BF%AA%E5%8C%96%E8%A1%97%E4%BA%8C%E6%AE%B5_Dihua_Street_March_2024_R12S_122.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/TW_%E5%8F%B0%E5%8C%97%E5%B8%82_Taipei_%E5%A4%A7%E5%90%8C%E5%8D%80_Datong_District_%E8%BF%AA%E5%8C%96%E8%A1%97%E4%BA%8C%E6%AE%B5_Dihua_Street_March_2024_R12S_206.jpg/500px-TW_%E5%8F%B0%E5%8C%97%E5%B8%82_Taipei_%E5%A4%A7%E5%90%8C%E5%8D%80_Datong_District_%E8%BF%AA%E5%8C%96%E8%A1%97%E4%BA%8C%E6%AE%B5_Dihua_Street_March_2024_R12S_206.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/TW_%E5%8F%B0%E5%8C%97%E5%B8%82_Taipei_%E5%A4%A7%E5%90%8C%E5%8D%80_Datong_District_%E8%BF%AA%E5%8C%96%E8%A1%97%E4%BA%8C%E6%AE%B5_Dihua_Street_March_2024_R12S_206.jpg/1280px-TW_%E5%8F%B0%E5%8C%97%E5%B8%82_Taipei_%E5%A4%A7%E5%90%8C%E5%8D%80_Datong_District_%E8%BF%AA%E5%8C%96%E8%A1%97%E4%BA%8C%E6%AE%B5_Dihua_Street_March_2024_R12S_206.jpg",r:0.750,c:"TW 台北市 Taipei 大同區 Datong District 迪化街二段 Dihua Street in March 2024",by:"DONGIE 829 EFUOA",l:"CC0",p:"https://commons.wikimedia.org/wiki/File:TW_%E5%8F%B0%E5%8C%97%E5%B8%82_Taipei_%E5%A4%A7%E5%90%8C%E5%8D%80_Datong_District_%E8%BF%AA%E5%8C%96%E8%A1%97%E4%BA%8C%E6%AE%B5_Dihua_Street_March_2024_R12S_206.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/TW_%E5%8F%B0%E5%8C%97%E5%B8%82_Taipei_%E5%A4%A7%E5%90%8C%E5%8D%80_Datong_District_%E8%BF%AA%E5%8C%96%E8%A1%97%E4%BA%8C%E6%AE%B5_Dihua_Street_March_2024_R12S_301.jpg/500px-TW_%E5%8F%B0%E5%8C%97%E5%B8%82_Taipei_%E5%A4%A7%E5%90%8C%E5%8D%80_Datong_District_%E8%BF%AA%E5%8C%96%E8%A1%97%E4%BA%8C%E6%AE%B5_Dihua_Street_March_2024_R12S_301.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/TW_%E5%8F%B0%E5%8C%97%E5%B8%82_Taipei_%E5%A4%A7%E5%90%8C%E5%8D%80_Datong_District_%E8%BF%AA%E5%8C%96%E8%A1%97%E4%BA%8C%E6%AE%B5_Dihua_Street_March_2024_R12S_301.jpg/1280px-TW_%E5%8F%B0%E5%8C%97%E5%B8%82_Taipei_%E5%A4%A7%E5%90%8C%E5%8D%80_Datong_District_%E8%BF%AA%E5%8C%96%E8%A1%97%E4%BA%8C%E6%AE%B5_Dihua_Street_March_2024_R12S_301.jpg",r:1.333,c:"TW 台北市 Taipei 大同區 Datong District 迪化街二段 Dihua Street in March 2024",by:"DONGIE 829 EFUOA",l:"CC0",p:"https://commons.wikimedia.org/wiki/File:TW_%E5%8F%B0%E5%8C%97%E5%B8%82_Taipei_%E5%A4%A7%E5%90%8C%E5%8D%80_Datong_District_%E8%BF%AA%E5%8C%96%E8%A1%97%E4%BA%8C%E6%AE%B5_Dihua_Street_March_2024_R12S_301.jpg"},
+ ],
+ yongkang:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_March_2024_R12S_650.jpg/500px-TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_March_2024_R12S_650.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_March_2024_R12S_650.jpg/1280px-TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_March_2024_R12S_650.jpg",r:1.333,c:"TW 台灣 Taiwan 台北 Taipei 大安區 Da'An 永康街 Yongkang Street in March 2024",by:"MAm ROFOW 022",l:"CC0",p:"https://commons.wikimedia.org/wiki/File:TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_March_2024_R12S_650.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_March_2024_R12S_653.jpg/500px-TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_March_2024_R12S_653.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_March_2024_R12S_653.jpg/1280px-TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_March_2024_R12S_653.jpg",r:0.750,c:"TW 台灣 Taiwan 台北 Taipei 大安區 Da'An 永康街 Yongkang Street in March 2024",by:"MAm ROFOW 022",l:"CC0",p:"https://commons.wikimedia.org/wiki/File:TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_March_2024_R12S_653.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_March_2024_R12S_705.jpg/500px-TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_March_2024_R12S_705.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_March_2024_R12S_705.jpg/1280px-TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_March_2024_R12S_705.jpg",r:1.333,c:"TW 台灣 Taiwan 台北 Taipei 大安區 Da'An 永康街 Yongkang Street in March 2024",by:"MAm ROFOW 022",l:"CC0",p:"https://commons.wikimedia.org/wiki/File:TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_March_2024_R12S_705.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_morning_March_2024_R12S_107.jpg/500px-TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_morning_March_2024_R12S_107.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_morning_March_2024_R12S_107.jpg/1280px-TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_morning_March_2024_R12S_107.jpg",r:1.333,c:"TW 台灣 Taiwan 台北 Taipei 大安區 Da'An 永康街 Yongkang Street in March 2024",by:"MAm ROFOW 022",l:"CC0",p:"https://commons.wikimedia.org/wiki/File:TW_%E5%8F%B0%E7%81%A3_Taiwan_%E5%8F%B0%E5%8C%97_Taipei_%E5%A4%A7%E5%AE%89%E5%8D%80_Da%27An_%E6%B0%B8%E5%BA%B7%E8%A1%97_Yongkang_Street_morning_March_2024_R12S_107.jpg"},
+ ],
+ daanpark:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Daan_Forest_Park_%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio.jpg/500px-Daan_Forest_Park_%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Daan_Forest_Park_%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio.jpg/1280px-Daan_Forest_Park_%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio.jpg",r:1.338,c:"Daan Forest Park 大安森林公園",by:"lienyuan lee",l:"CC BY 3.0",p:"https://commons.wikimedia.org/wiki/File:Daan_Forest_Park_%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Daan_Forest_Park_%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio_%282%29.jpg/500px-Daan_Forest_Park_%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio_%282%29.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Daan_Forest_Park_%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio_%282%29.jpg/1280px-Daan_Forest_Park_%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio_%282%29.jpg",r:1.333,c:"Daan Forest Park 大安森林公園",by:"lienyuan lee",l:"CC BY 3.0",p:"https://commons.wikimedia.org/wiki/File:Daan_Forest_Park_%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio_(2).jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Daan_Forest_Park_%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio_%284%29.jpg/500px-Daan_Forest_Park_%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio_%284%29.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Daan_Forest_Park_%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio_%284%29.jpg/1280px-Daan_Forest_Park_%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio_%284%29.jpg",r:1.333,c:"Daan Forest Park 大安森林公園",by:"lienyuan lee",l:"CC BY 3.0",p:"https://commons.wikimedia.org/wiki/File:Daan_Forest_Park_%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio_(4).jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Taipei_Daan_Forest_Park_%E5%8F%B0%E5%8C%97%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio.jpg/500px-Taipei_Daan_Forest_Park_%E5%8F%B0%E5%8C%97%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Taipei_Daan_Forest_Park_%E5%8F%B0%E5%8C%97%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio.jpg/1280px-Taipei_Daan_Forest_Park_%E5%8F%B0%E5%8C%97%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio.jpg",r:1.333,c:"Taipei Daan Forest Park 台北大安森林公園",by:"lienyuan lee",l:"CC BY 3.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_Daan_Forest_Park_%E5%8F%B0%E5%8C%97%E5%A4%A7%E5%AE%89%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92_-_panoramio.jpg"},
+ ],
+ xiangshan:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Taipei_101_from_Xiangshan_20240729.jpg/500px-Taipei_101_from_Xiangshan_20240729.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Taipei_101_from_Xiangshan_20240729.jpg/1280px-Taipei_101_from_Xiangshan_20240729.jpg",r:0.562,c:"​從象山看台北101，2024年7月29日攝",by:"Sinsyuan",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_101_from_Xiangshan_20240729.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/View_from_Elephant_Mountain%2C_Taipei%2C_Taiwan_2015.jpg/500px-View_from_Elephant_Mountain%2C_Taipei%2C_Taiwan_2015.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/View_from_Elephant_Mountain%2C_Taipei%2C_Taiwan_2015.jpg/1280px-View_from_Elephant_Mountain%2C_Taipei%2C_Taiwan_2015.jpg",r:1.501,c:"View of Taipei skyline from Elephant Mountain, Taipei, Taiwan 2015",by:"Sonse",l:"CC BY 2.0",p:"https://commons.wikimedia.org/wiki/File:View_from_Elephant_Mountain,_Taipei,_Taiwan_2015.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Panoramic_view_of_Taipei%2C_Taiwan_Skyline_from_Elephant_Mountain_2016.jpg/500px-Panoramic_view_of_Taipei%2C_Taiwan_Skyline_from_Elephant_Mountain_2016.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Panoramic_view_of_Taipei%2C_Taiwan_Skyline_from_Elephant_Mountain_2016.jpg/1280px-Panoramic_view_of_Taipei%2C_Taiwan_Skyline_from_Elephant_Mountain_2016.jpg",r:3.432,c:"Panoramic view of the skyline of Taipei, Taiwan from Elephant Mountain photographed in 2016",by:"Andrew Harvey from Sydney, Australia",l:"CC BY 2.0",p:"https://commons.wikimedia.org/wiki/File:Panoramic_view_of_Taipei,_Taiwan_Skyline_from_Elephant_Mountain_2016.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/View_of_Taipei_from_Elephant_Mountain_%28%E8%B1%A1%E5%B1%B1%29.jpg/500px-View_of_Taipei_from_Elephant_Mountain_%28%E8%B1%A1%E5%B1%B1%29.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/View_of_Taipei_from_Elephant_Mountain_%28%E8%B1%A1%E5%B1%B1%29.jpg/1280px-View_of_Taipei_from_Elephant_Mountain_%28%E8%B1%A1%E5%B1%B1%29.jpg",r:1.778,c:"Вечерний вид на Тайбэй",by:"Любарский Сергей Николаевич",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:View_of_Taipei_from_Elephant_Mountain_(%E8%B1%A1%E5%B1%B1).jpg"},
+ ],
+ tfam:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Taipei_Fine_Arts_Museum_20150919.jpg/500px-Taipei_Fine_Arts_Museum_20150919.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Taipei_Fine_Arts_Museum_20150919.jpg/1280px-Taipei_Fine_Arts_Museum_20150919.jpg",r:1.501,c:"Taipei Fine Arts Museum.",by:"翁維德 (Wei-Te Wong)",l:"CC BY-SA 2.0",p:"https://commons.wikimedia.org/wiki/File:Taipei_Fine_Arts_Museum_20150919.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Taipei-fine-arts-museum.jpg/500px-Taipei-fine-arts-museum.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Taipei-fine-arts-museum.jpg/1280px-Taipei-fine-arts-museum.jpg",r:1.333,c:"Taipei Fine Arts Museum.",by:"Prattflora",l:"CC BY-SA 3.0",p:"https://commons.wikimedia.org/wiki/File:Taipei-fine-arts-museum.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Taipei_Fine_Arts_Museum_070624_2.jpg/500px-Taipei_Fine_Arts_Museum_070624_2.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Taipei_Fine_Arts_Museum_070624_2.jpg/1280px-Taipei_Fine_Arts_Museum_070624_2.jpg",r:1.333,c:"​臺北市立美術館。",by:"User: (WT-shared) ResTpeTw at wts wikivo",l:"CC BY 2.5",p:"https://commons.wikimedia.org/wiki/File:Taipei_Fine_Arts_Museum_070624_2.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/%E5%8F%B0%E5%8C%97%E7%BE%8E%E8%A1%93%E9%A4%A8_Taipei_Fine_Arts_Museum_-_panoramio.jpg/500px-%E5%8F%B0%E5%8C%97%E7%BE%8E%E8%A1%93%E9%A4%A8_Taipei_Fine_Arts_Museum_-_panoramio.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/%E5%8F%B0%E5%8C%97%E7%BE%8E%E8%A1%93%E9%A4%A8_Taipei_Fine_Arts_Museum_-_panoramio.jpg/1280px-%E5%8F%B0%E5%8C%97%E7%BE%8E%E8%A1%93%E9%A4%A8_Taipei_Fine_Arts_Museum_-_panoramio.jpg",r:1.333,c:"​臺北市立美術館公車候車亭。",by:"Tianmu peter",l:"CC BY 3.0",p:"https://commons.wikimedia.org/wiki/File:%E5%8F%B0%E5%8C%97%E7%BE%8E%E8%A1%93%E9%A4%A8_Taipei_Fine_Arts_Museum_-_panoramio.jpg"},
+ ],
+ moca:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Museum_of_Contemporary_Art%2C_Taipei%2C_2023_%2801%29.jpg/500px-Museum_of_Contemporary_Art%2C_Taipei%2C_2023_%2801%29.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Museum_of_Contemporary_Art%2C_Taipei%2C_2023_%2801%29.jpg/1280px-Museum_of_Contemporary_Art%2C_Taipei%2C_2023_%2801%29.jpg",r:1.778,c:"Exterior view of the Museum of Contemporary Art, Taipei",by:"Bahnfrend",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:Museum_of_Contemporary_Art,_Taipei,_2023_(01).jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Museum_of_Contemporary_Art%2C_Taipei%2C_2023_%2802%29.jpg/500px-Museum_of_Contemporary_Art%2C_Taipei%2C_2023_%2802%29.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Museum_of_Contemporary_Art%2C_Taipei%2C_2023_%2802%29.jpg/1280px-Museum_of_Contemporary_Art%2C_Taipei%2C_2023_%2802%29.jpg",r:1.790,c:"Exterior view of the Museum of Contemporary Art, Taipei",by:"Bahnfrend",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:Museum_of_Contemporary_Art,_Taipei,_2023_(02).jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Before_Museum_of_Contemporary_Art%2C_Taipei.jpg/500px-Before_Museum_of_Contemporary_Art%2C_Taipei.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Before_Museum_of_Contemporary_Art%2C_Taipei.jpg/1280px-Before_Museum_of_Contemporary_Art%2C_Taipei.jpg",r:1.502,c:"​台北當代藝術館前一景。",by:"Tbatb",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:Before_Museum_of_Contemporary_Art,_Taipei.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Side_Entrance_of_Museum_of_Contemporary_Art%2C_Taipei.jpg/500px-Side_Entrance_of_Museum_of_Contemporary_Art%2C_Taipei.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Side_Entrance_of_Museum_of_Contemporary_Art%2C_Taipei.jpg/1280px-Side_Entrance_of_Museum_of_Contemporary_Art%2C_Taipei.jpg",r:1.502,c:"​台北當代藝術館側門。",by:"Tbatb",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:Side_Entrance_of_Museum_of_Contemporary_Art,_Taipei.jpg"},
+ ],
+ tpemain:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Platform_1_%26_2%2C_MRT_Taipei_Main_Station_20260207.jpg/500px-Platform_1_%26_2%2C_MRT_Taipei_Main_Station_20260207.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Platform_1_%26_2%2C_MRT_Taipei_Main_Station_20260207.jpg/1280px-Platform_1_%26_2%2C_MRT_Taipei_Main_Station_20260207.jpg",r:1.778,c:"Platform 1 and 2 (for Red Line), Taipei Main Station, Taipei Metro.",by:"Bigmorr",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:Platform_1_%26_2,_MRT_Taipei_Main_Station_20260207.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/B1_Corridor_and_shop_area%2C_MRT_Taipei_Main_Station_20260407_T1714.jpg/500px-B1_Corridor_and_shop_area%2C_MRT_Taipei_Main_Station_20260407_T1714.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/B1_Corridor_and_shop_area%2C_MRT_Taipei_Main_Station_20260407_T1714.jpg/1280px-B1_Corridor_and_shop_area%2C_MRT_Taipei_Main_Station_20260407_T1714.jpg",r:1.778,c:"​台北捷運台北車站B1連通道及商場區（板南線側）",by:"Bigmorr",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:B1_Corridor_and_shop_area,_MRT_Taipei_Main_Station_20260407_T1714.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Kuo-kuang_Bus_Taipei_Terminal_and_MRT_Taipei_Main_Station_Exit_M1_20190814.jpg/500px-Kuo-kuang_Bus_Taipei_Terminal_and_MRT_Taipei_Main_Station_Exit_M1_20190814.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Kuo-kuang_Bus_Taipei_Terminal_and_MRT_Taipei_Main_Station_Exit_M1_20190814.jpg/1280px-Kuo-kuang_Bus_Taipei_Terminal_and_MRT_Taipei_Main_Station_Exit_M1_20190814.jpg",r:1.501,c:"​國光客運台北車站月台側（右）與台北捷運台北車站M1出口（左下）。",by:"Diamo Laung Bobpuao",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:Kuo-kuang_Bus_Taipei_Terminal_and_MRT_Taipei_Main_Station_Exit_M1_20190814.jpg"},
+ ],
+ tpeapt1:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Terminal_1_and_Control_Tower%2C_Taiwan_Taoyuan_International_Airport_20230708.jpg/500px-Terminal_1_and_Control_Tower%2C_Taiwan_Taoyuan_International_Airport_20230708.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Terminal_1_and_Control_Tower%2C_Taiwan_Taoyuan_International_Airport_20230708.jpg/1280px-Terminal_1_and_Control_Tower%2C_Taiwan_Taoyuan_International_Airport_20230708.jpg",r:1.780,c:"​臺灣桃園國際機場第一航廈與塔台遠景。",by:"Heeheemalu",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:Terminal_1_and_Control_Tower,_Taiwan_Taoyuan_International_Airport_20230708.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Exterior_of_Terminal_1%2C_Taoyuan_Airport_20141230.jpg/500px-Exterior_of_Terminal_1%2C_Taoyuan_Airport_20141230.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Exterior_of_Terminal_1%2C_Taoyuan_Airport_20141230.jpg/1280px-Exterior_of_Terminal_1%2C_Taoyuan_Airport_20141230.jpg",r:1.333,c:"Architecturual Design of Terminal 1, Taiwan Taoyuan International Airport.",by:"KCS",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:Exterior_of_Terminal_1,_Taoyuan_Airport_20141230.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Taiwan_Taoyuan_International_Airport_-_Terminal_1.jpg/500px-Taiwan_Taoyuan_International_Airport_-_Terminal_1.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Taiwan_Taoyuan_International_Airport_-_Terminal_1.jpg/1280px-Taiwan_Taoyuan_International_Airport_-_Terminal_1.jpg",r:1.333,c:"Taiwan Taoyuan International Airport - Terminal 1",by:"毛貓大少爺",l:"CC BY-SA 2.0",p:"https://commons.wikimedia.org/wiki/File:Taiwan_Taoyuan_International_Airport_-_Terminal_1.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Taoyuan_Metro_A12_Airport_Terminal_1_Station_2017-02-25.jpg/500px-Taoyuan_Metro_A12_Airport_Terminal_1_Station_2017-02-25.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Taoyuan_Metro_A12_Airport_Terminal_1_Station_2017-02-25.jpg/1280px-Taoyuan_Metro_A12_Airport_Terminal_1_Station_2017-02-25.jpg",r:1.333,c:"Taoyuan Metro A12 Airport Terminal 1 Station",by:"Subscriptshoe9",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:Taoyuan_Metro_A12_Airport_Terminal_1_Station_2017-02-25.jpg"},
+ ],
+ linjiang:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Linjiang_Street_Night_Market_entrance_20170517.jpg/500px-Linjiang_Street_Night_Market_entrance_20170517.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Linjiang_Street_Night_Market_entrance_20170517.jpg/1280px-Linjiang_Street_Night_Market_entrance_20170517.jpg",r:1.333,c:"​臨江街觀光夜市入口。",by:"Ken Marshall",l:"CC BY 2.0",p:"https://commons.wikimedia.org/wiki/File:Linjiang_Street_Night_Market_entrance_20170517.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/2024.6.15_Linjiang_Street_Night_Market.jpg/500px-2024.6.15_Linjiang_Street_Night_Market.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/2024.6.15_Linjiang_Street_Night_Market.jpg/1280px-2024.6.15_Linjiang_Street_Night_Market.jpg",r:0.753,c:"​位於台北市大安區的臨江街觀光夜市",by:"人人生來平等",l:"CC BY-SA 4.0",p:"https://commons.wikimedia.org/wiki/File:2024.6.15_Linjiang_Street_Night_Market.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Linjiang_Street_Night_Market.jpg/500px-Linjiang_Street_Night_Market.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Linjiang_Street_Night_Market.jpg/1280px-Linjiang_Street_Night_Market.jpg",r:1.501,c:"Linjiang Street Night Market also called \"Tonghua Night Market\".",by:"vixyao",l:"CC BY-SA 2.0",p:"https://commons.wikimedia.org/wiki/File:Linjiang_Street_Night_Market.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/2007-10-23_pancakes_vendor_at_Linjiang_Street_Night_Market%2C_Taipei.jpg/500px-2007-10-23_pancakes_vendor_at_Linjiang_Street_Night_Market%2C_Taipei.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/2007-10-23_pancakes_vendor_at_Linjiang_Street_Night_Market%2C_Taipei.jpg/1280px-2007-10-23_pancakes_vendor_at_Linjiang_Street_Night_Market%2C_Taipei.jpg",r:1.333,c:"pancakes vendor at Linjiang Street Night Market, Taipei",by:"Yun Huang Yong",l:"CC BY 2.0",p:"https://commons.wikimedia.org/wiki/File:2007-10-23_pancakes_vendor_at_Linjiang_Street_Night_Market,_Taipei.jpg"},
+ ],
+ kavalan:[
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Kavalan_distillery.jpg/500px-Kavalan_distillery.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Kavalan_distillery.jpg/1280px-Kavalan_distillery.jpg",r:0.667,c:"宜蘭 KAVALAN 威士忌酒廠",by:"Jerry Lai from Hsinchu, Taiwan",l:"CC BY-SA 2.0",p:"https://commons.wikimedia.org/wiki/File:Kavalan_distillery.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Whiskey_Aging_Warehouse_1_at_Kavalan_Distillery_under_blue_sky_on_2_December_2018.jpg/500px-Whiskey_Aging_Warehouse_1_at_Kavalan_Distillery_under_blue_sky_on_2_December_2018.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Whiskey_Aging_Warehouse_1_at_Kavalan_Distillery_under_blue_sky_on_2_December_2018.jpg/1280px-Whiskey_Aging_Warehouse_1_at_Kavalan_Distillery_under_blue_sky_on_2_December_2018.jpg",r:1.499,c:"Whiskey Aging Warehouse 1 at Kavalan Distillery under blue sky on 2 December 2018.",by:"mk_is_here",l:"CC BY 2.0",p:"https://commons.wikimedia.org/wiki/File:Whiskey_Aging_Warehouse_1_at_Kavalan_Distillery_under_blue_sky_on_2_December_2018.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/%E9%87%91%E8%BB%8A%E5%99%B6%E7%91%AA%E8%98%AD%E5%A8%81%E5%A3%AB%E5%BF%8C%E9%85%92%E5%BB%A0_-_panoramio.jpg/500px-%E9%87%91%E8%BB%8A%E5%99%B6%E7%91%AA%E8%98%AD%E5%A8%81%E5%A3%AB%E5%BF%8C%E9%85%92%E5%BB%A0_-_panoramio.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/%E9%87%91%E8%BB%8A%E5%99%B6%E7%91%AA%E8%98%AD%E5%A8%81%E5%A3%AB%E5%BF%8C%E9%85%92%E5%BB%A0_-_panoramio.jpg/1280px-%E9%87%91%E8%BB%8A%E5%99%B6%E7%91%AA%E8%98%AD%E5%A8%81%E5%A3%AB%E5%BF%8C%E9%85%92%E5%BB%A0_-_panoramio.jpg",r:1.335,c:"宜蘭酒廠 Yilan Winery",by:"lienyuan lee",l:"CC BY 3.0",p:"https://commons.wikimedia.org/wiki/File:%E9%87%91%E8%BB%8A%E5%99%B6%E7%91%AA%E8%98%AD%E5%A8%81%E5%A3%AB%E5%BF%8C%E9%85%92%E5%BB%A0_-_panoramio.jpg"},
+  {t:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Beautiful_tasting_of_Kavalan_whiskey.jpg/500px-Beautiful_tasting_of_Kavalan_whiskey.jpg",s:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Beautiful_tasting_of_Kavalan_whiskey.jpg/1280px-Beautiful_tasting_of_Kavalan_whiskey.jpg",r:1.501,c:"カバラン蒸留所 テイスティンググラス",by:"ironypoisoning",l:"CC BY-SA 2.0",p:"https://commons.wikimedia.org/wiki/File:Beautiful_tasting_of_Kavalan_whiskey.jpg"},
+ ],
+};
 
 /* ============ 유틸 ============ */
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const pad=n=>String(n).padStart(2,'0');
 const hm=m=>pad(Math.floor(m/60)%24)+':'+pad(m%60);
+const P=id=>PLACES.find(x=>x.id===id);
+const MODE={walk:'도보',mrt:'MRT',taxi:'택시',arex:'공항선',air:'항공',bus:'버스'};
 
 function taipeiNow(){
   const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',weekday:'short',hour12:false}).formatToParts(new Date());
   const g=t=>p.find(x=>x.type===t).value;
   const wd=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(g('weekday'));
-  return {y:+g('year'),mo:+g('month'),d:+g('day'),h:+g('hour')%24,mi:+g('minute'),s:+g('second'),wd,
+  return {mo:+g('month'),d:+g('day'),h:+g('hour')%24,mi:+g('minute'),s:+g('second'),wd,
           min:(+g('hour')%24)*60+ +g('minute'), key:g('month')+'.'+g('day')};
 }
 function openState(p,n){
   if(!p.hours) return {s:'unk',txt:'시간 확인 필요'};
   const today=p.hours[n.wd], prev=p.hours[(n.wd+6)%7];
-  if(prev) for(const[a,b] of prev) if(b>1440 && n.min<b-1440) return {s:'open',txt:'영업 중 · '+hm(b)+' 마감'};
+  if(prev) for(const[,b] of prev) if(b>1440 && n.min<b-1440) return {s:'open',txt:hm(b)+' 마감'};
   if(!today) return {s:'shut',txt:'오늘 휴무'};
-  for(const[a,b] of today){
-    if(n.min>=a&&n.min<Math.min(b,1440)) return {s:'open',txt:'영업 중 · '+hm(b)+' 마감'};
-  }
-  for(const[a,b] of today) if(n.min<a) return {s:'shut',txt:hm(a)+' 오픈'};
+  for(const[a,b] of today) if(n.min>=a&&n.min<Math.min(b,1440)) return {s:'open',txt:hm(b)+' 마감'};
+  for(const[a] of today) if(n.min<a) return {s:'shut',txt:hm(a)+' 오픈'};
   return {s:'shut',txt:'오늘 영업 종료'};
 }
 function hoursLine(p,n){
@@ -453,9 +1094,52 @@ function hoursLine(p,n){
   return '오늘 '+t.map(([a,b])=>hm(a)+'–'+hm(b)).join(', ');
 }
 function mapUrl(p){
-  const base='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p.ll||p.nm);
+  const base='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p.ll||(p.zh||p.nm)+' 台北');
   return p.pid? base+'&query_place_id='+p.pid : base;
 }
+function photosUrl(p){
+  return p.pid? 'https://search.google.com/local/photos?placeid='+p.pid : mapUrl(p);
+}
+
+/* ============ 사진 ============ */
+function galHtml(p){
+  const arr=PHOTOS[p.id]||[];
+  const tiles=arr.map((x,i)=>
+    `<button onclick="lbOpen('${p.id}',${i})" aria-label="${esc(x.c||p.nm)}">
+      <img loading="lazy" decoding="async" src="${x.t}" width="${Math.round(112*x.r)}" height="112" alt="${esc(x.c||p.nm)}"></button>`).join('');
+  const more=`<a class="more" href="${photosUrl(p)}" target="_blank" rel="noopener"><b>↗</b>구글<br>사진</a>`;
+  const note=arr.length
+    ? `<div class="galn">사진 ${arr.length}장 · Wikimedia Commons · 탭하면 원본 설명과 출처가 나옵니다</div>`
+    : `<div class="galn">자유 라이선스 사진 없음 · 구글 지도에서 확인</div>`;
+  return `<div class="gal">${tiles}${more}</div>${note}`;
+}
+
+let lbList=[],lbIdx=0,lbPlace='';
+function lbOpen(pid,i){
+  lbList=PHOTOS[pid]||[]; if(!lbList.length) return;
+  lbPlace=(P(pid)||{}).nm||'';
+  lbIdx=i; $('#lb').classList.add('on'); document.body.style.overflow='hidden'; lbPaint();
+}
+function lbPaint(){
+  const x=lbList[lbIdx];
+  $('#lbImg').src=x.s; $('#lbImg').alt=x.c||'';
+  $('#lbC').textContent=x.c||'';
+  $('#lbM').innerHTML=`촬영 ${esc(x.by||'미상')} · ${esc(x.l)} · <a href="${x.p}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
+  $('#lbCt').textContent=lbPlace+' · '+(lbIdx+1)+' / '+lbList.length;
+  $('#lbPv').disabled=lbIdx===0; $('#lbNx').disabled=lbIdx===lbList.length-1;
+}
+function lbGo(d){ const n=lbIdx+d; if(n<0||n>=lbList.length) return; lbIdx=n; lbPaint(); }
+function lbClose(){ $('#lb').classList.remove('on'); document.body.style.overflow=''; $('#lbImg').src=''; }
+(function(){
+  let x0=null;
+  const lb=()=>$('#lb');
+  document.addEventListener('touchstart',e=>{ if(lb().classList.contains('on')) x0=e.touches[0].clientX; },{passive:true});
+  document.addEventListener('touchend',e=>{
+    if(x0===null||!lb().classList.contains('on')) return;
+    const dx=e.changedTouches[0].clientX-x0; x0=null;
+    if(Math.abs(dx)>50) lbGo(dx<0?1:-1);
+  },{passive:true});
+})();
 
 /* ============ PID ============ */
 function tickPID(){
@@ -464,100 +1148,299 @@ function tickPID(){
   $('#pidDate').textContent=n.mo+'월 '+n.d+'일 '+['일','월','화','수','목','금','토'][n.wd];
 
   const day=DAYS.find(d=>d.d===n.key);
-  let cur=null,nxt=null;
+  const tag=$('#nowTag');
+  let cur=null,nxt=null,list=[];
   if(day&&day.stops.length){
-    const list=day.stops.map(s=>({...s,m:+s.t.slice(0,2)*60 + +s.t.slice(3)}));
+    list=day.stops.map(s=>({...s,m:+s.t.slice(0,2)*60 + +s.t.slice(3)}));
     for(const s of list){ if(s.m<=n.min) cur=s; else if(!nxt) nxt=s; }
   }
-  const tag=$('#nowTag');
+  const soft=()=>tag.style.background='rgba(255,255,255,.16)';
   if(!day){
     $('#nowTtl').textContent='여행 기간이 아닙니다';
-    $('#nowMet').textContent='08.29 – 09.02';
-    tag.style.background='rgba(255,255,255,.16)';
-  }else if(!day.stops.length){
-    $('#nowTtl').textContent=day.d+' — 카페 투어';
-    $('#nowMet').textContent='세부 일정 미확정';
-    tag.style.background='rgba(255,255,255,.16)';
+    $('#nowMet').textContent='08.29 – 09.02'; soft();
   }else if(cur){
     $('#nowTtl').textContent=cur.n;
-    $('#nowMet').textContent=cur.t+' 시작 · '+(n.min-cur.m)+'분 경과';
-    tag.style.background='';
+    $('#nowMet').textContent=(day.est?'추정 ':'')+cur.t+' 시작 · '+(n.min-cur.m)+'분 경과';
+    if(day.est) soft(); else tag.style.background='';
   }else{
     $('#nowTtl').textContent='아직 시작 전';
-    $('#nowMet').textContent='첫 일정 '+list0(day);
-    tag.style.background='rgba(255,255,255,.16)';
+    $('#nowMet').textContent='첫 일정 '+(list[0]?list[0].t:'—'); soft();
   }
   if(nxt){
     const dm=(+nxt.t.slice(0,2)*60 + +nxt.t.slice(3))-n.min;
     $('#nxtTtl').textContent=nxt.n;
-    $('#nxtMet').textContent=nxt.t+' · '+(dm>60?Math.floor(dm/60)+'시간 '+(dm%60)+'분':dm+'분')+' 남음'+(nxt.mvT?' · '+nxt.mvT:'');
+    $('#nxtMet').textContent=nxt.t+' · '+(dm>60?Math.floor(dm/60)+'시간 '+(dm%60)+'분':dm+'분')+' 남음'
+      +(nxt.leg?' · '+legShort(nxt.leg):'');
   }else{
     $('#nxtTtl').textContent=day&&day.stops.length?'오늘 일정 종료':'—';
     $('#nxtMet').textContent='';
   }
-  $$('.stop').forEach(el=>el.classList.toggle('live',cur&&el.dataset.t===cur.t&&el.dataset.day===n.key));
+  $$('.stop').forEach(el=>el.classList.toggle('live',!!cur&&el.dataset.t===cur.t&&el.dataset.day===n.key));
   $$('.st').forEach(el=>{
-    const p=PLACES.find(x=>x.id===el.dataset.pid); if(!p)return;
-    const st=openState(p,n); el.className='st '+st.s; el.textContent=st.s==='open'?'영업 중':st.s==='shut'?'닫힘':'확인 필요';
-    const hl=el.closest('.pl')?.querySelector('.hr'); if(hl) hl.textContent=hoursLine(p,n)+(st.s==='open'?' · '+st.txt.split('· ')[1]:'');
+    const p=P(el.dataset.pid); if(!p)return;
+    const st=openState(p,n);
+    el.className='st '+st.s;
+    el.textContent=st.s==='open'?'영업 중':st.s==='shut'?'닫힘':'확인 필요';
+    const hl=el.closest('.pl')?.querySelector('.hr');
+    if(hl) hl.textContent=hoursLine(p,n)+(st.s==='open'?' · '+st.txt:'');
   });
 }
-const list0=d=>d.stops[0].t;
+const legShort=l=>MODE[l.m]+' '+(l.min||0)+'분';
 
-/* ============ 렌더 ============ */
+/* ============ 일정 ============ */
 let curDay=0;
+const dayBtns=(cb)=>DAYS.map((d,i)=>
+  `<button aria-pressed="${i===curDay}" onclick="${cb}(${i})"><span class="d">${d.d}</span><span class="w">${d.w}</span></button>`).join('');
+
 function renderDays(){
-  $('#dayBar').innerHTML=DAYS.map((d,i)=>`<button aria-pressed="${i===curDay}" onclick="pickDay(${i})"><span class="d">${d.d}</span><span class="w">${d.w}</span></button>`).join('');
+  $('#dayBar').innerHTML=dayBtns('pickDay');
   const day=DAYS[curDay];
   $('#dayNote').textContent=day.note;
-  $('#tl').innerHTML=day.stops.length? day.stops.map(s=>{
-    const p=PLACES.find(x=>x.id===s.p);
+  $('#dayStay').innerHTML=day.stay&&day.stay!=='—'
+    ? `<div class="tiny mono" style="margin-top:8px">숙박 · ${esc(day.stay)}</div>`:'';
+  $('#tl').innerHTML=day.stops.map(s=>{
+    const p=s.p?P(s.p):null;
     return `<div class="stop" data-cat="${s.cat}" data-t="${s.t}" data-day="${day.d}">
-      <div class="hd"><span class="t mono">${s.t}</span><span class="n">${esc(s.n)}</span>${s.zh?`<span class="zh mono">${esc(s.zh)}</span>`:''}</div>
-      <div class="dsc">${esc(s.d)}</div>
-      ${s.mvT?`<div class="mv ${s.mv}"><i></i>${esc(s.mvT)}</div>`:''}
+      <div class="hd">
+        <span class="t mono${s.est?' est':''}">${s.est?'~':''}${s.t}</span>
+        <span class="n">${esc(s.n)}</span>${s.zh?`<span class="zh mono">${esc(s.zh)}</span>`:''}
+      </div>
+      ${s.d?`<div class="dsc">${esc(s.d)}</div>`:''}
+      ${s.leg?`<div class="mv ${s.leg.m==='walk'?'walk':s.leg.m==='taxi'?'taxi':'mrt'}"><i></i>${esc(legLine(s.leg))}</div>`:''}
+      ${s.opt?`<div class="dsc" style="color:var(--ink3);margin-top:6px">＋ ${esc(s.opt)}</div>`:''}
+      ${s.warn?`<div class="warn"><b>확인</b> ${esc(s.warn)}</div>`:''}
       ${p?`<br><a class="lk" href="${mapUrl(p)}" target="_blank" rel="noopener">지도 열기 →</a>`:''}
     </div>`;
-  }).join('') : `<div class="card muted">아직 채워지지 않았습니다. 방문할 로스터리가 정해지면 <span class="mono">DAYS</span> 배열에 추가하세요.</div>`;
+  }).join('');
   tickPID();
 }
 function pickDay(i){curDay=i;renderDays();}
 
-let filt='all',qs='';
+function legLine(l){
+  const bits=[MODE[l.m]];
+  if(l.from&&l.to) bits.push(l.from+' → '+l.to);
+  if(l.stops) bits.push(l.stops+'정거장');
+  if(l.min) bits.push(l.min+'분');
+  if(l.walk) bits.push('도보 '+l.walk+'분');
+  if(l.dist) bits.push(l.dist+(l.m==='walk'?'m':'km'));
+  if(l.fare) bits.push(l.fare+' TWD');
+  return bits.join(' · ');
+}
+
+/* ============ 동선 ============ */
+let rDay=0;
+function renderRoute(){
+  $('#rDayBar').innerHTML=DAYS.map((d,i)=>
+    `<button aria-pressed="${i===rDay}" onclick="pickRDay(${i})"><span class="d">${d.d}</span><span class="w">${d.w}</span></button>`).join('');
+  const day=DAYS[rDay];
+  $('#rNote').textContent=day.est?'표시된 시각과 소요 시간은 추정치입니다. 패키지 확정 시각표로 대조하세요.':'실측 기준 동선입니다. 이동 전 지도 앱에서 재확인하세요.';
+
+  const pts=day.stops.map((s,i)=>{
+    const p=s.p?P(s.p):null;
+    if(!p||!p.ll||p.nomap) return null;
+    const [la,ln]=p.ll.split(',').map(Number);
+    return {la,ln,s,i,nm:s.n,mode:s.leg?s.leg.m:null};
+  }).filter(Boolean);
+
+  $('#rMap').innerHTML=mapSvg(pts,day);
+  $('#rSum').innerHTML=sumHtml(day);
+
+  const legs=day.stops.filter(s=>s.leg);
+  $('#rLegs').innerHTML=legs.length? legs.map((s,i)=>{
+    const prev=day.stops[day.stops.indexOf(s)-1];
+    const l=s.leg;
+    return `<div class="lg">
+      <div class="ic ${l.m}">${MODE[l.m]}</div>
+      <div class="bd">
+        <div class="r">${esc(prev?prev.n:'출발')} → ${esc(s.n)}</div>
+        <div class="d">${l.line?`<span class="mrtl ${l.line}">${l.line}</span>`:''}${esc(legLine(l))}</div>
+        ${l.note?`<div class="d" style="color:var(--ink3)">${esc(l.note)}</div>`:''}
+        ${l.alt?`<div class="alt">대안 · ${esc(l.alt)}</div>`:''}
+      </div></div>`;
+  }).join('') : `<div class="card muted">이동 구간이 아직 정리되지 않았습니다.</div>`;
+
+  const withLL=day.stops.map(s=>s.p?P(s.p):null).filter(p=>p&&p.ll&&!p.nomap);
+  $('#rLink').innerHTML=withLL.length>=2? (()=>{
+    const ll=withLL.map(p=>p.ll);
+    const cut=ll.length>10;
+    const use=cut?ll.slice(0,10):ll;
+    const u='https://www.google.com/maps/dir/?api=1&travelmode=transit&origin='+use[0]
+      +'&destination='+use[use.length-1]
+      +(use.length>2?'&waypoints='+use.slice(1,-1).join('|'):'');
+    return `<a class="lk" style="display:inline-block;margin-top:16px" href="${u}" target="_blank" rel="noopener">이 날 동선 전체를 구글 지도에서 열기 →</a>
+      ${cut?`<div class="tiny" style="margin-top:6px">구글 지도 경유지 제한으로 앞 10개 지점만 포함됩니다.</div>`:''}`;
+  })() : '';
+  tickPID();
+}
+function pickRDay(i){rDay=i;renderRoute();}
+
+function mapSvg(pts,day){
+  const skipped=day.stops.filter(s=>s.p&&(!P(s.p)||!P(s.p).ll||P(s.p).nomap)).length;
+  const note=skipped?`<div class="tiny" style="margin-top:8px">좌표가 확인되지 않았거나 지도 범위를 벗어난 지점 ${skipped}곳은 표시하지 않았습니다.</div>`:'';
+  if(pts.length<2) return `<div class="card muted" style="margin-top:12px">이 날은 좌표가 확인된 지점이 ${pts.length}곳뿐이라 동선 지도를 그릴 수 없습니다. 주소가 확정되면 자동으로 표시됩니다.</div>${note}`;
+
+  const W=600,PADX=34,PADY=30;
+  const mlat=pts.reduce((a,p)=>a+p.la,0)/pts.length;
+  const kx=Math.cos(mlat*Math.PI/180);
+  const xs=pts.map(p=>p.ln*kx), ys=pts.map(p=>-p.la);
+  const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  const dx=Math.max(x1-x0,1e-5), dy=Math.max(y1-y0,1e-5);
+  const iw=W-PADX*2;
+  let H=Math.round(iw*(dy/dx))+PADY*2;
+  H=Math.max(280,Math.min(H,520));
+  const ih=H-PADY*2;
+  const sc=Math.min(iw/dx,ih/dy);
+  const ox=PADX+(iw-dx*sc)/2, oy=PADY+(ih-dy*sc)/2;
+  const X=p=>ox+(p.ln*kx-x0)*sc, Y=p=>oy+(-p.la-y0)*sc;
+
+  // 가까운 지점끼리 겹쳐 가려지지 않도록 최소 간격만큼 밀어냅니다(위치가 약간 왜곡됨).
+  const pos=pts.map(p=>({x:X(p),y:Y(p)}));
+  const SEP=25;
+  let nudged=false;
+  for(let it=0;it<80;it++){
+    let moved=false;
+    for(let i=0;i<pos.length;i++) for(let j=i+1;j<pos.length;j++){
+      let ax=pos[j].x-pos[i].x, ay=pos[j].y-pos[i].y, d=Math.hypot(ax,ay);
+      if(d>=SEP) continue;
+      if(d<1e-3){ ax=Math.cos(i*2.399); ay=Math.sin(i*2.399); d=1; }
+      const k=(SEP-d)/2/d;
+      pos[i].x-=ax*k; pos[i].y-=ay*k; pos[j].x+=ax*k; pos[j].y+=ay*k;
+      moved=true; nudged=true;
+    }
+    if(!moved) break;
+  }
+  pos.forEach(q=>{ q.x=Math.max(16,Math.min(W-16,q.x)); q.y=Math.max(20,Math.min(H-26,q.y)); });
+
+  const COL={walk:'var(--g)',mrt:'var(--bl)',taxi:'var(--o)',arex:'var(--br)',air:'var(--r)',bus:'var(--ink3)'};
+  let seg='';
+  for(let i=1;i<pts.length;i++){
+    const a=pos[i-1],b=pos[i],m=pts[i].mode||'walk';
+    seg+=`<line x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}"
+      stroke="${COL[m]||'var(--ink3)'}" stroke-width="3" stroke-linecap="round"
+      ${m==='walk'?'stroke-dasharray="1 6"':''} opacity=".85"/>`;
+  }
+  const nodes=pos.map((q,i)=>{
+    const x=q.x.toFixed(1),y=q.y.toFixed(1);
+    return `<circle cx="${x}" cy="${y}" r="11" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/>
+      <text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central"
+        font-family="ui-monospace,monospace" font-size="11" font-weight="600" fill="var(--ink)">${i+1}</text>`;
+  }).join('');
+
+  // 축척 막대 — 1도 경도 ≈ 111.32km * cos(lat)
+  const kmPerUnit=111.32/sc;
+  const nice=[0.2,0.5,1,2,5][ [0.2,0.5,1,2,5].findIndex(v=>v/kmPerUnit>60) ] || 5;
+  const barPx=nice/kmPerUnit;
+
+  const grid=[...Array(5)].map((_,i)=>{
+    const gy=PADY+ih*i/4;
+    return `<line x1="10" y1="${gy.toFixed(1)}" x2="${W-10}" y2="${gy.toFixed(1)}" stroke="var(--line)" stroke-width=".5" opacity=".5"/>`;
+  }).join('');
+
+  const legend=pts.map((p,i)=>`<span style="white-space:nowrap"><b class="mono">${i+1}</b> ${esc(p.nm)}</span>`).join('　');
+
+  return `<div class="rt">
+    <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(day.d)} 이동 동선 지도">
+      ${grid}
+      <g transform="translate(${W-46},26)">
+        <path d="M0,-13 L5,6 L0,1 L-5,6 Z" fill="var(--ink3)"/>
+        <text x="0" y="19" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="var(--ink3)">N</text>
+      </g>
+      ${seg}${nodes}
+      <g transform="translate(14,${H-16})">
+        <line x1="0" y1="0" x2="${barPx.toFixed(1)}" y2="0" stroke="var(--ink3)" stroke-width="1.5"/>
+        <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--ink3)" stroke-width="1.5"/>
+        <line x1="${barPx.toFixed(1)}" y1="-4" x2="${barPx.toFixed(1)}" y2="4" stroke="var(--ink3)" stroke-width="1.5"/>
+        <text x="${(barPx/2).toFixed(1)}" y="-8" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="var(--ink3)">${nice} km</text>
+      </g>
+    </svg>
+    <div class="rtlg">
+      <span><i style="background:var(--bl)"></i>MRT</span>
+      <span><i style="background:var(--g)"></i>도보</span>
+      <span><i style="background:var(--o)"></i>택시</span>
+      <span><i style="background:var(--br)"></i>공항선</span>
+    </div>
+    <div class="tiny" style="margin-top:9px;line-height:1.9">${legend}</div>
+    ${nudged?`<div class="tiny" style="margin-top:7px;opacity:.75">가까이 붙은 지점은 번호가 겹치지 않도록 조금 벌려 그렸습니다. 실제 거리는 축척 막대와 구간별 이동을 보세요.</div>`:''}
+  </div>${note}`;
+}
+
+function sumHtml(day){
+  // 항공은 지상 이동 합계에서 제외
+  const L=day.stops.filter(s=>s.leg).map(s=>s.leg).filter(l=>l.m!=='air');
+  const tot=L.reduce((a,l)=>a+(l.min||0)+(l.walk||0),0);
+  const mrt=L.filter(l=>l.m==='mrt'||l.m==='arex').reduce((a,l)=>a+(l.fare||0),0);
+  const taxi=L.filter(l=>l.m==='taxi').reduce((a,l)=>a+(l.fare||0),0);
+  const walk=L.reduce((a,l)=>a+(l.m==='walk'?(l.min||0):(l.walk||0)),0);
+  const t=m=>m>=60?(Math.floor(m/60)+'시간'+(m%60?' '+(m%60)+'분':'')):m+'분';
+  return `<div class="sum">
+    <div><div class="v">${t(tot)}</div><div class="k">지상 이동 합계</div></div>
+    <div><div class="v">${mrt}</div><div class="k">MRT · 공항선 TWD</div></div>
+    <div><div class="v">${taxi}</div><div class="k">택시 TWD (추정)</div></div>
+    <div><div class="v">${t(walk)}</div><div class="k">도보</div></div>
+  </div>`;
+}
+
+/* ============ 장소 ============ */
+let filt='all',qs='',onlySch=false;
 function renderPlaces(){
   const n=taipeiNow();
   $('#fl').innerHTML=['all',...Object.keys(CATS)].map(k=>
-    `<button aria-pressed="${filt===k}" onclick="setFilt('${k}')">${k==='all'?'전체':CATS[k]}</button>`).join('');
-  const rows=PLACES.filter(p=>(filt==='all'||p.cat===filt)&&
-    (!qs||(p.nm+p.zh+p.area+(p.addr||'')).toLowerCase().includes(qs)));
+    `<button aria-pressed="${filt===k}" onclick="setFilt('${k}')">${k==='all'?'전체':CATS[k]}</button>`).join('')
+    +`<button class="tgl" aria-pressed="${onlySch}" onclick="toggleSch()">일정 포함만</button>`;
+  const rows=PLACES.filter(p=>(filt==='all'||p.cat===filt)&&(!onlySch||p.sch)&&
+    (!qs||(p.nm+p.zh+p.area+(p.addr||'')+p.tip).toLowerCase().includes(qs)));
   $('#plist').innerHTML=rows.length? rows.map(p=>`
     <div class="pl" data-cat="${p.cat}">
       <div class="r1"><span class="nm">${esc(p.nm)}</span>${p.zh?`<span class="zh">${esc(p.zh)}</span>`:''}<span class="st unk" data-pid="${p.id}">—</span></div>
       <div class="hr mono"></div>
-      ${p.addr?`<div class="tiny mono" style="margin-top:3px">${esc(p.addr)} · ${esc(p.area)}</div>`:`<div class="tiny mono" style="margin-top:3px">${esc(p.area)}</div>`}
+      <div class="tiny mono" style="margin-top:3px">${p.addr?esc(p.addr)+' · ':''}${esc(p.area)}${p.sch?' · 일정 포함':''}</div>
+      ${galHtml(p)}
       <div class="tp">${esc(p.tip)}</div>
       <div class="acts">
         <a href="${mapUrl(p)}" target="_blank" rel="noopener">지도</a>
+        <a href="${photosUrl(p)}" target="_blank" rel="noopener">사진</a>
         ${p.zh?`<button onclick="copyTxt('${esc(p.zh)}',this)">한자 복사</button>`:''}
         ${p.addr?`<button onclick="copyTxt('${esc(p.addr)}',this)">주소 복사</button>`:''}
       </div>
-    </div>`).join('') : `<div class="card muted">일치하는 장소가 없습니다. 검색어를 줄여보세요.</div>`;
+    </div>`).join('') : `<div class="card muted">일치하는 장소가 없습니다. 검색어나 필터를 줄여보세요.</div>`;
   tickPID();
 }
 function setFilt(k){filt=k;renderPlaces();}
+function toggleSch(){onlySch=!onlySch;renderPlaces();}
 function copyTxt(t,btn){
   navigator.clipboard?.writeText(t).then(()=>{const o=btn.textContent;btn.textContent='복사됨';setTimeout(()=>btn.textContent=o,1400);})
   .catch(()=>{btn.textContent='복사 실패';});
 }
 
+/* ============ 필담 ============ */
+const TALKFLAT=[];
+TALK.forEach(g=>g.items.forEach(it=>TALKFLAT.push({k:g.k,g:g.g,zh:it[0],py:it[1],ko:it[2]})));
+let tfilt='all',tqs='';
 function renderTalk(){
-  $('#phWrap').innerHTML=PHRASES.map((p,i)=>
-    `<button class="ph" onclick="openBig(${i})"><div class="zh">${esc(p.zh)}</div><div class="ko">${esc(p.ko)}</div></button>`).join('');
+  $('#tfl').innerHTML=['all',...TALK.map(g=>g.k)].map(k=>
+    `<button aria-pressed="${tfilt===k}" onclick="setTFilt('${k}')">${k==='all'?'전체':esc(TALK.find(g=>g.k===k).g)}</button>`).join('');
+  const rows=TALKFLAT.map((x,i)=>({...x,i})).filter(x=>
+    (tfilt==='all'||x.k===tfilt) && (!tqs||(x.zh+x.py+x.ko).toLowerCase().includes(tqs)));
+  if(!rows.length){ $('#phWrap').innerHTML=`<div class="card muted">일치하는 문장이 없습니다.</div>`; return; }
+  let out='',last='';
+  rows.forEach(x=>{
+    if(x.g!==last){ out+=`<div class="gsec">${esc(x.g)}</div>`; last=x.g; }
+    out+=`<button class="ph" onclick="openBig(${x.i})">
+      <div class="zh">${esc(x.zh)}</div>
+      <div class="py mono">${esc(x.py)}</div>
+      <div class="ko">${esc(x.ko)}</div></button>`;
+  });
+  $('#phWrap').innerHTML=out;
 }
-function openBig(i){$('#bigZh').textContent=PHRASES[i].zh;$('#bigKo').textContent=PHRASES[i].ko;$('#big').classList.add('on');}
+function setTFilt(k){tfilt=k;renderTalk();}
+function openBig(i){
+  const x=TALKFLAT[i];
+  $('#bigZh').textContent=x.zh; $('#bigPy').textContent=x.py; $('#bigKo').textContent=x.ko;
+  $('#big').classList.add('on');
+}
 function closeBig(){$('#big').classList.remove('on');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBig();});
 
+/* ============ 실전 · 긴급 ============ */
 function renderInfo(){
   $('#infoWrap').innerHTML=INFO.map(x=>`<details><summary>${esc(x.t)}</summary><div class="bd">${x.b}</div></details>`).join('');
   let saved={};
@@ -581,8 +1464,22 @@ $$('.tabs button').forEach(b=>b.addEventListener('click',()=>{
   window.scrollTo({top:0,behavior:'instant'});
 }));
 $('#q').addEventListener('input',e=>{qs=e.target.value.trim().toLowerCase();renderPlaces();});
+$('#tq').addEventListener('input',e=>{tqs=e.target.value.trim().toLowerCase();renderTalk();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){ closeBig(); lbClose(); }
+  if($('#lb').classList.contains('on')){
+    if(e.key==='ArrowLeft') lbGo(-1);
+    if(e.key==='ArrowRight') lbGo(1);
+  }
+});
 
-renderDays();renderPlaces();renderTalk();renderInfo();renderSos();
+/* ============ 시작 ============ */
+(function(){
+  const n=taipeiNow();
+  const i=DAYS.findIndex(d=>d.d===n.key);
+  if(i>=0){ curDay=i; rDay=i; }
+})();
+renderDays();renderRoute();renderPlaces();renderTalk();renderInfo();renderSos();
 tickPID();setInterval(tickPID,1000);
 </script>
 </body>
