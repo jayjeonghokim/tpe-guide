@@ -2,13 +2,18 @@
 """index.html 의 PHOTOS 블록을 만들고 검증하는 보조 스크립트.
 
 파이썬 표준 라이브러리만 씁니다. 사이트 빌드와는 무관하고, 손으로 돌리는 도구입니다.
-Wikimedia 에 나가는 네트워크가 열린 곳(=보통 본인 노트북)에서 실행하세요.
+Wikimedia 에 나가는 네트워크가 열린 곳에서 실행하세요. 저장소를 클론할 필요는 없습니다 —
+이 파일 하나만 받으면 됩니다:
+
+  curl -sSLO https://raw.githubusercontent.com/jayjeonghokim/tpe-guide/main/tools/commons-photos.py
+  python3 commons-photos.py search "赤峰街 Taipei"
 
   ./tools/commons-photos.py search "赤峰街 Taipei"      후보 파일 찾기
   ./tools/commons-photos.py show File:Foo.jpg            캡션·촬영자·라이선스 확인
   ./tools/commons-photos.py entry zhongshan File:Foo.jpg File:Bar.jpg
                                                          index.html 에 붙여넣을 JS 출력
   ./tools/commons-photos.py check                        PHOTOS 안의 모든 URL 이 200 인지 검사
+                                                         (클론 없이 돌리면 라이브 사이트를 받아서 검사)
 
 CLAUDE.md 의 사진 규칙을 그대로 강제합니다.
  - Wikimedia Commons 자유 라이선스만
@@ -17,6 +22,7 @@ CLAUDE.md 의 사진 규칙을 그대로 강제합니다.
  - 출력 전에 실제 URL 이 200 인지 확인
 """
 import json
+import os
 import re
 import sys
 import urllib.parse
@@ -119,8 +125,25 @@ def cmd_entry(args):
     print(" %s:[\n%s\n ]," % (pid, "\n".join(rows)))
 
 
-def cmd_check(_args):
-    src = open("index.html", encoding="utf-8").read()
+LIVE = "https://jayjeonghokim.github.io/tpe-guide/"
+
+
+def cmd_check(args):
+    """index.html 안의 Wikimedia URL 이 전부 200 인지 검사.
+
+    인자로 로컬 경로나 URL 을 줄 수 있습니다. 아무것도 안 주면 현재 폴더의
+    index.html 을 보고, 그것도 없으면 라이브 사이트를 내려받아 검사합니다.
+    (저장소를 클론하지 않았을 때 이 경로로 떨어집니다.)
+    """
+    target = args[0] if args else ("index.html" if os.path.exists("index.html") else LIVE)
+    if target.startswith(("http://", "https://")):
+        print("대상: " + target)
+        req = urllib.request.Request(target, headers={"User-Agent": UA})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            src = r.read().decode("utf-8")
+    else:
+        print("대상: " + target)
+        src = open(target, encoding="utf-8").read()
     urls = re.findall(r'[ts]:"(https://upload\.wikimedia\.org[^"]+)"', src)
     bad = [u for u in urls if not head_ok(u)]
     print("검사 %d개 · 실패 %d개" % (len(urls), len(bad)))

@@ -126,6 +126,14 @@ node --check /tmp/b.js
 ./tools/commons-photos.py check          # 커밋 전 전체 URL 200 확인
 ```
 
+클론 없이 쓸 수도 있습니다. 파일 하나만 받으면 되고, `check` 는 인자가 없고 로컬에
+`index.html` 도 없으면 라이브 사이트를 받아서 검사합니다.
+
+```bash
+curl -sSLO https://raw.githubusercontent.com/jayjeonghokim/tpe-guide/main/tools/commons-photos.py
+python3 commons-photos.py check
+```
+
 메타데이터 직접 조회:
 ```bash
 curl -sS -A "tpe-guide/1.0 (연락처)" \
