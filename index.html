@@ -1078,10 +1078,12 @@ function taipeiNow(){
   return {mo:+g('month'),d:+g('day'),h:+g('hour')%24,mi:+g('minute'),s:+g('second'),wd,
           min:(+g('hour')%24)*60+ +g('minute'), key:g('month')+'.'+g('day')};
 }
+const isAllDay=t=>!!t&&t.length===1&&t[0][0]===0&&t[0][1]>=1440;
 function openState(p,n){
   if(!p.hours) return {s:'unk',txt:'시간 확인 필요'};
   const today=p.hours[n.wd], prev=p.hours[(n.wd+6)%7];
-  if(prev) for(const[,b] of prev) if(b>1440 && n.min<b-1440) return {s:'open',txt:hm(b)+' 마감'};
+  if(isAllDay(today)) return {s:'open',txt:''};
+  if(prev&&!isAllDay(prev)) for(const[,b] of prev) if(b>1440 && n.min<b-1440) return {s:'open',txt:hm(b)+' 마감'};
   if(!today) return {s:'shut',txt:'오늘 휴무'};
   for(const[a,b] of today) if(n.min>=a&&n.min<Math.min(b,1440)) return {s:'open',txt:hm(b)+' 마감'};
   for(const[a] of today) if(n.min<a) return {s:'shut',txt:hm(a)+' 오픈'};
@@ -1091,6 +1093,7 @@ function hoursLine(p,n){
   if(!p.hours) return '영업시간 미확인';
   const t=p.hours[n.wd];
   if(!t) return '오늘 휴무';
+  if(isAllDay(t)) return '24시간 · 상시';
   return '오늘 '+t.map(([a,b])=>hm(a)+'–'+hm(b)).join(', ');
 }
 function mapUrl(p){
@@ -1180,9 +1183,9 @@ function tickPID(){
     const p=P(el.dataset.pid); if(!p)return;
     const st=openState(p,n);
     el.className='st '+st.s;
-    el.textContent=st.s==='open'?'영업 중':st.s==='shut'?'닫힘':'확인 필요';
+    el.textContent=st.s==='open'?(p.cat==='move'||p.cat==='base'?'운영 중':'영업 중'):st.s==='shut'?'닫힘':'확인 필요';
     const hl=el.closest('.pl')?.querySelector('.hr');
-    if(hl) hl.textContent=hoursLine(p,n)+(st.s==='open'?' · '+st.txt:'');
+    if(hl) hl.textContent=hoursLine(p,n)+(st.s==='open'&&st.txt?' · '+st.txt:'');
   });
 }
 const legShort=l=>MODE[l.m]+' '+(l.min||0)+'분';
