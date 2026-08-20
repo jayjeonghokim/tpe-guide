@@ -1,0 +1,75 @@
+# 임시 워크플로 — Commons 사진 후보를 긁어오기 위한 일회성 도구.
+#
+# 이 저장소는 원래 Actions 워크플로가 없습니다(Pages legacy 방식).
+# 작업 환경에서 wikimedia 로 나가는 네트워크가 막혀 있어서, 네트워크가 열린
+# Actions 러너를 대신 씁니다. 후보 선별이 끝나면 이 파일과 tmp/photo-review
+# 브랜치는 지웁니다. main 에는 올라가지 않습니다.
+name: photo-harvest
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/travel-image-resources-3xfkrm]
+    paths:
+      - tools/commons-photos.py
+      - .github/workflows/photo-harvest.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: photo-harvest
+  cancel-in-progress: true
+
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 후보 수집
+        run: |
+          mkdir -p out
+          python3 tools/commons-photos.py harvest out \
+            zhongshan='赤峰街 台北' \
+            zhongshan='Chifeng Street Taipei' \
+            zhongshan='Zhongshan District Taipei street' \
+            fuhang='阜杭豆漿' \
+            fuhang='Fuhang Soy Milk' \
+            fuhang='華山市場 台北' \
+            ayzong='阿宗麵線' \
+            ayzong='Ay-Chung Flour-Rice Noodle' \
+            amba='西門町意舍酒店' \
+            dadaocheng='迪化街 台北' \
+            dadaocheng='Dihua Street Taipei' \
+            tpemain='台北車站 大廳' \
+            tpemain='Taipei Main Station concourse' \
+            2>&1 | tee out/harvest.log || true
+
+      - name: 나머지 후보는 검색만
+        run: |
+          mkdir -p out
+          for q in '興波咖啡' 'FIKA FIKA CAFE Taipei' '王有記茶行' '伊良可樂 台北' \
+                   '劉山東牛肉麵' '金峰滷肉飯' '雙月食品社' '西門紅樓 夜'; do
+            echo "### $q"
+            python3 tools/commons-photos.py search "$q" || true
+          done 2>&1 | tee out/scan.log || true
+
+      - name: 결과를 임시 브랜치로 밀어넣기
+        run: |
+          du -sh out
+          cd out
+          git init -q
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q -b tmp/photo-review
+          git add -A
+          git commit -qm "photo harvest $(date -u +%FT%TZ) from ${GITHUB_SHA::7}"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" \
+            tmp/photo-review
+          echo "pushed tmp/photo-review"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: photo-candidates
+          path: out

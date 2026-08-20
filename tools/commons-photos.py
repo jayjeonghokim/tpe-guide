@@ -14,6 +14,9 @@ Wikimedia 에 나가는 네트워크가 열린 곳에서 실행하세요. 저장
                                                          index.html 에 붙여넣을 JS 출력
   ./tools/commons-photos.py check                        PHOTOS 안의 모든 URL 이 200 인지 검사
                                                          (클론 없이 돌리면 라이브 사이트를 받아서 검사)
+  ./tools/commons-photos.py harvest out/ zhongshan="赤峰街 台北" ...
+                                                         검색 + 메타데이터 + 썸네일 다운로드를
+                                                         한 번에. 사람이 눈으로 고르라고 만든 모드.
 
 CLAUDE.md 의 사진 규칙을 그대로 강제합니다.
  - Wikimedia Commons 자유 라이선스만
@@ -125,6 +128,99 @@ def cmd_entry(args):
     print(" %s:[\n%s\n ]," % (pid, "\n".join(rows)))
 
 
+PER_PLACE = 8  # 장소당 내려받을 후보 수. 눈으로 넘겨볼 수 있는 정도로.
+
+
+def safe(s):
+    return re.sub(r"[^A-Za-z0-9._-]+", "_", s)[:80]
+
+
+def cmd_harvest(args):
+    """검색 → 메타데이터 → 썸네일 다운로드를 한 번에.
+
+        harvest <outdir> <placeId>="<질의어>" [<placeId>="<질의어>" ...]
+
+    같은 placeId 를 여러 번 줘도 됩니다 — 질의어별 결과를 합치고 중복은 제거합니다.
+    outdir/<placeId>/NN-<파일명>.jpg 로 썸네일을 받고, outdir/manifest.json 에
+    캡션·촬영자·라이선스·종횡비를 적습니다. 고르는 건 사람이 합니다.
+    """
+    if len(args) < 2:
+        raise SystemExit('사용법: harvest <outdir> <placeId>="<질의어>" [...]')
+    outdir, pairs = args[0], args[1:]
+
+    queries = {}
+    for pair in pairs:
+        if "=" not in pair:
+            raise SystemExit("placeId=질의어 형식이어야 합니다: " + pair)
+        pid, q = pair.split("=", 1)
+        queries.setdefault(pid, []).append(q)
+
+    manifest = {}
+    for pid, qs in queries.items():
+        titles, seen = [], set()
+        for q in qs:
+            try:
+                d = api(action="query", list="search", srsearch=q,
+                        srnamespace="6", srlimit="15")
+            except Exception as e:
+                print("  검색 실패 [%s] %s: %s" % (pid, q, e))
+                continue
+            for hit in d.get("query", {}).get("search", []):
+                t = hit["title"]
+                if t.lower().endswith((".jpg", ".jpeg", ".png")) and t not in seen:
+                    seen.add(t)
+                    titles.append(t)
+
+        print("\n=== %s === 질의 %s · 후보 %d개" % (pid, qs, len(titles)))
+        rows = []
+        for t in titles:
+            if len(rows) >= PER_PLACE:
+                break
+            try:
+                x = info(t)
+            except Exception as e:
+                print("  건너뜀 %s (%s)" % (t, e))
+                continue
+            if not x["c"]:
+                print("  건너뜀 %s — ImageDescription 비어 있음" % t)
+                continue
+            if not (head_ok(x["t"]) and head_ok(x["s"])):
+                print("  건너뜀 %s — URL 이 200 이 아님" % t)
+                continue
+            n = len(rows)
+            rel = "%s/%02d-%s" % (pid, n, safe(t[5:]))
+            path = os.path.join(outdir, rel)
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            try:
+                req = urllib.request.Request(x["t"], headers={"User-Agent": UA})
+                with urllib.request.urlopen(req, timeout=60) as r, open(path, "wb") as f:
+                    f.write(r.read())
+            except Exception as e:
+                print("  건너뜀 %s — 썸네일 다운로드 실패 (%s)" % (t, e))
+                continue
+            x["file"] = rel
+            rows.append(x)
+            print("  [%02d] %s\n       %s\n       %s · %s · r=%.3f"
+                  % (n, t, x["c"][:110], x["by"], x["l"], x["r"]))
+        manifest[pid] = rows
+
+    os.makedirs(outdir, exist_ok=True)
+    with open(os.path.join(outdir, "manifest.json"), "w", encoding="utf-8") as f:
+        json.dump(manifest, f, ensure_ascii=False, indent=1)
+
+    print("\n\n===== 붙여넣기용 초안 (고르기 전) =====")
+    for pid, rows in manifest.items():
+        if not rows:
+            continue
+        print(" %s:[" % pid)
+        for x in rows:
+            print(js(x) + "   // " + x["file"])
+        print(" ],")
+    print("\n총 %d개 장소 · 사진 %d장 내려받음"
+          % (len(manifest), sum(len(v) for v in manifest.values())))
+    return 0
+
+
 LIVE = "https://jayjeonghokim.github.io/tpe-guide/"
 
 
@@ -152,7 +248,8 @@ def cmd_check(args):
     return 1 if bad else 0
 
 
-CMDS = {"search": cmd_search, "show": cmd_show, "entry": cmd_entry, "check": cmd_check}
+CMDS = {"search": cmd_search, "show": cmd_show, "entry": cmd_entry,
+        "check": cmd_check, "harvest": cmd_harvest}
 
 if __name__ == "__main__":
     if len(sys.argv) < 2 or sys.argv[1] not in CMDS:
