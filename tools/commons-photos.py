@@ -281,11 +281,26 @@ def cmd_check(args):
         print("대상: " + target)
         src = open(target, encoding="utf-8").read()
     urls = re.findall(r'[ts]:"(https://upload\.wikimedia\.org[^"]+)"', src)
-    bad = [u for u in urls if not head_ok(u)]
+    bad = []
+    for u in urls:
+        # 대량 검사라 넉넉히 재시도한다. 여기서 429 를 404 로 오해하면
+        # 멀쩡한 사진을 지우게 된다.
+        err = check_url(u, tries=6)
+        if err:
+            bad.append((u, err))
     print("검사 %d개 · 실패 %d개" % (len(urls), len(bad)))
-    for u in bad:
-        print("  X " + u)
-    return 1 if bad else 0
+    by_reason = {}
+    for u, err in bad:
+        by_reason.setdefault(err, []).append(u)
+    for err in sorted(by_reason):
+        print("\n  [%s] %d개" % (err, len(by_reason[err])))
+        for u in by_reason[err]:
+            print("    " + u)
+    # 429/503 는 우리 쪽 사정이라 실패로 치지 않는다. 진짜 깨진 링크만 exit 1.
+    real = [u for u, e in bad if not e.startswith(("HTTP 429", "HTTP 503"))]
+    if bad and not real:
+        print("\n전부 레이트리밋(429/503)이라 깨진 링크로 보지 않습니다.")
+    return 1 if real else 0
 
 
 CMDS = {"search": cmd_search, "show": cmd_show, "entry": cmd_entry,
