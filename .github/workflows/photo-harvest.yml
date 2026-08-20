@@ -13,6 +13,7 @@ on:
     paths:
       - tools/commons-photos.py
       - .github/workflows/photo-harvest.yml
+      - index.html
 
 permissions:
   contents: write
@@ -71,6 +72,9 @@ jobs:
           git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" \
             tmp/photo-review
           echo "pushed tmp/photo-review"
+
+      - name: index.html 의 모든 사진 URL 이 200 인지 검사
+        run: python3 tools/commons-photos.py check index.html
 
       - uses: actions/upload-artifact@v4
         with:
