@@ -98,7 +98,12 @@ h1,h2,h3{font-weight:600;letter-spacing:-.01em;margin:0}
 .stop .mv{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:7px}
 .mv i{width:16px;height:2px;display:inline-block;border-radius:1px}
 .mv.walk i{background:var(--g)} .mv.mrt i{background:var(--bl)} .mv.taxi i{background:var(--o)}
-.stop .lk{display:inline-block;font-family:var(--mono);font-size:11px;margin-top:7px;color:var(--bl);text-decoration:none;border-bottom:1px solid currentColor}
+.stop .lk{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--bl);text-decoration:none;border-bottom:1px solid currentColor}
+.stop .lks{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:9px}
+.stop .thumbs{display:flex;gap:5px;overflow-x:auto;margin:9px 0 0;scrollbar-width:none}
+.stop .thumbs::-webkit-scrollbar{display:none}
+.stop .thumbs button{flex:none;padding:0;border:0;border-radius:6px;overflow:hidden;background:var(--sunk);height:64px;line-height:0}
+.stop .thumbs img{height:64px;width:auto;max-width:130px;display:block;object-fit:cover;background:var(--sunk)}
 
 /* ---- place cards ---- */
 .tools{display:flex;gap:8px;margin-bottom:12px}
@@ -1103,6 +1108,19 @@ function mapUrl(p){
 function photosUrl(p){
   return p.pid? 'https://search.google.com/local/photos?placeid='+p.pid : mapUrl(p);
 }
+/* 이미지 검색용 질의어 — 중국어 상호가 있으면 그게 가장 정확하다.
+   단, '芏' 같은 한 글자 상호는 너무 흔해서 로마자 이름을 쓴다. */
+function imgKey(p){
+  return (p.zh&&p.zh.length>=2)? p.zh+' 台北' : p.nm+' Taipei';
+}
+function imgUrl(p){
+  return 'https://www.google.com/search?tbm=isch&q='+encodeURIComponent(imgKey(p));
+}
+function igUrl(p){
+  return 'https://www.instagram.com/explore/search/keyword/?q='+encodeURIComponent(imgKey(p));
+}
+/* 인스타는 식당·카페·바에서만 의미가 있다. 임시 휴무나 그날 메뉴가 거기 올라온다. */
+function hasIg(p){ return p.cat==='food'||p.cat==='cafe'||p.cat==='bar'; }
 
 /* ============ 사진 ============ */
 function galHtml(p){
@@ -1110,11 +1128,24 @@ function galHtml(p){
   const tiles=arr.map((x,i)=>
     `<button onclick="lbOpen('${p.id}',${i})" aria-label="${esc(x.c||p.nm)}">
       <img loading="lazy" decoding="async" src="${x.t}" width="${Math.round(112*x.r)}" height="112" alt="${esc(x.c||p.nm)}"></button>`).join('');
-  const more=`<a class="more" href="${photosUrl(p)}" target="_blank" rel="noopener"><b>↗</b>구글<br>사진</a>`;
+  const more=(u,a,b)=>`<a class="more" href="${u}" target="_blank" rel="noopener"><b>↗</b>${a}<br>${b}</a>`;
+  // pid 가 없으면 사진 갤러리로 바로 못 가고 지도 검색 결과로 떨어진다. 라벨을 그에 맞춘다.
+  let links=more(photosUrl(p),p.pid?'구글':'지도','사진')+more(imgUrl(p),'이미지','검색');
+  if(hasIg(p)) links+=more(igUrl(p),'인스타','그램');
   const note=arr.length
     ? `<div class="galn">사진 ${arr.length}장 · Wikimedia Commons · 탭하면 원본 설명과 출처가 나옵니다</div>`
-    : `<div class="galn">자유 라이선스 사진 없음 · 구글 지도에서 확인</div>`;
-  return `<div class="gal">${tiles}${more}</div>${note}`;
+    : `<div class="galn">자유 라이선스 사진 없음 · 위 링크에서 실물 사진을 확인하세요</div>`;
+  return `<div class="gal">${tiles}${links}</div>${note}`;
+}
+
+/* 일정 타임라인용 축소 미리보기 — 자유 라이선스 사진이 있는 곳만.
+   탭하면 장소 탭과 같은 라이트박스가 열린다. */
+function thumbHtml(p){
+  const arr=(PHOTOS[p.id]||[]).slice(0,3);
+  if(!arr.length) return '';
+  return `<div class="thumbs">`+arr.map((x,i)=>
+    `<button onclick="lbOpen('${p.id}',${i})" aria-label="${esc(x.c||p.nm)}">
+      <img loading="lazy" decoding="async" src="${x.t}" width="${Math.round(64*x.r)}" height="64" alt="${esc(x.c||p.nm)}"></button>`).join('')+`</div>`;
 }
 
 let lbList=[],lbIdx=0,lbPlace='';
@@ -1212,7 +1243,8 @@ function renderDays(){
       ${s.leg?`<div class="mv ${s.leg.m==='walk'?'walk':s.leg.m==='taxi'?'taxi':'mrt'}"><i></i>${esc(legLine(s.leg))}</div>`:''}
       ${s.opt?`<div class="dsc" style="color:var(--ink3);margin-top:6px">＋ ${esc(s.opt)}</div>`:''}
       ${s.warn?`<div class="warn"><b>확인</b> ${esc(s.warn)}</div>`:''}
-      ${p?`<br><a class="lk" href="${mapUrl(p)}" target="_blank" rel="noopener">지도 열기 →</a>`:''}
+      ${p?thumbHtml(p):''}
+      ${p?`<div class="lks"><a class="lk" href="${mapUrl(p)}" target="_blank" rel="noopener">지도 열기 →</a><a class="lk" href="${photosUrl(p)}" target="_blank" rel="noopener">${p.pid?'구글 사진':'지도 사진'} →</a><a class="lk" href="${imgUrl(p)}" target="_blank" rel="noopener">이미지 검색 →</a>${hasIg(p)?`<a class="lk" href="${igUrl(p)}" target="_blank" rel="noopener">인스타 →</a>`:''}</div>`:''}
     </div>`;
   }).join('');
   tickPID();
@@ -1401,7 +1433,9 @@ function renderPlaces(){
       <div class="tp">${esc(p.tip)}</div>
       <div class="acts">
         <a href="${mapUrl(p)}" target="_blank" rel="noopener">지도</a>
-        <a href="${photosUrl(p)}" target="_blank" rel="noopener">사진</a>
+        <a href="${photosUrl(p)}" target="_blank" rel="noopener">${p.pid?'구글 사진':'지도 사진'}</a>
+        <a href="${imgUrl(p)}" target="_blank" rel="noopener">이미지 검색</a>
+        ${hasIg(p)?`<a href="${igUrl(p)}" target="_blank" rel="noopener">인스타</a>`:''}
         ${p.zh?`<button onclick="copyTxt('${esc(p.zh)}',this)">한자 복사</button>`:''}
         ${p.addr?`<button onclick="copyTxt('${esc(p.addr)}',this)">주소 복사</button>`:''}
       </div>

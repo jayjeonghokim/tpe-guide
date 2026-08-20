@@ -97,7 +97,36 @@ node --check /tmp/b.js
 - **Wikimedia 썸네일 폭은 화이트리스트입니다: 120, 250, 330, 500, 960, 1280, 1920.** 그 외 폭은 400을 반환합니다. 다른 값 쓰지 마세요.
 - 새 사진 추가 시 URL이 실제로 200인지 확인하고 커밋하세요.
 
-메타데이터 조회:
+### 사진이 없는 곳의 대체 링크
+
+자유 라이선스 사진이 없는 장소(현재 39곳, 대부분 식당·카페·바)는 카드에 점선 타일로
+외부 링크를 대신 깝니다. `galHtml()`이 자동으로 처리합니다.
+
+- **구글 사진 / 지도 사진** — `photosUrl()`. `pid`가 있으면 구글 장소 사진 갤러리로 바로,
+  없으면 지도 검색 결과로 떨어지므로 라벨을 "지도 사진"으로 낮춥니다.
+- **이미지 검색** — `imgUrl()`. 구글 이미지 검색.
+- **인스타** — `igUrl()`. `hasIg()`가 true인 `food`·`cafe`·`bar`에만 붙습니다.
+  임시 휴무나 그날 메뉴가 거기 올라오므로 현장에서 실제로 쓰입니다.
+
+질의어는 `imgKey()`가 만듭니다. 중국어 상호가 2글자 이상이면 `zh + ' 台北'`,
+아니면 `nm + ' Taipei'`. `芏`(Astēa)처럼 한 글자 상호는 너무 흔해서 로마자를 씁니다.
+
+**이 링크들은 링크일 뿐입니다.** 구글·인스타 이미지를 파일로 받아 넣거나 핫링크하지 마세요.
+공개 사이트라 저작권 문제가 그대로 남고, 인스타 CDN URL은 서명이 붙어 며칠이면 깨집니다.
+
+### 보조 스크립트
+
+`tools/commons-photos.py` — Commons 검색·메타데이터 조회·PHOTOS 블록 생성·URL 200 검사.
+표준 라이브러리만 쓰고 사이트 빌드와 무관합니다. `tools/missing-photos.md`에 남은 후보 목록이 있습니다.
+
+```bash
+./tools/commons-photos.py search "赤峰街 Taipei"
+./tools/commons-photos.py show   File:후보.jpg
+./tools/commons-photos.py entry  zhongshan File:후보.jpg
+./tools/commons-photos.py check          # 커밋 전 전체 URL 200 확인
+```
+
+메타데이터 직접 조회:
 ```bash
 curl -sS -A "tpe-guide/1.0 (연락처)" \
  "https://commons.wikimedia.org/w/api.php?action=query&titles=File:NAME.jpg&prop=imageinfo&iiprop=url%7Cextmetadata&iiurlwidth=1280&format=json"
