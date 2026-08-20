@@ -31,26 +31,29 @@ jobs:
         run: |
           mkdir -p out
           python3 tools/commons-photos.py harvest out \
+            zhongshan='incategory:"Chifeng Street"' \
             zhongshan='赤峰街 台北' \
             zhongshan='Chifeng Street Taipei' \
-            zhongshan='Zhongshan District Taipei street' \
+            fuhang='incategory:"Fu Hang Soy Milk"' \
             fuhang='阜杭豆漿' \
-            fuhang='Fuhang Soy Milk' \
             fuhang='華山市場 台北' \
+            ayzong='incategory:"Ay-Chung Flour-Rice Noodle"' \
             ayzong='阿宗麵線' \
-            ayzong='Ay-Chung Flour-Rice Noodle' \
-            amba='西門町意舍酒店' \
+            liushandong='劉山東牛肉麵' \
+            wangtealab='王有記茶行' \
+            wangtealab='Wang Tea Taipei' \
+            dadaocheng='incategory:"Dihua Street"' \
             dadaocheng='迪化街 台北' \
-            dadaocheng='Dihua Street Taipei' \
+            tpemain='incategory:"Taipei Main Station"' \
             tpemain='台北車站 大廳' \
-            tpemain='Taipei Main Station concourse' \
             2>&1 | tee out/harvest.log || true
 
       - name: 나머지 후보는 검색만
         run: |
           mkdir -p out
-          for q in '興波咖啡' 'FIKA FIKA CAFE Taipei' '王有記茶行' '伊良可樂 台北' \
-                   '劉山東牛肉麵' '金峰滷肉飯' '雙月食品社' '西門紅樓 夜'; do
+          for q in '興波咖啡' 'FIKA FIKA CAFE Taipei' '伊良可樂 台北' '金峰滷肉飯' \
+                   '雙月食品社' 'RUFOUS COFFEE Taipei' 'BAR MOOD Taipei' \
+                   'incategory:"Ximending"' 'incategory:"Yongkang Street"'; do
             echo "### $q"
             python3 tools/commons-photos.py search "$q" || true
           done 2>&1 | tee out/scan.log || true

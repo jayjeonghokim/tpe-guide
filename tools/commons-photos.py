@@ -28,12 +28,14 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.parse
 import urllib.request
 
 API = "https://commons.wikimedia.org/w/api.php"
 UA = "tpe-guide/1.0 (jay.jeonghokim@gmail.com)"
 THUMB, FULL = 500, 1280  # 화이트리스트 폭. 다른 값 쓰지 말 것.
+THROTTLE = 0.4           # 요청 간 최소 간격(초). wikimedia 가 클라우드 IP 를 조인다.
 
 
 def api(**params):
@@ -41,22 +43,51 @@ def api(**params):
     params.setdefault("formatversion", "2")
     req = urllib.request.Request(API + "?" + urllib.parse.urlencode(params),
                                  headers={"User-Agent": UA})
+    time.sleep(THROTTLE)
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.load(r)
 
 
+def check_url(url, tries=4):
+    """URL 이 200 이면 "" 를, 아니면 사유 문자열을 돌려준다.
+
+    upload.wikimedia.org 는 클라우드 IP 에서 연속 요청을 던지면 429/503 을 준다.
+    (Actions 러너에서 이것 때문에 후보가 통째로 걸러진 적이 있다.)
+    429/503/네트워크 오류는 지수 백오프로 재시도하고, 404 는 즉시 실패로 본다.
+    """
+    reason = "알 수 없음"
+    for i in range(tries):
+        time.sleep(THROTTLE)
+        req = urllib.request.Request(url, method="HEAD", headers={"User-Agent": UA})
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                if r.status == 200:
+                    return ""
+                reason = "status %d" % r.status
+        except urllib.error.HTTPError as e:
+            reason = "HTTP %d" % e.code
+            if e.code not in (429, 503):
+                return reason
+        except Exception as e:
+            reason = type(e).__name__ + ": " + str(e)
+        if i < tries - 1:
+            time.sleep(2 ** i)
+    return reason
+
+
 def head_ok(url):
-    req = urllib.request.Request(url, method="HEAD", headers={"User-Agent": UA})
-    try:
-        with urllib.request.urlopen(req, timeout=30) as r:
-            return r.status == 200
-    except Exception:
-        return False
+    return check_url(url) == ""
+
+
+ZERO_WIDTH = "\u200b\u200c\u200d\u200e\u200f\ufeff"
 
 
 def strip_html(s):
     s = re.sub(r"<[^>]+>", "", s or "")
     s = urllib.parse.unquote(s)
+    # Commons 설명문은 제로폭 공백으로 시작하는 경우가 흔하다. 그대로 두면
+    # 캡션 앞에 보이지 않는 문자가 박힌다.
+    s = s.translate({ord(c): None for c in ZERO_WIDTH})
     return " ".join(s.split()).strip()
 
 
@@ -72,9 +103,11 @@ def info(title):
     ii = pages[0]["imageinfo"][0]
     em = ii.get("extmetadata", {})
     g = lambda k: strip_html(em.get(k, {}).get("value", ""))
-    base = ii["thumburl"].rsplit("/", 1)[0]           # .../thumb/a/ab/Name.jpg
-    name = ii["thumburl"].rsplit("/", 1)[1]
-    name = re.sub(r"^\d+px-", "", name)
+    # thumburl 에 utm_* 추적 파라미터가 붙어서 온다. 그대로 쓰면 PHOTOS 에
+    # 쿼리스트링이 박히므로 잘라낸다.
+    thumb = urllib.parse.urlsplit(ii["thumburl"])._replace(query="", fragment="").geturl()
+    base = thumb.rsplit("/", 1)[0]                    # .../thumb/a/ab/Name.jpg
+    name = re.sub(r"^\d+px-", "", thumb.rsplit("/", 1)[1])
     return {
         "title": pages[0]["title"],
         "t": f"{base}/{THUMB}px-{name}",
@@ -87,6 +120,15 @@ def info(title):
     }
 
 
+def srch(q, limit="15"):
+    """파일 검색. 스캔본(pdf·djvu)이 결과를 뒤덮으므로 비트맵으로 제한한다.
+    incategory:"..." 같은 CirrusSearch 연산자를 그대로 쓸 수 있다."""
+    if "filetype:" not in q:
+        q = q + " filetype:bitmap"
+    d = api(action="query", list="search", srsearch=q, srnamespace="6", srlimit=limit)
+    return [h["title"] for h in d.get("query", {}).get("search", [])]
+
+
 def js(x):
     q = lambda s: '"' + str(s).replace("\\", "\\\\").replace('"', '\\"') + '"'
     return ("  {t:%s,s:%s,r:%.3f,c:%s,by:%s,l:%s,p:%s}," %
@@ -94,10 +136,8 @@ def js(x):
 
 
 def cmd_search(args):
-    d = api(action="query", list="search", srsearch=" ".join(args),
-            srnamespace="6", srlimit="25")
-    for hit in d["query"]["search"]:
-        print(hit["title"])
+    for t in srch(" ".join(args), "25"):
+        print(t)
 
 
 def cmd_show(args):
@@ -106,7 +146,7 @@ def cmd_show(args):
         print(x["title"])
         for k in ("c", "by", "l", "r"):
             print("  %-3s %s" % (k, x[k]))
-        print("  200 %s / %s" % (head_ok(x["t"]), head_ok(x["s"])))
+        print("  url %s" % (check_url(x["t"]) or check_url(x["s"]) or "200 OK"))
 
 
 def cmd_entry(args):
@@ -119,8 +159,9 @@ def cmd_entry(args):
         if not x["c"]:
             print("// 건너뜀 — ImageDescription 이 비어 있음: " + x["title"], file=sys.stderr)
             continue
-        if not (head_ok(x["t"]) and head_ok(x["s"])):
-            print("// 건너뜀 — URL 이 200 이 아님: " + x["title"], file=sys.stderr)
+        err = check_url(x["t"]) or check_url(x["s"])
+        if err:
+            print("// 건너뜀 — URL 확인 실패 (%s): %s" % (err, x["title"]), file=sys.stderr)
             continue
         rows.append(js(x))
     if not rows:
@@ -160,13 +201,11 @@ def cmd_harvest(args):
         titles, seen = [], set()
         for q in qs:
             try:
-                d = api(action="query", list="search", srsearch=q,
-                        srnamespace="6", srlimit="15")
+                found = srch(q)
             except Exception as e:
                 print("  검색 실패 [%s] %s: %s" % (pid, q, e))
                 continue
-            for hit in d.get("query", {}).get("search", []):
-                t = hit["title"]
+            for t in found:
                 if t.lower().endswith((".jpg", ".jpeg", ".png")) and t not in seen:
                     seen.add(t)
                     titles.append(t)
@@ -184,8 +223,9 @@ def cmd_harvest(args):
             if not x["c"]:
                 print("  건너뜀 %s — ImageDescription 비어 있음" % t)
                 continue
-            if not (head_ok(x["t"]) and head_ok(x["s"])):
-                print("  건너뜀 %s — URL 이 200 이 아님" % t)
+            err = check_url(x["t"]) or check_url(x["s"])
+            if err:
+                print("  건너뜀 %s — URL 확인 실패 (%s)" % (t, err))
                 continue
             n = len(rows)
             rel = "%s/%02d-%s" % (pid, n, safe(t[5:]))
