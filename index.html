@@ -441,7 +441,7 @@ const PLACES=[
 
  {id:'songyan',nm:'쑹산문화창의공원 · Eslite Spectrum Songyan',zh:'松山文創園區',cat:'sight',area:'쑹산',sch:1,
   addr:'信義區菸廠路88號',hours:EVERYDAY(660,1320),pid:'',ll:'',
-  tip:'9/1 패키지 확정 일정 18:00. 일본식 담배공장을 개조한 문화단지. 誠品生活 松菸店 매장(B2~3F)은 11:00–22:00, 영화관·공연장은 10:00–22:00. 야외 원구는 상시 개방. 饒河街觀光夜市와 같은 松山역 권역이라 도보로 이어집니다.'},
+  tip:'9/1 패키지 확정 일정 18:00. 일본식 담배공장을 개조한 문화단지. 誠品生活 松菸店 매장(B2~3F)은 11:00–22:00, 영화관·공연장은 10:00–22:00. 야외 원구는 상시 개방. 信義區 소재로 國父紀念館역 권역이며, 饒河街觀光夜市(松山역 권역)와는 도보 거리가 아니라 MRT 板南線으로 4정거장 떨어져 있습니다.'},
 
  {id:'raohe',nm:'饒河街觀光夜市',zh:'饒河街觀光夜市',cat:'sight',area:'쑹산',sch:1,
   hours:EVERYDAY(1020,1380),pid:'',ll:'',
@@ -513,8 +513,8 @@ const PLACES=[
 
  /* ---- 커피·차 · 일정 포함 ---- */
  {id:'alldayroast',nm:'ALL DAY ROASTERY C',zh:'',cat:'cafe',area:'쑹산',sch:1,
-  hours:null,pid:'',ll:'25.056714,121.56022',
-  tip:'8/31 패키지 확정 일정 10:00. 좌표는 옌서우제(延壽街) 지점 기준이며 타이베이에 지점이 여러 곳이라 확정서상 "C" 지점이 정확히 어디인지 확인이 필요합니다.'},
+  hours:null,pid:'',ll:'',
+  tip:'8/31 패키지 확정 일정 10:00. 타이베이에 지점이 여러 곳이라 확정서상 "C" 지점이 정확히 어디인지 확인이 필요합니다 — 확정 전에는 좌표를 비워둡니다(옌서우제 지점 좌표를 넣으면 지도 버튼이 엉뚱한 지점으로 안내할 수 있어 제거했습니다).'},
 
  {id:'wangtealab',nm:'Wangtea Lab',zh:'王有記茶行',cat:'cafe',area:'다퉁',sch:1,
   hours:null,pid:'',ll:'',
@@ -760,10 +760,13 @@ const DAYS=[
     d:'단체 전체 일정 참고용. 본인은 8/29에 이미 타이베이에 있으므로 해당 없음.'},
    {t:'10:30',n:'(단체) 인천공항 출발',zh:'KE2021',cat:'move',
     d:'대한항공 KE2021, 단체 항공편. 본인은 탑승하지 않음 — 참고용.'},
+   {t:'11:00',n:'amba 체크아웃 · 짐 맡기기',zh:'',cat:'base',p:'amba',
+    d:'amba 체크아웃 기준 시각(11:00). 8/29부터 묵은 첫 숙소이니 잊지 말고 체크아웃하세요. inhouse 체크인(13:30)까지 시간이 남으면 짐만 프런트에 맡기고 자유롭게 보내다가 이동하면 됩니다.'},
    {t:'12:10',n:'(단체) 타오위안 국제공항 도착',zh:'桃園國際機場',cat:'move',p:'tpeapt1',
     d:'단체 도착 시각. 본인은 숙소나 합류 지점에서 대기하면 됩니다.'},
    {t:'13:30',n:'inhouse Hotel 체크인 · 단체 합류',zh:'',cat:'base',p:'inhouse',
-    d:'여기서부터 본인 일정 시작 — 단체와 합류합니다.'},
+    leg:{m:'walk',min:7,note:'amba(武昌街二段77號) → inhouse(西寧路107號), 두 곳 모두 시먼딩 권역'},
+    d:'여기서부터 본인 일정 시작 — 단체와 합류합니다. amba에 맡긴 짐을 찾아 옮깁니다.'},
    {t:'14:00',n:'다퉁구 다다오청 · 디화제 거리탐방',zh:'大稻埕 迪化街',cat:'sight',p:'dadaocheng',
     leg:{m:'mrt',line:'G',from:'西門',to:'北門',stops:1,min:2,walk:10,fare:20,
          note:'北門역 3번 출구에서 디화제 남쪽 입구까지 도보 8분'},
@@ -833,8 +836,9 @@ const DAYS=[
     leg:{m:'mrt',min:20,fare:20,note:'위치 미확정 구간 포함 — 최종 경로는 매장 확정 후 갱신'},
     d:'일본식 담배공장을 개조한 문화단지. 誠品生活 松菸店은 11:00–22:00 (영화관·공연장은 10:00–22:00).'},
    {t:'20:00',n:'饒河街觀光夜市',zh:'饒河街觀光夜市',cat:'sight',p:'raohe',
-    leg:{m:'walk',min:10,note:'송산문창원구와 같은 松山역 권역 — 도보 이동'},
-    d:'17:00–23:00 영업. 松山역 1번 출구 도보 5분.'},
+    leg:{m:'mrt',line:'BL',from:'國父紀念館',to:'松山',stops:4,min:10,walk:5,fare:20,
+         note:'쑹산문창원구는 國父紀念館역 권역, 饒河街는 松山역 권역 — 도보 거리가 아니라 MRT 板南線으로 4정거장 이동합니다'},
+    d:'17:00–24:00 영업(자료마다 23:00 표기도 있음). 松山역 1번 출구 도보 5분.'},
    {t:'22:00',n:'까르푸 (선택)',zh:'',cat:'move',
     leg:{m:'walk',min:5},
     d:'선택 일정 — 대형마트.',opt:'참여 여부 자유.'}
@@ -854,12 +858,15 @@ const DAYS=[
    {t:'12:30',n:'beanroom',zh:'',cat:'cafe',p:'beanroom',
     leg:{m:'walk',min:5,note:'위치 미확정'},
     d:'커피 매장으로 추정. 주소·영업시간 미확인.'},
+   {t:'14:30',n:'inhouse Hotel 복귀 · 짐 찾기',zh:'',cat:'base',p:'inhouse',
+    leg:{m:'mrt',min:15,fare:20,note:'중산 권역 → 西門, 위치 미확정 구간 포함'},
+    d:'09:30에 맡긴 짐을 찾습니다. 남은 TWD와 짐을 여기서 정리하세요.'},
    {t:'15:30',n:'타오위안 국제공항으로 출발',zh:'',cat:'move',
-    leg:{m:'mrt',min:36,fare:150,note:'중산 권역 기준 — 타이베이 메인역 경유 공항선'},
-    d:'짐과 남은 현금을 여기서 정리합니다.'},
+    leg:{m:'arex',line:'A',from:'台北車站',to:'A12 機場第一航廈',min:36,fare:150,
+         note:'inhouse에서 西門역까지 도보·MRT 이동 후 타이베이 메인역에서 공항선 환승'},
+    d:'출발 3시간 전 도착 기준 역산 시각입니다.'},
    {t:'16:55',n:'타오위안 제1터미널 체크인',zh:'桃園國際機場 第一航廈',cat:'move',p:'tpeapt1',
-    leg:{m:'arex',line:'A',to:'A12 機場第一航廈',min:36,fare:150},
-    d:'대한항공 KE2028 체크인.'},
+    d:'대한항공 KE2028 체크인. 15:30 출발 이동에 포함된 여정이라 별도 이동 구간은 없습니다.'},
    {t:'18:55',n:'타이베이 출발',zh:'KE2028',cat:'move',
     d:'대한항공 KE2028.'},
    {t:'22:35',n:'인천공항 도착 T2',zh:'',cat:'move',
@@ -1407,7 +1414,10 @@ function renderRoute(){
     `<button aria-pressed="${i===rDay}" onclick="pickRDay(${i})"><span class="d">${d.d}</span><span class="w">${d.w}</span></button>`).join('');
   const day=DAYS[rDay];
   const plan=activePlan(rDay);
-  $('#rNote').textContent=day.est?'표시된 시각과 소요 시간은 추정치입니다. 패키지 확정 시각표로 대조하세요.':'실측 기준 동선입니다. 이동 전 지도 앱에서 재확인하세요.';
+  const routeUnverified=plan.stops.some(s=>s.leg?.note&&/미확정/.test(s.leg.note));
+  $('#rNote').textContent=day.est?'표시된 시각과 소요 시간은 추정치입니다. 패키지 확정 시각표로 대조하세요.'
+    :routeUnverified?'시각은 확정이지만 일부 구간 경로·지점이 아직 미확정입니다. 이동 전 지도 앱에서 재확인하세요.'
+    :'실측 기준 동선입니다. 이동 전 지도 앱에서 재확인하세요.';
   $('#rPlanBar').innerHTML=planBarHtml(rDay,'pickPlan');
 
   const pts=plan.stops.map((s,i)=>{
