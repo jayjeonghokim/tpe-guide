@@ -61,6 +61,14 @@ h1,h2,h3{font-weight:600;letter-spacing:-.01em;margin:0}
 .tabs button{flex:none;padding:7px 13px;border-radius:20px;font-size:13px;font-weight:500;color:var(--ink2);border:1px solid transparent;white-space:nowrap}
 .tabs button[aria-selected=true]{background:var(--ink);color:var(--paper)}
 .tabs button:focus-visible{outline:2px solid var(--bl);outline-offset:2px}
+
+/* 하루짜리 대안 동선(1안/2안) 토글. 메인 탭 클릭 핸들러가 `.tabs button` 을
+   라이브 쿼리해 aria-selected 를 재설정하므로 클래스명을 절대 tabs 와 겹치지 않게 한다. */
+.plansel{display:flex;gap:4px;margin-top:10px;flex-wrap:wrap}
+.plansel button{flex:none;padding:7px 13px;border-radius:20px;font-size:13px;font-weight:500;
+  color:var(--ink2);border:1px solid var(--line);background:transparent;white-space:nowrap}
+.plansel button[aria-selected=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.plansel button:focus-visible{outline:2px solid var(--bl);outline-offset:2px}
 .pane{display:none;padding-top:18px}
 .pane.on{display:block}
 
@@ -276,6 +284,7 @@ details .bd li{margin:4px 0}
   <div class="days" id="dayBar"></div>
   <div id="dayNote" class="tiny" style="margin-top:12px"></div>
   <div id="dayStay"></div>
+  <div id="planBar"></div>
   <div class="tl" id="tl"></div>
 </section>
 
@@ -283,6 +292,7 @@ details .bd li{margin:4px 0}
 <section class="pane" id="p-route" role="tabpanel">
   <div class="days" id="rDayBar"></div>
   <div id="rNote" class="tiny" style="margin-top:12px"></div>
+  <div id="rPlanBar"></div>
   <div id="rMap"></div>
   <div id="rSum"></div>
   <div class="eyebrow">구간별 이동</div>
@@ -384,9 +394,9 @@ const PLACES=[
   tip:'숙소 바로 앞 보행자 상권. 레인보우 크로싱은 서문홍루 북쪽 횡단보도입니다. 상점은 대체로 11시 이후 열고 밤이 가장 활발합니다. 아종면선(阿宗麵線)이 이 구역에 있습니다.'},
 
  {id:'redhouse',nm:'서문홍루',zh:'西門紅樓',cat:'sight',area:'완화·시먼딩',sch:1,
-  hours:{0:[[660,1260]],1:null,2:[[660,1260]],3:[[660,1260]],4:[[660,1260]],5:[[660,1260]],6:[[660,1320]]},
+  hours:{0:[[660,1290]],1:null,2:[[660,1290]],3:[[660,1290]],4:[[660,1290]],5:[[660,1320]],6:[[660,1320]]},
   pid:'ChIJi-yspAmpQjQRxcHc_lwnNHw',ll:'25.0420139,121.5068592',
-  tip:'1908년 공설시장 건물. 토요일은 22시까지 열고 주말 창작시장은 14시부터. 월요일 휴관이라 8/31에는 갈 수 없습니다.'},
+  tip:'1908년 공설시장 건물, 成都路10號. 일~목 11:00–21:30 / 금·토 11:00–22:00, 월요일 휴관이라 8/31에는 갈 수 없습니다. 후원 야외 창작시장은 토·일 14:00–21:00, 16공방(문창 상점)은 일~목 14:00–21:30 · 금·토 14:00–22:00. 기념품은 16공방이 낫습니다.'},
 
  {id:'bopiliao',nm:'보피랴오 역사거리',zh:'剝皮寮歷史街區',cat:'sight',area:'완화',sch:1,
   hours:{0:[[540,1080]],1:null,2:[[540,1080]],3:[[540,1080]],4:[[540,1080]],5:[[540,1080]],6:[[540,1080]]},
@@ -525,10 +535,13 @@ const PLACES=[
 
  {id:'zhuangji',nm:'撞記 설화빙',zh:'撞記 水果 果汁 雪花冰',cat:'cafe',area:'중산',
   addr:'錦州街30巷1號',
-  hours:{0:[[660,1020]],1:[[660,1200]],2:[[660,1200]],3:null,4:null,5:[[660,1200]],6:[[660,1200]]},
+  hours:null,
   pid:'ChIJ685-kyGpQjQR2uBgKI2-R0M',ll:'25.0599838,121.5248555',
-  tip:'수·목 휴무 — 9/2 귀국일에는 못 갑니다. 주말은 30분~1시간 대기가 기본이라 오픈 직후가 안전합니다. 망고빙수 150~180 TWD, 일반 설화빙 60 TWD. 8월 말은 망고 끝물이라 상태가 들쭉날쭉 — 별로면 행인이나 깨가 낫습니다. 현금.'},
-
+  tip:'영업시간·휴무일이 자료마다 어긋나 미확인으로 둡니다 — 여름 11:00–21:00 / 11:30–22:00 / 13:00–21:00 이 섞여 나오고 휴무일도 월요일·수목·부정기로 갈립니다. 과일가게 겸업이라 부정기 휴무가 보고됩니다. 방문 전 구글 지도나 인스타로 당일 확인하세요. 中山國小역 도보 5분. 망고 설화빙 200 TWD 안팎이고 8월 말은 망고 끝물이라 상태가 들쭉날쭉 — 별로면 행인이나 깨가 낫습니다. 현금.'},
+ {id:'yongfu',nm:'융푸 아이스크림',zh:'永富冰淇淋',cat:'cafe',area:'완화',sch:1,
+  addr:'貴陽街二段68號',hours:EVERYDAY(600,1320),pid:'',ll:'',
+  tip:'1945년 창업, 3대째. 叭噗(바푸) 방식 수제 아이스크림으로 타로(芋頭)·리메이(李梅)·구이위안(桂圓)이 대표입니다. 서문홍루에서 남쪽으로 도보 10분. 영업시간은 10:00–22:00으로 잡았는데 자료에 따라 23:00까지로도 나옵니다. 겨울에 두 달쯤 장기 휴업하지만 8월은 무관합니다. 좌표 미확인이라 지도는 주소로 확인하세요. 현금.'},
+ 
  {id:'rufous',nm:'RUFOUS COFFEE ROASTERS',zh:'',cat:'cafe',area:'다안',
   hours:null,pid:'',ll:'25.023498,121.543589',
   tip:'푸싱난루2단. 양야오(楊耀) 로스터의 매장으로 다크·미디엄 계열 정통 로스팅 노선입니다. 라이트 로스팅 위주 매장들과 대비해서 마셔보면 대만 씬의 폭이 보입니다. 류장리역(六張犁) 도보 5분.'},
@@ -598,50 +611,106 @@ const PLACES=[
    m: walk|mrt|taxi|arex|air|bus|train  ·  min 소요분  ·  fare TWD  ·  alt 대안 경로 */
 const DAYS=[
  {d:'08.29',w:'토',stay:'amba 타이베이 시먼딩',
-  note:'도착일. 입국·이동에 오후가 걸리므로 서→동 한 방향으로 흐르게 짰습니다. 되돌아오는 구간 없음. 체크인은 15시부터라 짐만 맡기고 시작하세요.',
-  stops:[
-   {t:'10:30',n:'인천공항 출발',zh:'KE2021',cat:'move',d:'대한항공 KE2021. 비행 약 2시간 40분.'},
-   {t:'12:10',n:'타오위안공항 T1 도착',zh:'桃園機場 第一航廈',cat:'move',p:'tpeapt1',
-    leg:{m:'air',min:160,note:'KE2021 · 인천 → 타오위안'},
-    d:'입국심사·수하물에 30~40분. 도착층에서 이지카드를 먼저 사고 지하 1층 공항 MRT로 내려갑니다.'},
-   {t:'13:15',n:'공항 MRT → 타이베이 메인역',zh:'台北車站',cat:'move',p:'tpemain',
-    leg:{m:'arex',line:'A',from:'A12 機場第一航廈',to:'A1 台北車站',min:36,fare:150,
-         note:'직달차(紫·36분)와 보통차(藍·50분)가 번갈아 옵니다. 이지카드 사용 가능.'},
-    d:'짐이 있으면 직달차가 편합니다. A1 도착 후 반난선 환승까지 지하 통로로 도보 8분.'},
-   {t:'14:10',n:'amba 체크인 · 짐 보관',zh:'台北西門町意舍酒店',cat:'base',p:'amba',
-    leg:{m:'mrt',line:'BL',from:'台北車站',to:'西門',stops:1,min:2,walk:10,fare:20},
-    d:'체크인 개시는 15:00. 이 시각엔 프런트에 짐만 맡기고 바로 나가는 편이 낫습니다.'},
-   {t:'14:40',n:'서문홍루',zh:'西門紅樓',cat:'sight',p:'redhouse',
-    leg:{m:'walk',min:4,dist:300},
-    d:'1908년 붉은 벽돌 팔각당. 토요일은 22시까지 열고 주말 창작시장은 14시부터라 시간이 맞습니다.'},
-   {t:'15:30',n:'시먼딩 · 레인보우 크로싱',zh:'西門町',cat:'sight',p:'ximending',
-    leg:{m:'walk',min:3,dist:200},
-    d:'보행자 거리와 무지개 횡단보도. 더울 때는 지하상가로 피하세요.'},
-   {t:'16:15',n:'보피랴오 역사거리',zh:'剝皮寮',cat:'sight',p:'bopiliao',
-    leg:{m:'mrt',line:'BL',from:'西門',to:'龍山寺',stops:1,min:2,walk:8,fare:20},
-    d:'청·일제시대 거리. 실내 전시가 18시에 끝나므로 용산사보다 먼저 봅니다.'},
-   {t:'16:55',n:'용산사',zh:'艋舺龍山寺',cat:'sight',p:'longshan',
-    leg:{m:'walk',min:5,dist:400},
-    d:'현지인의 기도와 향불. 해 지기 직전 광선이 가장 좋고, 조명이 들어오면 분위기가 완전히 달라집니다.'},
-   {t:'17:40',n:'저녁 — 雙月食品社 청도점',zh:'雙月食品社 青島店',cat:'food',p:'moonq',
-    leg:{m:'taxi',min:15,fare:190,dist:5.4,
-         alt:'MRT 龍山寺 → 善導寺 반난선 3정거장 7분 + 도보 6분 · 20 TWD'},
-    d:'저녁 영업 17:00–20:00. 17:20까지 당기면 대기가 거의 없습니다. 탕 1 + 면 1이면 충분합니다.'},
-   {t:'19:10',n:'BAR MOOD',zh:'吧沐',cat:'bar',p:'barmood',
-    leg:{m:'taxi',min:18,fare:180,dist:4.8,
-         alt:'MRT 善導寺 → 忠孝敦化 반난선 3정거장 6분 + 도보 5분 · 20 TWD — 토요일 저녁엔 MRT가 더 빠릅니다'},
-    d:'대만 차·과일 기반 시그니처 1~2잔. 예약 권장(inline.app/groups/moodtw).',
-    opt:'같은 골목 도보 1분에 To Infinity & Beyond가 20시에 엽니다. 여유가 있으면 한 잔 더 붙이세요 — 아시아 50 베스트 35위.'},
-   {t:'20:30',n:'타이베이 101 야경',zh:'台北101',cat:'sight',p:'t101',
-    leg:{m:'taxi',min:15,fare:160,dist:3.4,
-         alt:'MRT 忠孝敦化 →(반난선 1)→ 忠孝復興 →(원후선 1)→ 大安 →(단수이신이선 2)→ 台北101/世貿 · 환승 2회 약 18분 · 25 TWD'},
-    d:'전망대 마지막 입장 21:15. 올라갈 생각이면 이 시각에 도착해야 합니다. 외관과 신이광장 산책만이면 20~30분.'},
-   {t:'21:40',n:'호텔 복귀',zh:'',cat:'base',p:'amba',
-    leg:{m:'taxi',min:22,fare:280,dist:8.1,
-         alt:'MRT 台北101/世貿 →(단수이신이선 5)→ 中正紀念堂 →(쑹산신뎬선 2)→ 西門 · 환승 1회 약 20분 · 25 TWD'},
-    d:'심야에도 시먼딩은 활발해서 야식 여지가 있습니다. 아종면선이 도보 3분, 새벽 0시 반까지.'}
+  plans:[
+   {label:'1안 · 서→동 직선',
+    note:'도착일. 입국·이동에 오후가 걸리므로 서→동 한 방향으로 흐르게 짰습니다. 되돌아오는 구간 없음. 체크인은 15시부터라 짐만 맡기고 시작하세요.',
+    stops:[
+     {t:'10:30',n:'인천공항 출발',zh:'KE2021',cat:'move',d:'대한항공 KE2021. 비행 약 2시간 40분.'},
+     {t:'12:10',n:'타오위안공항 T1 도착',zh:'桃園機場 第一航廈',cat:'move',p:'tpeapt1',
+      leg:{m:'air',min:160,note:'KE2021 · 인천 → 타오위안'},
+      d:'입국심사·수하물에 30~40분. 도착층에서 이지카드를 먼저 사고 지하 1층 공항 MRT로 내려갑니다.'},
+     {t:'13:15',n:'공항 MRT → 타이베이 메인역',zh:'台北車站',cat:'move',p:'tpemain',
+      leg:{m:'arex',line:'A',from:'A12 機場第一航廈',to:'A1 台北車站',min:36,fare:150,
+           note:'직달차(紫·36분)와 보통차(藍·50분)가 번갈아 옵니다. 이지카드 사용 가능.'},
+      d:'짐이 있으면 직달차가 편합니다. A1 도착 후 반난선 환승까지 지하 통로로 도보 8분.'},
+     {t:'14:10',n:'amba 체크인 · 짐 보관',zh:'台北西門町意舍酒店',cat:'base',p:'amba',
+      leg:{m:'mrt',line:'BL',from:'台北車站',to:'西門',stops:1,min:2,walk:10,fare:20},
+      d:'체크인 개시는 15:00. 이 시각엔 프런트에 짐만 맡기고 바로 나가는 편이 낫습니다.'},
+     {t:'14:40',n:'서문홍루',zh:'西門紅樓',cat:'sight',p:'redhouse',
+      leg:{m:'walk',min:4,dist:300},
+      d:'1908년 붉은 벽돌 팔각당. 토요일은 22시까지 열고 후원 창작시장은 14시부터라 시간이 맞습니다.'},
+     {t:'15:30',n:'시먼딩 · 레인보우 크로싱',zh:'西門町',cat:'sight',p:'ximending',
+      leg:{m:'walk',min:3,dist:200},
+      d:'보행자 거리와 무지개 횡단보도. 더울 때는 지하상가로 피하세요.'},
+     {t:'16:15',n:'보피랴오 역사거리',zh:'剝皮寮',cat:'sight',p:'bopiliao',
+      leg:{m:'mrt',line:'BL',from:'西門',to:'龍山寺',stops:1,min:2,walk:8,fare:20},
+      d:'청·일제시대 거리. 실내 전시가 18시에 끝나므로 용산사보다 먼저 봅니다.'},
+     {t:'16:55',n:'용산사',zh:'艋舺龍山寺',cat:'sight',p:'longshan',
+      leg:{m:'walk',min:5,dist:400},
+      d:'현지인의 기도와 향불. 해 지기 직전 광선이 가장 좋고, 조명이 들어오면 분위기가 완전히 달라집니다.'},
+     {t:'17:40',n:'저녁 — 雙月食品社 청도점',zh:'雙月食品社 青島店',cat:'food',p:'moonq',
+      leg:{m:'taxi',min:15,fare:190,dist:5.4,
+           alt:'MRT 龍山寺 → 善導寺 반난선 3정거장 7분 + 도보 6분 · 20 TWD'},
+      d:'저녁 영업 17:00–20:00. 17:20까지 당기면 대기가 거의 없습니다. 탕 1 + 면 1이면 충분합니다.'},
+     {t:'19:10',n:'BAR MOOD',zh:'吧沐',cat:'bar',p:'barmood',
+      leg:{m:'taxi',min:18,fare:180,dist:4.8,
+           alt:'MRT 善導寺 → 忠孝敦化 반난선 3정거장 6분 + 도보 5분 · 20 TWD — 토요일 저녁엔 MRT가 더 빠릅니다'},
+      d:'대만 차·과일 기반 시그니처 1~2잔. 예약 권장(inline.app/groups/moodtw).',
+      opt:'같은 골목 도보 1분에 To Infinity & Beyond가 20시에 엽니다. 여유가 있으면 한 잔 더 붙이세요 — 아시아 50 베스트 35위.'},
+     {t:'20:30',n:'타이베이 101 야경',zh:'台北101',cat:'sight',p:'t101',
+      leg:{m:'taxi',min:15,fare:160,dist:3.4,
+           alt:'MRT 忠孝敦化 →(반난선 1)→ 忠孝復興 →(원후선 1)→ 大安 →(단수이신이선 2)→ 台北101/世貿 · 환승 2회 약 18분 · 25 TWD'},
+      d:'전망대 마지막 입장 21:15. 올라갈 생각이면 이 시각에 도착해야 합니다. 외관과 신이광장 산책만이면 20~30분.'},
+     {t:'21:40',n:'호텔 복귀',zh:'',cat:'base',p:'amba',
+      leg:{m:'taxi',min:22,fare:280,dist:8.1,
+           alt:'MRT 台北101/世貿 →(단수이신이선 5)→ 中正紀念堂 →(쑹산신뎬선 2)→ 西門 · 환승 1회 약 20분 · 25 TWD'},
+      d:'심야에도 시먼딩은 활발해서 야식 여지가 있습니다. 아종면선이 도보 3분, 새벽 0시 반까지.'}
+    ]},
+   {label:'2안 · 撞記+永富 코스',
+    note:'사용자 제안 동선. 도착 직후 시먼딩과 반대 방향인 중산으로 撞記(설화빙)를 다녀온 뒤, 남쪽으로 내려오며 시먼딩·서문홍루·永富 아이스크림·보피랴오·용산사를 훑습니다. 서문홍루 이후는 1안과 같은 남하 경로라 되돌아오는 구간이 없고, 永富가 보피랴오 바로 옆이라 자연스럽게 이어집니다 — 이 구간만 보면 1안보다 매끄럽습니다. 다만 撞記 왕복에 짐을 든 채 MRT 환승을 두 번 해야 하고, 그 왕복만으로 1안 대비 40~70분이 밀립니다. 撞記는 영업시간·휴무일 정보가 자료마다 어긋나고(미확인 처리) 대기가 30분~1시간 걸리는 곳이라 실제로는 더 늦어질 수 있습니다.',
+    stops:[
+     {t:'10:30',n:'인천공항 출발',zh:'KE2021',cat:'move',d:'대한항공 KE2021. 비행 약 2시간 40분.'},
+     {t:'12:10',n:'타오위안공항 T1 도착',zh:'桃園機場 第一航廈',cat:'move',p:'tpeapt1',
+      leg:{m:'air',min:160,note:'KE2021 · 인천 → 타오위안'},
+      d:'입국심사·수하물에 30~40분. 도착층에서 이지카드를 먼저 사고 지하 1층 공항 MRT로 내려갑니다.'},
+     {t:'13:15',n:'공항 MRT → 타이베이 메인역',zh:'台北車站',cat:'move',p:'tpemain',
+      leg:{m:'arex',line:'A',from:'A12 機場第一航廈',to:'A1 台北車站',min:36,fare:150,
+           note:'직달차(紫·36분)와 보통차(藍·50분)가 번갈아 옵니다. 이지카드 사용 가능.'},
+      d:'짐이 있으면 직달차가 편합니다. A1 도착 후 반난선 환승까지 지하 통로로 도보 8분.'},
+     {t:'13:45',n:'撞記 水果 果汁 雪花冰',zh:'撞記 水果 果汁 雪花冰',cat:'cafe',p:'zhuangji',
+      leg:{m:'mrt',from:'台北車站',to:'中山國小',min:15,walk:6,fare:20,
+           note:'淡水信義線으로 民權西路까지 2정거장, 中和新蘆線으로 환승해 1정거장 되짚어 중산국소역. 짐을 든 채 환승 1회'},
+      warn:'영업시간·휴무일이 자료마다 달라 미확인입니다. 문 닫혀 있거나 30분~1시간 대기일 가능성을 염두에 두세요 — 시간이 없으면 이 정류장을 빼고 바로 amba로 가는 편이 안전합니다.',
+      d:'짐을 멘 채 들르는 곳이라 오래 머물기보다 맛만 보고 나오는 편을 권합니다.'},
+     {t:'14:35',n:'amba 체크인 · 짐 보관',zh:'台北西門町意舍酒店',cat:'base',p:'amba',
+      leg:{m:'mrt',from:'中山國小',to:'西門',min:20,walk:10,fare:20,
+           note:'中和新蘆線 民權西路까지 1정거장 → 淡水信義線 환승 台北車站까지 2정거장 → 板南線 환승 西門까지 1정거장. 환승 2회'},
+      d:'체크인 개시는 15:00. 撞記에서 늦어지지 않았다면 15시 전에 도착해 짐만 맡기고 나갑니다.'},
+     {t:'15:00',n:'시먼딩 · 레인보우 크로싱',zh:'西門町',cat:'sight',p:'ximending',
+      leg:{m:'walk',min:3,dist:200},
+      d:'보행자 거리와 무지개 횡단보도. 더울 때는 지하상가로 피하세요.'},
+     {t:'15:40',n:'서문홍루',zh:'西門紅樓',cat:'sight',p:'redhouse',
+      leg:{m:'walk',min:4,dist:300},
+      d:'1908년 붉은 벽돌 팔각당. 후원 창작시장(토·일 14:00–21:00)과 16공방이 이 시각에 이미 열려 있습니다. 기념품·팝업스토어는 16공방 쪽이 낫습니다.'},
+     {t:'16:30',n:'永富 아이스크림',zh:'永富冰淇淋',cat:'cafe',p:'yongfu',
+      leg:{m:'walk',min:10,dist:800},
+      d:'1945년 창업 3대째 수제 아이스크림. 타로·리메이·구이위안이 대표. 보피랴오 방향으로 가는 길에 있어 되돌아가는 구간이 없습니다.'},
+     {t:'17:00',n:'보피랴오 역사거리',zh:'剝皮寮',cat:'sight',p:'bopiliao',
+      leg:{m:'walk',min:6,dist:450},
+      d:'청·일제시대 거리. 실내 전시가 18시에 끝나므로 용산사보다 먼저 봅니다.'},
+     {t:'17:40',n:'용산사',zh:'艋舺龍山寺',cat:'sight',p:'longshan',
+      leg:{m:'walk',min:5,dist:400},
+      d:'현지인의 기도와 향불. 해 지기 직전 광선이 가장 좋고, 조명이 들어오면 분위기가 완전히 달라집니다.'},
+     {t:'18:20',n:'저녁 — 雙月食品社 청도점',zh:'雙月食品社 青島店',cat:'food',p:'moonq',
+      leg:{m:'taxi',min:15,fare:190,dist:5.4,
+           alt:'MRT 龍山寺 → 善導寺 반난선 3정거장 7분 + 도보 6분 · 20 TWD'},
+      warn:'1안(17:40 도착)보다 40분 늦어져 토요일 저녁 피크와 겹칩니다. 대기를 각오하세요.',
+      d:'저녁 영업 17:00–20:00. 탕 1 + 면 1이면 충분합니다.'},
+     {t:'19:50',n:'BAR MOOD',zh:'吧沐',cat:'bar',p:'barmood',
+      leg:{m:'taxi',min:18,fare:180,dist:4.8,
+           alt:'MRT 善導寺 → 忠孝敦化 반난선 3정거장 6분 + 도보 5분 · 20 TWD'},
+      d:'대만 차·과일 기반 시그니처 1~2잔. 예약 권장(inline.app/groups/moodtw).'},
+     {t:'21:10',n:'타이베이 101 야경',zh:'台北101',cat:'sight',p:'t101',
+      leg:{m:'taxi',min:15,fare:160,dist:3.4,
+           alt:'MRT 忠孝敦化 →(반난선 1)→ 忠孝復興 →(원후선 1)→ 大安 →(단수이신이선 2)→ 台北101/世貿 · 환승 2회 약 18분 · 25 TWD'},
+      warn:'전망대 마지막 입장은 21:15입니다. 撞記 왕복으로 밀린 일정이 여기서 한계에 부딪힙니다 — 도착이 조금만 늦어도 전망대는 못 올라가고 외관·신이광장 산책만 가능합니다.',
+      d:'전망대에 꼭 올라가고 싶다면 撞記를 빼거나 저녁을 간소화해 시간을 벌어두세요.'},
+     {t:'22:20',n:'호텔 복귀',zh:'',cat:'base',p:'amba',
+      leg:{m:'taxi',min:22,fare:280,dist:8.1,
+           alt:'MRT 台北101/世貿 →(단수이신이선 5)→ 中正紀念堂 →(쑹산신뎬선 2)→ 西門 · 환승 1회 약 20분 · 25 TWD'},
+      d:'심야에도 시먼딩은 활발해서 야식 여지가 있습니다. 아종면선이 도보 3분, 새벽 0시 반까지.'}
+    ]}
   ]},
-
  {d:'08.30',w:'일',stay:'inhouse Hotel',est:1,
   note:'오전에 이란현 카발란 증류소를 다녀오고 오후에 패키지 일정에 합류하는 구성입니다. 카발란 왕복은 Klook에서 예약한 葛瑪蘭客運(Kamalan Bus) 공유 셔틀(package_id 115422) — 07:30 타이베이 승차, 12:00경 이란 승차로 이미 확정. 승차지가 台北轉運站이 아니라 復興南路 쪽 科技大樓 정류장이라는 점에 주의하세요. 숙소가 amba(武昌街二段77號) → inhouse(西寧路107號)로 바뀌는 날이고 두 곳은 도보 5~7분입니다. 아래 시각은 모두 추정치입니다.',
   stops:[
@@ -1289,16 +1358,35 @@ const legShort=l=>MODE[l.m]+' '+(l.min||0)+'분';
 
 /* ============ 일정 ============ */
 let curDay=0;
+let planSel={}; // dayIndex -> 선택된 plans 인덱스. 미지정 시 0(1안)
 const dayBtns=(cb)=>DAYS.map((d,i)=>
   `<button aria-pressed="${i===curDay}" onclick="${cb}(${i})"><span class="d">${d.d}</span><span class="w">${d.w}</span></button>`).join('');
+/* 하루에 대안 동선(plans)이 있으면 그중 선택된 하나를, 없으면 기존 stops/note를
+   그대로 단일 plan처럼 돌려준다 — plans 없는 날은 코드 변경 없이 그대로 동작. */
+function dayPlans(day){ return day.plans || [{label:'',note:day.note,stops:day.stops}]; }
+function activePlan(dayIdx){
+  const plans=dayPlans(DAYS[dayIdx]);
+  return plans[Math.min(planSel[dayIdx]||0, plans.length-1)];
+}
+function planBarHtml(dayIdx,cb){
+  const plans=dayPlans(DAYS[dayIdx]);
+  if(plans.length<2) return '';
+  const cur=planSel[dayIdx]||0;
+  return `<nav class="plansel" role="tablist">${plans.map((pl,i)=>
+    `<button role="tab" aria-selected="${i===cur}" onclick="${cb}(${dayIdx},${i})">${esc(pl.label)}</button>`).join('')}</nav>`;
+}
+function pickPlan(dayIdx,i){ planSel[dayIdx]=i; renderDays(); renderRoute(); }
+
 
 function renderDays(){
   $('#dayBar').innerHTML=dayBtns('pickDay');
   const day=DAYS[curDay];
-  $('#dayNote').textContent=day.note;
+  const plan=activePlan(curDay);
+  $('#dayNote').textContent=plan.note;
   $('#dayStay').innerHTML=day.stay&&day.stay!=='—'
     ? `<div class="tiny mono" style="margin-top:8px">숙박 · ${esc(day.stay)}</div>`:'';
-  $('#tl').innerHTML=day.stops.map(s=>{
+  $('#planBar').innerHTML=planBarHtml(curDay,'pickPlan');
+  $('#tl').innerHTML=plan.stops.map(s=>{
     const p=s.p?P(s.p):null;
     return `<div class="stop" data-cat="${s.cat}" data-t="${s.t}" data-day="${day.d}">
       <div class="hd">
@@ -1334,21 +1422,23 @@ function renderRoute(){
   $('#rDayBar').innerHTML=DAYS.map((d,i)=>
     `<button aria-pressed="${i===rDay}" onclick="pickRDay(${i})"><span class="d">${d.d}</span><span class="w">${d.w}</span></button>`).join('');
   const day=DAYS[rDay];
+  const plan=activePlan(rDay);
   $('#rNote').textContent=day.est?'표시된 시각과 소요 시간은 추정치입니다. 패키지 확정 시각표로 대조하세요.':'실측 기준 동선입니다. 이동 전 지도 앱에서 재확인하세요.';
+  $('#rPlanBar').innerHTML=planBarHtml(rDay,'pickPlan');
 
-  const pts=day.stops.map((s,i)=>{
+  const pts=plan.stops.map((s,i)=>{
     const p=s.p?P(s.p):null;
     if(!p||!p.ll||p.nomap) return null;
     const [la,ln]=p.ll.split(',').map(Number);
     return {la,ln,s,i,nm:s.n,mode:s.leg?s.leg.m:null};
   }).filter(Boolean);
 
-  $('#rMap').innerHTML=mapSvg(pts,day);
-  $('#rSum').innerHTML=sumHtml(day);
+  $('#rMap').innerHTML=mapSvg(pts,plan);
+  $('#rSum').innerHTML=sumHtml(plan);
 
-  const legs=day.stops.filter(s=>s.leg);
+  const legs=plan.stops.filter(s=>s.leg);
   $('#rLegs').innerHTML=legs.length? legs.map((s,i)=>{
-    const prev=day.stops[day.stops.indexOf(s)-1];
+    const prev=plan.stops[plan.stops.indexOf(s)-1];
     const l=s.leg;
     return `<div class="lg">
       <div class="ic ${l.m}">${MODE[l.m]}</div>
@@ -1360,7 +1450,7 @@ function renderRoute(){
       </div></div>`;
   }).join('') : `<div class="card muted">이동 구간이 아직 정리되지 않았습니다.</div>`;
 
-  const withLL=day.stops.map(s=>s.p?P(s.p):null).filter(p=>p&&p.ll&&!p.nomap);
+  const withLL=plan.stops.map(s=>s.p?P(s.p):null).filter(p=>p&&p.ll&&!p.nomap);
   $('#rLink').innerHTML=withLL.length>=2? (()=>{
     const ll=withLL.map(p=>p.ll);
     const cut=ll.length>10;
